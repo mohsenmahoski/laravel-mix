@@ -219,13 +219,17 @@ class PagesController extends Controller
            $message->family = $request->family;
            $message->email = $request->email;
            $message->message = $request->message;
-
-           try {
-               $message->save();
-               return 'Ok';
-           } catch (Exception $e) {
-               return $e;
+           if ($request->no_robot == true ) {
+                try {
+                   $message->save();
+                   return 'Ok';
+               } catch (Exception $e) {
+                   return $e;
+               }
+           }else{
+             return 'error';
            }
+           
 
     }
     public function subscribe(Request $request){

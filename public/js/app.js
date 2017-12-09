@@ -58397,7 +58397,14 @@ var Contact = function (_Component) {
       message: '',
       email: '',
       no_robot: false,
-      success: false
+      success: false,
+      validEmail: 'hidden',
+      NameRequired: 'hidden',
+      FamilyRequired: 'hidden',
+      EmailRequired: 'hidden',
+      MessageRequired: 'hidden',
+      NoRoobotRequired: 'hidden'
+
     };
     return _this;
   }
@@ -58411,26 +58418,43 @@ var Contact = function (_Component) {
       switch (inputName) {
         case 'family':
           this.setState({
+            FamilyRequired: 'hidden',
             family: inputValue
           });
           break;
         case 'name':
           this.setState({
+            NameRequired: 'hidden',
             name: inputValue
           });
           break;
         case 'email':
+          this.setState({
+            EmailRequired: 'hidden'
+          });
+          var valid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (valid.test(inputValue)) {
+            this.setState({
+              validEmail: 'hidden'
+            });
+          } else {
+            this.setState({
+              validEmail: 'visibile'
+            });
+          }
           this.setState({
             email: inputValue
           });
           break;
         case 'message':
           this.setState({
+            MessageRequired: 'hidden',
             message: inputValue
           });
           break;
         case 'no_robot':
           this.setState({
+            NoRoobotRequired: 'hidden',
             no_robot: inputValue
           });
           break;
@@ -58449,30 +58473,59 @@ var Contact = function (_Component) {
       var message = this.state.message;
       var email = this.state.email;
       var no_robot = this.state.no_robot;
+      if (name !== '') {
+        if (family !== '') {
+          if (email !== '') {
+            if (message !== '') {
+              if (no_robot !== false) {
+                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/contact', {
+                  name: name,
+                  family: family,
+                  message: message,
+                  email: email,
+                  no_robot: no_robot
+                }).then(function (response) {
 
-      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/contact', {
-        name: name,
-        family: family,
-        message: message,
-        email: email,
-        no_robot: no_robot
-      }).then(function (response) {
-
-        if (response.data == 'Ok') {
-          _this2.setState({
-            name: '',
-            family: '',
-            message: '',
-            email: '',
-            no_robot: false,
-            success: true
-          });
+                  if (response.data == 'Ok') {
+                    _this2.setState({
+                      name: '',
+                      family: '',
+                      message: '',
+                      email: '',
+                      no_robot: false,
+                      success: true
+                    });
+                  } else {
+                    console.log('failed to refresh form');
+                  }
+                }).catch(function (error) {
+                  console.log(error);
+                });
+              } else {
+                this.setState({
+                  NoRoobotRequired: 'visibile'
+                });
+              }
+            } else {
+              this.setState({
+                MessageRequired: 'visibile'
+              });
+            }
+          } else {
+            this.setState({
+              EmailRequired: 'visibile'
+            });
+          }
         } else {
-          console.log('failed to refresh form');
+          this.setState({
+            FamilyRequired: 'visibile'
+          });
         }
-      }).catch(function (error) {
-        console.log(error);
-      });
+      } else {
+        this.setState({
+          NameRequired: 'visibile'
+        });
+      }
     }
   }, {
     key: 'render',
@@ -58521,7 +58574,12 @@ var Contact = function (_Component) {
                             { htmlFor: 'family', className: 'control-label' },
                             '\u0646\u0627\u0645 \u062E\u0627\u0646\u0648\u0627\u062F\u06AF\u06CC'
                           ),
-                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { ref: 'family', value: this.state.family, onChange: this.handleKeyPress.bind(this), className: 'form-control', name: 'family', type: 'text', id: 'family' }),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.family, onChange: this.handleKeyPress.bind(this), className: 'form-control', name: 'family', type: 'text' }),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { className: 'rtl', style: { color: '#f44336', display: this.state.FamilyRequired == 'visibile' ? 'block' : 'none' } },
+                            '\u0644\u0637\u0641\u0627 \u0646\u0627\u0645 \u062E\u0627\u0646\u0648\u0627\u062F\u06AF\u06CC \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F!!'
+                          ),
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' })
                         )
@@ -58537,7 +58595,12 @@ var Contact = function (_Component) {
                             { htmlFor: 'name', className: 'control-label' },
                             '\u0646\u0627\u0645'
                           ),
-                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { ref: 'name', className: 'form-control', value: this.state.name, onChange: this.handleKeyPress.bind(this), name: 'name', type: 'text', id: 'name' }),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', value: this.state.name, onChange: this.handleKeyPress.bind(this), name: 'name', type: 'text' }),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { className: 'rtl', style: { color: '#f44336', display: this.state.NameRequired == 'visibile' ? 'block' : 'none' } },
+                            '\u0644\u0637\u0641\u0627 \u0646\u0627\u0645 \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F!!'
+                          ),
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
                           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' })
                         )
@@ -58551,7 +58614,17 @@ var Contact = function (_Component) {
                         { htmlFor: 'email', className: 'control-label' },
                         '\u0627\u06CC\u0645\u06CC\u0644'
                       ),
-                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { ref: 'email', value: this.state.email, onChange: this.handleKeyPress.bind(this), className: 'form-control', name: 'email', type: 'email', id: 'email' }),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.email, onChange: this.handleKeyPress.bind(this), className: 'form-control', name: 'email', type: 'email' }),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        { className: 'rtl', style: { color: '#f44336', display: this.state.validEmail == 'visibile' ? 'block' : 'none' } },
+                        '\u0644\u0637\u0641\u0627 \u0627\u06CC\u0645\u06CC\u0644 \u0635\u062D\u06CC\u062D \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F!'
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        { className: 'rtl', style: { color: '#f44336', display: this.state.EmailRequired == 'visibile' ? 'block' : 'none' } },
+                        '\u0644\u0637\u0641\u0627 \u0627\u06CC\u0645\u06CC\u0644 \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F!'
+                      ),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' })
                     ),
@@ -58563,7 +58636,13 @@ var Contact = function (_Component) {
                         { htmlFor: 'message', className: 'control-label' },
                         '\u0645\u062A\u0646 \u067E\u06CC\u0627\u0645'
                       ),
-                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', value: this.state.message, onChange: this.handleKeyPress.bind(this), name: 'message', cols: '50', rows: '10', id: 'message' }),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', value: this.state.message, onChange: this.handleKeyPress.bind(this), name: 'message', cols: '50', rows: '10' }),
+                      ' ',
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        { className: 'rtl', style: { color: '#f44336', display: this.state.MessageRequired == 'visibile' ? 'block' : 'none' } },
+                        '\u0644\u0637\u0641\u0627 \u067E\u06CC\u0627\u0645 \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F!!'
+                      ),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' })
                     ),
@@ -58585,6 +58664,11 @@ var Contact = function (_Component) {
                               'span',
                               { className: 'checkbox-material' },
                               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'check' })
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                              'span',
+                              { className: 'rtl', style: { color: '#f44336', display: this.state.NoRoobotRequired == 'visibile' ? 'block' : 'none' } },
+                              '\u0627\u06CC\u0646 \u06AF\u0632\u06CC\u0646\u0647 \u0627\u0644\u0632\u0627\u0645\u06CC \u0645\u06CC\u0628\u0627\u0634\u062F!!'
                             )
                           )
                         )
@@ -58606,7 +58690,7 @@ var Contact = function (_Component) {
           { className: 'alert alert-success', style: { display: this.state.success == true ? 'block' : 'none' } },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
-            { className: 'container-fluid' },
+            { className: 'container-fluid rtl' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
               { className: 'alert-icon' },
@@ -58632,9 +58716,8 @@ var Contact = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'b',
               null,
-              'Success Alert:'
-            ),
-            ' Yuhuuu! You\'ve got your $11.99 album from The Weeknd'
+              '\u067E\u06CC\u0627\u0645 \u0634\u0645\u0627 \u0628\u0627 \u0645\u0648\u0641\u0642\u06CC\u062A \u0627\u0631\u0633\u0627\u0644 \u0634\u062F!!'
+            )
           )
         )
       );

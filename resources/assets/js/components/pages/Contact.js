@@ -12,6 +12,14 @@ class Contact extends Component {
       email:'',
       no_robot:false,
       success:false,
+      validEmail:'hidden',
+      NameRequired:'hidden',
+      FamilyRequired:'hidden',
+      EmailRequired:'hidden',
+      MessageRequired:'hidden',
+      NoRoobotRequired:'hidden',
+
+
     }
   }
   handleKeyPress(evnt){
@@ -20,27 +28,44 @@ class Contact extends Component {
           const inputValue = evnt.target.type === 'checkbox' ? evnt.target.checked : evnt.target.value;       
           switch (inputName) {
             case 'family':
-               this.setState({
+               this.setState({ 
+                            FamilyRequired:'hidden',
                             family:inputValue
                           });
               break;
             case 'name':
               this.setState({
+                           NameRequired:'hidden',
                             name:inputValue
                           });
               break;
             case 'email':
+            this.setState({
+                            EmailRequired:'hidden',
+                          });
+            const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+               if (valid.test(inputValue)) {
+                   this.setState({
+                            validEmail:'hidden'
+                          });
+               }else{
+                  this.setState({
+                            validEmail:'visibile'
+                          });
+               }
                this.setState({
                             email:inputValue
                           });
               break;
             case 'message':
                this.setState({
+                            MessageRequired:'hidden',
                             message:inputValue
                           });
               break;
             case 'no_robot':
                this.setState({
+                            NoRoobotRequired:'hidden',
                             no_robot:inputValue
                           });
               break;
@@ -56,32 +81,62 @@ class Contact extends Component {
         const message = this.state.message;
         const email = this.state.email;
         const no_robot = this.state.no_robot;
-       
-        axios.post('/contact', {
-          name : name,
-          family : family,
-          message : message,
-          email : email,
-          no_robot : no_robot,
-        })
-        .then((response) => {
-         
-          if (response.data == 'Ok') {
-             this.setState({
-                    name:'',
-                    family:'',
-                    message:'',
-                    email:'',
-                    no_robot:false,
-                    success:true,
-            });
-           }else{console.log('failed to refresh form')}
-           
-         
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        if (name !== '' ) {
+            if(family !=='' ){
+                if (email !=='' ){
+                        if (message !== '') {
+                             if (no_robot !== false) {
+                                    axios.post('/contact', {
+                                  name : name,
+                                  family : family,
+                                  message : message,
+                                  email : email,
+                                  no_robot : no_robot,
+                                })
+                                .then((response) => {
+                                 
+                                  if (response.data == 'Ok') {
+                                     this.setState({
+                                            name:'',
+                                            family:'',
+                                            message:'',
+                                            email:'',
+                                            no_robot:false,
+                                            success:true,
+                                    });
+                                   }else{console.log('failed to refresh form')}
+                                   
+                                 
+                                })
+                                .catch(function (error) {
+                                  console.log(error);
+                                }); 
+                             }else{
+                                this.setState({
+                                      NoRoobotRequired:'visibile',
+                                });
+                             }
+                        }else{
+                            this.setState({
+                              MessageRequired:'visibile',
+                            });
+                        }
+                }else{
+                     this.setState({
+                       EmailRequired:'visibile',
+                    });
+                }
+            }else{
+                this.setState({
+                FamilyRequired:'visibile',
+              });
+            }
+        }else{
+          this.setState({
+            NameRequired:'visibile',
+          });
+        }
+        
   }
     render() {
         return (
@@ -99,25 +154,25 @@ class Contact extends Component {
                                        <div className="col-md-6 ">
                                                 <div className="text-right form-group label-floating is-empty">
                                                  <label htmlFor="family" className="control-label">نام خانوادگی</label>
-                                                 <input ref="family" value={this.state.family} onChange={this.handleKeyPress.bind(this)} className="form-control"   name="family" type="text" id="family"/>    
+                                                 <input  value={this.state.family} onChange={this.handleKeyPress.bind(this)} className="form-control"   name="family" type="text" /><span className="rtl" style={{ color:'#f44336',display: this.state.FamilyRequired=='visibile' ? 'block' : 'none'}}>لطفا نام خانوادگی خود را وارد کنید!!</span>    
                                                 <span className="material-input"></span><span className="material-input"></span></div>
                                        </div>  
                                        <div className="col-md-6">
                                             <div className="text-right form-group label-floating is-empty">
                                              <label htmlFor="name" className="control-label">نام</label>
-                                             <input ref="name" className="form-control" value={this.state.name} onChange={this.handleKeyPress.bind(this)} name="name" type="text" id="name"/>    
+                                             <input  className="form-control" value={this.state.name} onChange={this.handleKeyPress.bind(this)} name="name" type="text" /><span className="rtl" style={{ color:'#f44336',display: this.state.NameRequired=='visibile' ? 'block' : 'none'}}>لطفا نام خود را وارد کنید!!</span>    
                                             <span className="material-input"></span><span className="material-input"></span></div>
                                        </div>
                                    </div>
                                     
                                    <div className="text-right form-group label-floating is-empty">
                                         <label htmlFor="email" className="control-label">ایمیل</label>
-                                         <input ref="email" value={this.state.email}  onChange={this.handleKeyPress.bind(this)} className="form-control"   name="email" type="email" id="email"/>    
+                                         <input  value={this.state.email}  onChange={this.handleKeyPress.bind(this)} className="form-control"   name="email" type="email" /><span className="rtl" style={{ color:'#f44336',display: this.state.validEmail=='visibile' ? 'block' : 'none'}}>لطفا ایمیل صحیح وارد کنید!</span><span className="rtl" style={{ color:'#f44336',display: this.state.EmailRequired =='visibile' ? 'block' : 'none'}}>لطفا ایمیل خود را وارد کنید!</span>   
                                         <span className="material-input"></span>
                                    <span className="material-input"></span></div>
                                    <div className="text-right form-group label-floating is-empty">
                                          <label htmlFor="message" className="control-label">متن پیام</label>
-                                         <textarea className="form-control" value={this.state.message} onChange={this.handleKeyPress.bind(this)}  name="message" cols="50" rows="10" id="message"></textarea>    
+                                         <textarea className="form-control" value={this.state.message} onChange={this.handleKeyPress.bind(this)}  name="message" cols="50" rows="10" ></textarea> <span className="rtl" style={{ color:'#f44336',display: this.state.MessageRequired=='visibile' ? 'block' : 'none'}}>لطفا پیام خود را وارد کنید!!</span>   
                                         <span className="material-input"></span>
                                    <span className="material-input"></span></div>
                                    <div className="row">
@@ -126,7 +181,7 @@ class Contact extends Component {
                                             <label>
                                                 
                                                 من ربات نیستم
-                                                <input  type="checkbox" checked={this.state.no_robot} onChange={this.handleKeyPress.bind(this)} name="no_robot" /><span className="checkbox-material"><span className="check"></span></span>
+                                                <input  type="checkbox" checked={this.state.no_robot} onChange={this.handleKeyPress.bind(this)} name="no_robot" /><span className="checkbox-material"><span className="check"></span></span><span className="rtl" style={{ color:'#f44336',display: this.state.NoRoobotRequired=='visibile' ? 'block' : 'none'}}>این گزینه الزامی میباشد!!</span> 
                                             </label>
                                         </div>
                                      </div>
@@ -143,14 +198,14 @@ class Contact extends Component {
                </div>
              </div>
              <div className="alert alert-success" style={{display : this.state.success == true ? 'block' : 'none' }}>
-                <div className="container-fluid">
+                <div className="container-fluid rtl">
                     <div className="alert-icon">
                         <i className="material-icons">check</i>
                     </div>
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true"><i className="material-icons">clear</i></span>
                     </button>
-                    <b>Success Alert:</b> Yuhuuu! You've got your $11.99 album from The Weeknd
+                    <b>پیام شما با موفقیت ارسال شد!!</b>
                 </div>
             </div>
           </div>
