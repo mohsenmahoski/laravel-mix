@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Geo;
 use App\Message;
 use Session;
 
@@ -25,8 +24,8 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $geo = Geo::all();
-        return view('auth.admin-dashboard')->withGeo($geo);
+    {   
+        return view('auth.adminDashboard');
     }
     public function users_messages(){
         $messages = Message::all();
