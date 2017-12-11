@@ -19,7 +19,7 @@ class AdminForgotPasswordController extends Controller
     |
     */
 
-    use SendsPasswordResetEmails;
+
 
     /**
      * Create a new controller instance.
@@ -30,7 +30,7 @@ class AdminForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
-
+    use SendsPasswordResetEmails;
     
     public function showLinkRequestForm()
     {
