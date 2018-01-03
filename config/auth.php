@@ -53,6 +53,22 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'seller' => [
+            'driver' => 'session',
+            'provider' => 'sellers',
+        ],
+         'seller-api' => [
+            'driver' => 'session',
+            'provider' => 'sellers',
+        ],
+        'author' => [
+            'driver' => 'session',
+            'provider' => 'authors',
+        ],
+         'author-api' => [
+            'driver' => 'session',
+            'provider' => 'authors',
+        ],
     ],
 
     /*
@@ -80,6 +96,14 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
+        ],
+        'sellers' => [
+            'driver' => 'eloquent',
+            'model' => App\Seller::class,
+        ],
+        'authors' => [
+            'driver' => 'eloquent',
+            'model' => App\Author::class,
         ],
 
         // 'users' => [
@@ -111,6 +135,16 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 15,
+        ],
+        'sellers' => [
+            'provider' => 'sellers',
+            'table' => 'password_resets',
+            'expire' => 15,
+        ],
+        'authors' => [
+            'provider' => 'authors',
             'table' => 'password_resets',
             'expire' => 15,
         ],

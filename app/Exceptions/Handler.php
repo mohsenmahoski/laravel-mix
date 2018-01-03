@@ -64,6 +64,9 @@ class Handler extends ExceptionHandler
             case 'seller':
                    return redirect()->route('seller.login');
                 break;
+            case 'author':
+                   return redirect()->route('author.login');
+                break;
             default:
                     return redirect()->guest(route('login'));
                 break;

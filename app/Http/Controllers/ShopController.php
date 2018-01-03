@@ -9,8 +9,9 @@ use App\Procat;
 
 class ShopController extends Controller
 {
+   
    public function index(Request $request){
-   	     $routes = Controller::get_url( $request->url() );
+   	    
            $newproducts = Product::orderBy('created_at')->take(8)->get();
            $dealproducts = Product::where('special_sale' ,'!=' , null)->orderBy('created_at')->take(2)->get();
            

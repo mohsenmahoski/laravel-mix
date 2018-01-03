@@ -55,7 +55,7 @@ class Carsoul extends Component {
 	                    </div>
 	                    
                     <div className="col-md-4 col-xs-12">
-	                      <a href=""  className="mask item-banner mb-10">
+	                      <a href=""  className="mask item-banner mb-20">
 	                            	<img  src="images/theme/banner1.jpg" alt="Rounded Image" className="banner  img-responsive" />
 	                                <div className="fade-caption">  
 	                                    <h5 className="caption-title text-right">یک فروشگاه اینترنتی موفق چه امکاناتی دارد؟</h5>  

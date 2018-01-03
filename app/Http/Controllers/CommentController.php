@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Post;
+use Auth;
 use Session;
 
 class CommentController extends Controller
@@ -35,29 +36,61 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , $id)
+    public function store(Request $request)
     {
-        $this->validate($request,[
-           'name' => 'required|min:3',
-           'email' => 'required|min:9|max:255',
-           'comment' => 'required|min:10'
-            ]);
-        $comment = new Comment;
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->approved =true;
-        $comment->post_id = $request->id;
-        $post = Post::find($id);
-        $comment->post()->associate($post);
-        $comment->save();
+        
+       
+       if (Auth::check()) {
+                
+                
+                try {
 
-        Session::flash('success' , 'Your comment Save Successfully');
+                    $comment = new Comment;
+                    $comment->name = Auth::user()->name;
+                    $comment->email = Auth::user()->email;
+                    $comment->comment = $request->comment;
+                    $comment->approved = false;
+                    $comment->likes = 0;
+                    $comment->dislikes=0;
+                    $comment->post_id = $request->id;
+                    $post = Post::find($request->id);
+                    $comment->post()->associate($post);
+                    $comment->save();
+                    return 'message saved';
 
-        return redirect()->route('blog.single' ,[$post->slug]);
+                } catch (Exception $e) {
+                       return $e;
+                }
 
+       }else{
+                return 'not login';
+       }
     }
-
+    public function likes(Request $request){
+       
+         if (Auth::check()) {
+              $comment = Comment::find($request->id);
+              $comment->likes = $comment->likes +1 ;
+              $comment->save();
+              return $comment->likes;
+         }
+         else{
+                return 'not login';
+        }
+          
+    }
+    public function dislikes(Request $request){
+       
+              if (Auth::check()) { 
+                  $comment = Comment::find($request->id);
+                  $comment->dislikes = $comment->dislikes + 1 ;
+                  $comment->save();
+                  return $comment->dislikes;
+             }
+             else{
+                  return 'not login';
+            }
+    }
     /**
      * Display the specified resource.
      *

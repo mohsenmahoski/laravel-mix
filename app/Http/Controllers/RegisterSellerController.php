@@ -36,14 +36,10 @@ class RegisterSellerController extends Controller
        $seller->shop_description = $request->shop_description;
        $seller->shop_name = $request->shop_name;
        $seller->shop_slug = str_replace(' ', '-' , trim($request->shop_name));
-
        if($request->hasFile('sample_work')){
-       	   $image = $request->File('sample_work');
-           $filename = time().'.'.$image->getClientOriginalExtension();
-           $location = public_path('images/sample_work/'.$filename);
-
-           Image::make($image)->save($location);
-           $seller->sample_work = $filename;
+           $imageName = time().'.'.$request->sample_work->getClientOriginalExtension();
+           $request->sample_work->move(public_path('images\sample_work'), $imageName);
+           $seller->sample_work = $imageName;
        }
        $seller->active = false;
        $seller->remember_token = $request->_token;
