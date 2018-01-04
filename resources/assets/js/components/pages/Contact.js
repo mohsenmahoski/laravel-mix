@@ -23,7 +23,6 @@ class Contact extends Component {
     }
   }
   handleKeyPress(evnt){
-          console.log();
           const inputName =  evnt.target.name;
           const inputValue = evnt.target.type === 'checkbox' ? evnt.target.checked : evnt.target.value;       
           switch (inputName) {
@@ -149,8 +148,7 @@ class Contact extends Component {
           this.setState({
             NameRequired:'visibile',
           });
-        }
-        
+        } 
   }
     render() {
         return (

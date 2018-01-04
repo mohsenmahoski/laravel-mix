@@ -122,3 +122,4 @@ Route::post('/contact',['uses' => 'PagesController@send_message', 'as' => 'conta
 
 
 Route::get('/mail' , 'HomeController@send_mail')->name('UserSendMail');
+

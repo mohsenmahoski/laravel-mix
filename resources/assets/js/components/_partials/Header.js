@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import  NavItem  from '../items/NavItem';
 import Menu from '../items/Menu';
-import Modal from '../items/Modal';
+import UserLogin from '../pages/UserLogin';
 
 class Header extends Component{
     constructor(props){
@@ -11,7 +11,6 @@ class Header extends Component{
       }
     }
     _userlogin(){
-      console.log('called');
        this.setState({
           display:'block'
        });
@@ -19,7 +18,7 @@ class Header extends Component{
     render() {
         return (
     <nav className="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
-         <Modal display={this.state.display} />
+         <UserLogin display={this.state.display}></UserLogin>
          <div className="container">
             <div className="navbar-header">
                 <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">

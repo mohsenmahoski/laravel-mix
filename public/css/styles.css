@@ -150,6 +150,12 @@ img.gra{
 .card .image img {
     width: 100%;
 }
+.login-card{
+  padding:15px 5px;
+  border: 2px solid #9c27b0;
+  display: inline-block;
+  border-radius:5px;
+}
 .hvr-sweep-to-left:before{
     content: "";
     position: absolute;

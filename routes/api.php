@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/login','API\PassportController@login')->name('api.login');
+Route::post('/register','API\PassportController@register')->name('api.register');
+
+
+Route::group(['middleware'=>'auth:api'],function(){
+	Route::post('/get_details','API\PassportController@get_details')->name('api.userdetails');
+});

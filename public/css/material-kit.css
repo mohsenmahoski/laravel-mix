@@ -3196,6 +3196,7 @@ h2.title {
   box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
   border-radius: 3px;
   border: none;
+  background-image: url('/images/theme/flower-pattern.png');
 }
 .modal-content .modal-header {
   border-bottom: none;
@@ -3231,6 +3232,7 @@ h2.title {
 }
 .modal-content .modal-body + .modal-footer {
   padding-top: 0;
+  min-height: 49px;
 }
 
 .modal-backdrop {

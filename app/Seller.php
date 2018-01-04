@@ -1,13 +1,15 @@
 <?php
 
 namespace App;
+
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\SellerResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Seller extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens,Notifiable;
     protected $guard = 'seller';
     /**
      * The attributes that are mass assignable.

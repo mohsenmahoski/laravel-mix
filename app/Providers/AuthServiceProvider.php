@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use seller;
+use Laravel\Passport\Passport;
+use App\Policies\SellerPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\Policies\SellerPolicy;
-use seller;
+
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,5 +32,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
            Gate::define('SellerActive', 'App\Policies\SellerPolicy@_sellerActive' );
+           Passport::routes();
     }
 }
