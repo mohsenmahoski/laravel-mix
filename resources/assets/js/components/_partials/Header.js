@@ -11,9 +11,12 @@ class Header extends Component{
       }
     }
     _userlogin(){
-       this.setState({
+      if (this.state.display != 'block' ){
+        this.setState({
           display:'block'
-       });
+        });
+      }
+       
     }
     render() {
         return (

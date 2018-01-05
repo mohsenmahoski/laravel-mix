@@ -2,6 +2,9 @@ import React ,{Component} from 'react';
 import axios from 'axios';
 import CardBlog from '../items/CardBlog';
 import InfiniteScroll from 'react-infinite-scroller';
+import Header from '../_partials/Header';
+import Footer from '../_partials/Footer';
+
 
 export default class Blog extends Component{
 	constructor(props){
@@ -33,6 +36,7 @@ export default class Blog extends Component{
 	    const articles = this.state.article;
 		return(
                     <div>
+                    <Header />
 		                       	<div className="header header-filter">
 							        <div className="container">
 							            <div className="row">
@@ -70,6 +74,7 @@ export default class Blog extends Component{
 										</div>
 									</div>
 								</div>
+						<Footer />
                     </div>
 			);
 	}

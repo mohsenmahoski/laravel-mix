@@ -1644,8 +1644,9 @@ label.control-label {
 }
 
 .form-group {
-  padding-bottom: 7px;
-  margin: 27px 0 0 0;
+  padding-bottom:7px;
+  margin:27px 0 0 0;
+  min-height:75px;
 }
 .form-group .form-control {
   margin-bottom: 7px;

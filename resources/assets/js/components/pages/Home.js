@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Carousel from '../items/Carousel';
 import Tabs from '../items/Tabs';
+import Header from '../_partials/Header';
+import Footer from '../_partials/Footer';
 
 class Home extends Component {
     render() {
     	
         return (
         	<div>
+             <Header />
                       <div className="header header-filter">
                         <div className="container">
                             <div className="row">
@@ -32,6 +35,7 @@ class Home extends Component {
 						           <Carousel />
 						           <Tabs />
                     </div>
+                    <Footer />
             </div>
         );
     }

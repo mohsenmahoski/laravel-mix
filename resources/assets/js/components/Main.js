@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route , HashRouter } from 'react-router-dom';
 
-
-import Header from './_partials/Header';
-import Footer from './_partials/Footer';
 import Contact from './pages/Contact'; 
 import Home from './pages/Home'; 
 import Blog from './pages/Blog';
 import SingleBlog from './pages/SingleBlog';
 import AboutUs from './pages/AboutUs';
+import UserDashboard from './pages/UserDashboard';
 
 
 
@@ -23,15 +21,16 @@ class Main extends Component{
             <div>
                 	<Router>
 					  <div>
-					     <Header />
+					    
 					 
 		                             <Route exact={true} path="/" component={Home}/>
 								     <Route exact path="/contact" component={Contact}/>
 								     <Route exact path="/blog" component={Blog} />
 								     <Route exact path="/blog/:id" component={SingleBlog} />
 								     <Route exact path="/about" component={AboutUs} />
+								     <Route exact path="/dashboard" component={UserDashboard} />
 								    
-		                 <Footer />
+		                 
 					  </div>
 					</Router>
             </div>

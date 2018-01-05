@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Header from '../_partials/Header';
+import Footer from '../_partials/Footer';
 
 class Contact extends Component {
   constructor(){
@@ -153,6 +155,7 @@ class Contact extends Component {
     render() {
         return (
                 <div>
+                <Header />
                       <div className="header header-filter">
                         <div className="container">
                             <div className="row">
@@ -274,7 +277,8 @@ class Contact extends Component {
                                                </div>
                                       </div>
                                  </div>
-                     </div>
+                         </div>
+                      <Footer />
                 </div>
         );
     }

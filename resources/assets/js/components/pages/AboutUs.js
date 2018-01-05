@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
+import Header from '../_partials/Header';
+import Footer from '../_partials/Footer';
 
 export default class AboutUs extends Component{
 	render(){
 		return(
 			        <div>
+			        <Header />
 				        <div className="header header-filter">
 	                        <div className="container">
 	                            <div className="row">
@@ -34,6 +36,7 @@ export default class AboutUs extends Component{
 								    	</div>
 								    </div>
 					    </div>
+					    <Footer />
 			        </div>
 			);
 	}

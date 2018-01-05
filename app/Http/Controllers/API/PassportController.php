@@ -11,12 +11,12 @@ use Validator;
 
 class PassportController extends Controller
 {
-    public $successStatus = 200;
+    public $successStatus =200;
     public function login(Request $request){
          if (Auth::attempt(['email' => $request->email , 'password' => $request->password])) {
                      $seller = Auth::user();
                      $success['token'] = $seller->createToken('Laravel APP')->accessToken;
-                     return response()->json(['success' => $success],$this->successStatus);       
+                     return response()->json(['success' => $success],200);       
          }
          else{
          	return response()->json(['error'=>'Unauthorised'],402);
