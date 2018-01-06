@@ -46,4 +46,15 @@ class PassportController extends Controller
         $user = Auth::user();
         return $user;   
     }
+    public function email_check(Request $request){
+
+         $user = User::where('email' , $request->email )->first();
+         if ($user != null) {
+              return response()->json(false,201);
+         }else{
+              return response()->json(true,203);
+         }
+         
+      
+    }
 }

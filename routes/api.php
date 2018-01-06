@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/login','API\PassportController@login')->name('api.login');
 Route::post('/register','API\PassportController@register')->name('api.register');
+Route::post('/email_check','API\PassportController@email_check')->name('api.email_check');
 
 
 Route::group(['middleware'=>'auth:api'],function(){

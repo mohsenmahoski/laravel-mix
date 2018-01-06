@@ -554,7 +554,10 @@ path[fill='#123456'] {
   height: 1px;
   background: #ccc;
 }
-
+.disable {
+  pointer-events: none;
+  cursor: default;
+}
 .tcb-product-photo {
   text-align: center;
   height: 180px;
