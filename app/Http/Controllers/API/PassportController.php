@@ -14,8 +14,8 @@ class PassportController extends Controller
     public $successStatus =200;
     public function login(Request $request){
          if (Auth::attempt(['email' => $request->email , 'password' => $request->password])) {
-                     $seller = Auth::user();
-                     $success['token'] = $seller->createToken('Laravel APP')->accessToken;
+                     $user = Auth::user();
+                     $success['token'] = $user->createToken('Laravel APP')->accessToken;
                      return response()->json(['success' => $success],200);       
          }
          else{

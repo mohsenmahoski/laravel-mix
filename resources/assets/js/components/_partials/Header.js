@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import  NavItem  from '../items/NavItem';
 import Menu from '../items/Menu';
+import axios from 'axios';
 import UserLogin from '../pages/UserLogin';
+import Cookie from 'universal-cookie';
 
 class Header extends Component{
     constructor(props){
       super(props);
       this.state={
-        display:'none'
+        display:'none',
+        username:'',
+        useremail:'',
       }
     }
     _userlogin(){
@@ -17,6 +21,28 @@ class Header extends Component{
         });
       }
        
+    }
+    componentWillMount(){
+         let cookie = new Cookie;
+         let user_token =  cookie.get('user_token');
+         let token = 'Bearer '+ user_token;
+         
+         if (user_token !== undefined){
+             axios.post('/api/get_details',null,{
+                headers:{Authorization:token}
+              })
+                   .then(response=>{
+                    
+                     let {email ,name } = response.data;
+                     this.setState({
+                      username:name,
+                      useremail:email
+                     });
+                   }) 
+                     .catch(error=>{
+                      console.log(error);
+                     });
+         }
     }
     render() {
         return (
@@ -150,7 +176,7 @@ class Header extends Component{
                     <NavItem className="nav-link" dataOriginalTitle="با ما در تماس باشید" to="/contact">
                        تماس با ما<i className="material-icons">perm_phone_msg</i>
                     </NavItem>
-                    <Menu title="ورود" data={[{title:'کاربر' , to:'#' , onClicking:()=>{this._userlogin()}},{title:'فروشنده' , to:'/seller/login'},{title:'نویسنده' , to:'/author/login'}]} />
+                    {this.state.username == '' ? <Menu title="ورود" data={[{title:'کاربر' , to:'#' , onClicking:()=>{this._userlogin()}},{title:'فروشنده' , to:'/seller/login'},{title:'نویسنده' , to:'/author/login'}]} /> : <NavItem className="nav-link" dataOriginalTitle="با ما در تماس باشید" to="/dashboard">{this.state.username}<i className="material-icons">perm_phone_msg</i></NavItem>}
                 </ul>
                 <div className="float-block">
                                                       

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Modal from '../items/Modal';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import Cookie from 'universal-cookie';
 
 export default class UserLogin extends Component{
 	 constructor(props){
@@ -22,11 +23,13 @@ export default class UserLogin extends Component{
       NewUsername:'',
       NewPassword:'',
       NewC_password:'',
+      NewPasswordLength:'hidden',
       NewEmailRequired:'hidden',
       NewValidEmail:'hidden',
       NewUsernameRequired:'hidden',
       NewPasswordRequired:'hidden',
       NewC_passwordRequired:'hidden',
+      C_passwordCompare:'hidden',
       EmailRegisteredBefore:true,
 
 
@@ -55,7 +58,7 @@ export default class UserLogin extends Component{
   }
   
   _handleGetdata(){
-      	const token ="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJiODE2N2JkNDI5ZGFmYTljZDU4ZGJhZDgxYzVlZTU4N2FlN2E1NDU2NWNlNDYwMDAzODdmZmI3ZjMzNjExNzA2NWI2ZDg3MGNjNjk3YTc4In0.eyJhdWQiOiIxIiwianRpIjoiMmI4MTY3YmQ0MjlkYWZhOWNkNThkYmFkODFjNWVlNTg3YWU3YTU0NTY1Y2U0NjAwMDM4N2ZmYjdmMzM2MTE3MDY1YjZkODcwY2M2OTdhNzgiLCJpYXQiOjE1MTUwODE4OTMsIm5iZiI6MTUxNTA4MTg5MywiZXhwIjoxNTQ2NjE3ODkzLCJzdWIiOiIxNyIsInNjb3BlcyI6W119.Kfdt2iBBvBQABNlyWzbi1NgPfgK7WhEE8495lgRlwNN0UapW6H4CYNCO8PcOrT5eRUmO6-vgfTvly6j5PW2NDN0ZdrFg7fQsVTim9sc7pSd_5M3kqJ6Ym7noxMaGGoZzyRA3x9uPRd8zbIWBNGdYNHoJtvKcSJ_SnXKNz3CdQZXO3FQwBVeEyLd-h7pZ1G4FOxs9SrJ5gYd_PAKHc7pSfDlkRa6cTWBmvl-PuGcLuygX506T01cXa-Ut81j9nn_AeEDr4ObV1W-D-rvyEMHRXeos7QTN3UZ8MhEpTFdjqSJgnuu2n8uii_1Xg5pP7Uj5q43_qBTZ1hTW11I-bZOvydMr9o7Bib4_F_JiPtOdu85SYPizX9itgBc2kc8Rb-KyWe_yUc_4GSJpL3XGpJ3ES8SD_VC1CAnydg-y_nP1kii69SgmeUjApSIoQ4Ig4Impdioh5SONPWXVnCTAM6Psi_JzwBvDrJx-7eazKPdnRAd4WJxDf9kwQhHspSbLLxfgGla0W6kKxyx7_4NFmbZPhb-AcAKMIfpYfKWAg04u1IoFseZSWDIMljgQ4we_O-BR_JpczHKJeMopAgWUUI-s745Qxo8-VjoBqy2gIICXjAEQW-6xe3Iav-UW7jH4dF48HwNcJ8AU10FRzUaiSRadRIx2FEMSxqvCzpDL9qnBg84";
+      	const token ="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjVmYzgxMTljNjJjNzlkOTgwNGRhNDM3M2E1ZDMxMTQ4ZWU3ZGMzYzViYTY5ZmRlYmYyYWRhMzU5ZDEwOWFlODIyODMxM2Y3YTZmNDZkNmYyIn0.eyJhdWQiOiIxIiwianRpIjoiNWZjODExOWM2MmM3OWQ5ODA0ZGE0MzczYTVkMzExNDhlZTdkYzNjNWJhNjlmZGViZjJhZGEzNTlkMTA5YWU4MjI4MzEzZjdhNmY0NmQ2ZjIiLCJpYXQiOjE1MTUyNTEzMTMsIm5iZiI6MTUxNTI1MTMxMywiZXhwIjoxNTQ2Nzg3MzEzLCJzdWIiOiIxNiIsInNjb3BlcyI6W119.HYF0ziG9mlTrE6nHWeDZZGJLgIritVDGO51Mh-pa9WAY76x7jbUCdX8EDRrSFmieUPtdUm3mHa7DEfVwtUD9t-UXjFoM_Gkk9YrMxALT3hPOF18wEY1mOfDSjXYiF_ZV9YHrBsUoadMX1SkKxHnZG4j_O8sHjsHMO51VAnhvqBi-bJr6h8YpV_Ut3_k_wxKWTQP3Or4_MgwHi9AMtZ8cilKnmU35oqwMaHSLdm0HLzTa2MA9uVOYlUkIHU2dolt9xLTUwpZSKDE5nw0s71-TjPBpEEPq7DQB2_lR1qn_4gYmnQ3rbNOd4KUT5qpmZe6lNwmWpCsIBFjT1ZZHnRQpDK6IbJvF8fW7NJbUWVVkbtxAMZGEmaIqIEbbUM84S1c2FaW44toahcIbBoG78IGRVCKg2IYYOSfewOBD6C2aok0M2IGTreGP2S5LFrL1pLJQsG9aCNKLrjgPFTJF_-UcYDi1u5nZrZkeHuA2WG60par75x1B8MQ7QQcgeD5BRKiHzfgInKEj-xW0X8rn24zD9fXzSmOayP7APU1s1U74khUZBAJ3cWzEwfPThWLuxqSkrcnHfLS_nQHq7f8h-Rh_W2DiJsQyCfNNj3hiqRNFk6nidwm0Z85O866U1dl-cv93TMkTIigD0sP13pK_yuF6f27pE4kbOsOabxyPLWDGk68";
       	axios.post('/api/get_details',null,{
       		headers:{Authorization:token}
       	})
@@ -97,7 +100,7 @@ _register(){
                             <div className="input-group">
                                 <div className="form-group is-empty">
                                    <input name="NewUsername" type="text" className="form-control rtl" placeholder="نام کاربری" onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.NewUsername} />
-                                     <span className="rtl" style={{ color:'#f44336',display: this.state.passwordRequired=='visibile' ? 'block' : 'none'}}><small>نام کاربری.</small></span>
+                                     <span className="rtl" style={{ color:'#f44336',display: this.state.NewUsernameRequired=='visibile' ? 'block' : 'none'}}><small>نام کاربری خود را وارد کنید.</small></span>
                                    <span className="material-input"></span>
                                 </div>
                                 <span className="input-group-addon">
@@ -111,8 +114,8 @@ _register(){
                                  <div className="form-group is-empty">
                                    <input name="NewC_password"  type="password" className="form-control rtl" placeholder="تکرار پسورد..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.NewC_password} />
                                    <span className="material-input"></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.c_passwordRequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.c_passwordCompare=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
+                                   <span className="rtl" style={{ color:'#f44336',display: this.state.NewC_passwordRequired=='visibile' ? 'block' : 'none'}}><small>تکرار پسورد را وارد کنید.</small></span>
+                                   <span className="rtl" style={{ color:'#f44336',display: this.state.C_passwordCompare=='visibile' ? 'block' : 'none'}}><small>تکرار پسورد صحیح نیست.</small></span>
                                  </div>
                                 <span className="input-group-addon">
                                     <i className="material-icons">lock_outline</i>
@@ -124,8 +127,8 @@ _register(){
                                  <div className="form-group is-empty">
                                    <input name="NewPassword"  type="password" className="form-control rtl" placeholder="پسورد ..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.NewPassword}  />
                                    <span className="material-input"></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.passwordRequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.passwordLength=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
+                                   <span className="rtl" style={{ color:'#f44336',display: this.state.NewPasswordRequired=='visibile' ? 'block' : 'none'}}><small>پسورد خود را وارد کنید.</small></span>
+                                   <span className="rtl" style={{ color:'#f44336',display: this.state.NewPasswordLength=='visibile' ? 'block' : 'none'}}><small>پسورد شما باید حداقل 5 حرف باشد.</small></span>
                                  </div>
                                 <span className="input-group-addon">
                                     <i className="material-icons">lock_open</i>
@@ -146,7 +149,7 @@ _handleRegisterKeyPress(event){
               switch (inputName) {
                   case 'NewUsername':
                      this.setState({
-                                  NewUsername:'hidden',
+                                  NewUsernameRequired:'hidden',
                                   NewUsername:inputValue,   
                       });
                    break;
@@ -175,6 +178,7 @@ _handleRegisterKeyPress(event){
                     case 'NewPassword':
                          this.setState({
                                       NewPasswordRequired:'hidden',
+                                      NewPasswordLength:'hidden',
                                       NewPassword:inputValue,
                                      
                           });
@@ -182,6 +186,7 @@ _handleRegisterKeyPress(event){
                    case 'NewC_password':
                          this.setState({
                                       NewC_passwordRequired:'hidden',
+                                      C_passwordCompare:'hidden',
                                       NewC_password:inputValue,
                                      
                           });
@@ -192,33 +197,72 @@ _handleRegisterKeyPress(event){
 }
 _handleRegister(){
       const{NewEmail , NewPassword , NewUsername , NewC_password} = this.state;
-      if (NewEmail != '' ){
-            const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (valid.test(NewEmail)) {
-                 this.setState({
-                        NewValidEmail:'hidden',   
-                 });
-                 console.log(this._checkEmail(NewEmail));
-                 if(this._checkEmail(NewEmail)){
-                       this.setState({
-                                      EmailRegisteredBefore:true
+      if (NewUsername != '' ){
+           if (NewEmail != '' ){
+              const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+              if (valid.test(NewEmail)) {
+                    this.setState({
+                            NewValidEmail:'hidden',   
+                    });
+                    axios.post('/api/email_check',{
+                              email:NewEmail
+                       })
+                         .then(response=>{
+                             if (response.data) {
+                                this.setState({
+                                  EmailRegisteredBefore:true
+                                });
+                               if(NewPassword != '' ){
+                                  if (NewPassword.length >= 5){
+                                      if (NewC_password != ''){
+                                              if (NewPassword == NewC_password){
+                                                  console.log('Registered');
+                                              }else{
+                                                this.setState({
+                                                   C_passwordCompare:'visibile'
+                                                });
+                                              }
+                                    }else{
+                                      this.setState({
+                                         NewC_passwordRequired:'visibile'
+                                      });
+                                    }
+                                  }else{
+                                     this.setState({
+                                        NewPasswordLength:'visibile'
+                                     });
+                                  }
+                               }else{
+                                  this.setState({
+                                     NewPasswordRequired:'visibile',
                                   });
-                 }else{
-                       this.setState({
-                                      EmailRegisteredBefore:false
+                               }
+                                  
+                             }else{
+                                  this.setState({
+                                    EmailRegisteredBefore:false
                                   });
-                 }
+                             }
+                         }) 
+                           .catch(error=>{
+                              console.log(error);
+                           });
+                    
             }else{
                  this.setState({
                         NewValidEmail:'visibile',
                   });
-           }
-           
+           }    
       }else{
         this.setState({
              NewEmailRequired:'visibile'
         });
       }
+     }else{
+       this.setState({
+            NewUsernameRequired:'visibile'
+       });
+     }
 }
 
 
@@ -331,8 +375,7 @@ _handleKeyPress(event){
                    break;
                   default:
                     console.log('Sorry, the state not found.');
-              }
-              
+              }        
 }
 _handleSubmit(){
         const email = this.state.email;
@@ -350,19 +393,18 @@ _handleSubmit(){
                          })
                    .then(response=>{
                       if (response.status==200) {
-                            this.setState({
-                               display:'none',
-                               Redirect:true,
 
+                              let token = response.data.success.token;
+                              let cookie = new Cookie;
+                              cookie.set('user_token' , token , {path : '/'});
+                          
+                            this.setState({
+                               Redirect:true,
                             });
                       }
                    }) 
                      .catch(error=>{
-                        if (error.response.data.error=="Unauthorised" , error.response.status==402) {
-                           this.setState({
-                              login:'failed'
-                           });
-                        }
+                        console.log(error);
                      });
                    }else{
                       this.setState({
@@ -381,20 +423,6 @@ _handleSubmit(){
           });
         }      
 }
-
-_checkEmail(email){
-         const NewEmail  = email;
-         axios.post('/api/email_check',{
-                          email:NewEmail
-                   })
-                     .then(response=>{
-                          return response.data;
-                     }) 
-                       .catch(error=>{
-                          console.log(error);
-                       });
-}
-
 render(){
 		return(
                 <Modal display={this.state.display} > 

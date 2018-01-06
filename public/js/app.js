@@ -5363,7 +5363,11 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__items_NavItem__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__items_Menu__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_UserLogin__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_UserLogin__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_universal_cookie__ = __webpack_require__(293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_universal_cookie__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5371,6 +5375,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -5386,7 +5392,9 @@ var Header = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
     _this.state = {
-      display: 'none'
+      display: 'none',
+      username: '',
+      useremail: ''
     };
     return _this;
   }
@@ -5401,14 +5409,40 @@ var Header = function (_Component) {
       }
     }
   }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      var cookie = new __WEBPACK_IMPORTED_MODULE_5_universal_cookie___default.a();
+      var user_token = cookie.get('user_token');
+      var token = 'Bearer ' + user_token;
+
+      if (user_token !== undefined) {
+        __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post('/api/get_details', null, {
+          headers: { Authorization: token }
+        }).then(function (response) {
+          var _response$data = response.data,
+              email = _response$data.email,
+              name = _response$data.name;
+
+          _this2.setState({
+            username: name,
+            useremail: email
+          });
+        }).catch(function (error) {
+          console.log(error);
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'nav',
         { className: 'navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__pages_UserLogin__["a" /* default */], { display: this.state.display }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__pages_UserLogin__["a" /* default */], { display: this.state.display }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'container' },
@@ -5906,9 +5940,18 @@ var Header = function (_Component) {
                   'perm_phone_msg'
                 )
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__items_Menu__["a" /* default */], { title: '\u0648\u0631\u0648\u062F', data: [{ title: 'کاربر', to: '#', onClicking: function onClicking() {
-                    _this2._userlogin();
-                  } }, { title: 'فروشنده', to: '/seller/login' }, { title: 'نویسنده', to: '/author/login' }] })
+              this.state.username == '' ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__items_Menu__["a" /* default */], { title: '\u0648\u0631\u0648\u062F', data: [{ title: 'کاربر', to: '#', onClicking: function onClicking() {
+                    _this3._userlogin();
+                  } }, { title: 'فروشنده', to: '/seller/login' }, { title: 'نویسنده', to: '/author/login' }] }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1__items_NavItem__["a" /* default */],
+                { className: 'nav-link', dataOriginalTitle: '\u0628\u0627 \u0645\u0627 \u062F\u0631 \u062A\u0645\u0627\u0633 \u0628\u0627\u0634\u06CC\u062F', to: '/dashboard' },
+                this.state.username,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'i',
+                  { className: 'material-icons' },
+                  'perm_phone_msg'
+                )
+              )
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'float-block' })
           )
@@ -59395,15 +59438,16 @@ var Menu = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie__ = __webpack_require__(293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_universal_cookie__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -59433,11 +59477,13 @@ var UserLogin = function (_Component) {
       NewUsername: '',
       NewPassword: '',
       NewC_password: '',
+      NewPasswordLength: 'hidden',
       NewEmailRequired: 'hidden',
       NewValidEmail: 'hidden',
       NewUsernameRequired: 'hidden',
       NewPasswordRequired: 'hidden',
       NewC_passwordRequired: 'hidden',
+      C_passwordCompare: 'hidden',
       EmailRegisteredBefore: true,
 
       loginForm: true,
@@ -59469,7 +59515,7 @@ var UserLogin = function (_Component) {
   }, {
     key: '_handleGetdata',
     value: function _handleGetdata() {
-      var token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJiODE2N2JkNDI5ZGFmYTljZDU4ZGJhZDgxYzVlZTU4N2FlN2E1NDU2NWNlNDYwMDAzODdmZmI3ZjMzNjExNzA2NWI2ZDg3MGNjNjk3YTc4In0.eyJhdWQiOiIxIiwianRpIjoiMmI4MTY3YmQ0MjlkYWZhOWNkNThkYmFkODFjNWVlNTg3YWU3YTU0NTY1Y2U0NjAwMDM4N2ZmYjdmMzM2MTE3MDY1YjZkODcwY2M2OTdhNzgiLCJpYXQiOjE1MTUwODE4OTMsIm5iZiI6MTUxNTA4MTg5MywiZXhwIjoxNTQ2NjE3ODkzLCJzdWIiOiIxNyIsInNjb3BlcyI6W119.Kfdt2iBBvBQABNlyWzbi1NgPfgK7WhEE8495lgRlwNN0UapW6H4CYNCO8PcOrT5eRUmO6-vgfTvly6j5PW2NDN0ZdrFg7fQsVTim9sc7pSd_5M3kqJ6Ym7noxMaGGoZzyRA3x9uPRd8zbIWBNGdYNHoJtvKcSJ_SnXKNz3CdQZXO3FQwBVeEyLd-h7pZ1G4FOxs9SrJ5gYd_PAKHc7pSfDlkRa6cTWBmvl-PuGcLuygX506T01cXa-Ut81j9nn_AeEDr4ObV1W-D-rvyEMHRXeos7QTN3UZ8MhEpTFdjqSJgnuu2n8uii_1Xg5pP7Uj5q43_qBTZ1hTW11I-bZOvydMr9o7Bib4_F_JiPtOdu85SYPizX9itgBc2kc8Rb-KyWe_yUc_4GSJpL3XGpJ3ES8SD_VC1CAnydg-y_nP1kii69SgmeUjApSIoQ4Ig4Impdioh5SONPWXVnCTAM6Psi_JzwBvDrJx-7eazKPdnRAd4WJxDf9kwQhHspSbLLxfgGla0W6kKxyx7_4NFmbZPhb-AcAKMIfpYfKWAg04u1IoFseZSWDIMljgQ4we_O-BR_JpczHKJeMopAgWUUI-s745Qxo8-VjoBqy2gIICXjAEQW-6xe3Iav-UW7jH4dF48HwNcJ8AU10FRzUaiSRadRIx2FEMSxqvCzpDL9qnBg84";
+      var token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjVmYzgxMTljNjJjNzlkOTgwNGRhNDM3M2E1ZDMxMTQ4ZWU3ZGMzYzViYTY5ZmRlYmYyYWRhMzU5ZDEwOWFlODIyODMxM2Y3YTZmNDZkNmYyIn0.eyJhdWQiOiIxIiwianRpIjoiNWZjODExOWM2MmM3OWQ5ODA0ZGE0MzczYTVkMzExNDhlZTdkYzNjNWJhNjlmZGViZjJhZGEzNTlkMTA5YWU4MjI4MzEzZjdhNmY0NmQ2ZjIiLCJpYXQiOjE1MTUyNTEzMTMsIm5iZiI6MTUxNTI1MTMxMywiZXhwIjoxNTQ2Nzg3MzEzLCJzdWIiOiIxNiIsInNjb3BlcyI6W119.HYF0ziG9mlTrE6nHWeDZZGJLgIritVDGO51Mh-pa9WAY76x7jbUCdX8EDRrSFmieUPtdUm3mHa7DEfVwtUD9t-UXjFoM_Gkk9YrMxALT3hPOF18wEY1mOfDSjXYiF_ZV9YHrBsUoadMX1SkKxHnZG4j_O8sHjsHMO51VAnhvqBi-bJr6h8YpV_Ut3_k_wxKWTQP3Or4_MgwHi9AMtZ8cilKnmU35oqwMaHSLdm0HLzTa2MA9uVOYlUkIHU2dolt9xLTUwpZSKDE5nw0s71-TjPBpEEPq7DQB2_lR1qn_4gYmnQ3rbNOd4KUT5qpmZe6lNwmWpCsIBFjT1ZZHnRQpDK6IbJvF8fW7NJbUWVVkbtxAMZGEmaIqIEbbUM84S1c2FaW44toahcIbBoG78IGRVCKg2IYYOSfewOBD6C2aok0M2IGTreGP2S5LFrL1pLJQsG9aCNKLrjgPFTJF_-UcYDi1u5nZrZkeHuA2WG60par75x1B8MQ7QQcgeD5BRKiHzfgInKEj-xW0X8rn24zD9fXzSmOayP7APU1s1U74khUZBAJ3cWzEwfPThWLuxqSkrcnHfLS_nQHq7f8h-Rh_W2DiJsQyCfNNj3hiqRNFk6nidwm0Z85O866U1dl-cv93TMkTIigD0sP13pK_yuF6f27pE4kbOsOabxyPLWDGk68";
       __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/get_details', null, {
         headers: { Authorization: token }
       }).then(function (response) {
@@ -59558,11 +59604,11 @@ var UserLogin = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'NewUsername', type: 'text', className: 'form-control rtl', placeholder: '\u0646\u0627\u0645 \u06A9\u0627\u0631\u0628\u0631\u06CC', onChange: this._handleRegisterKeyPress.bind(this), value: this.state.NewUsername }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
-                { className: 'rtl', style: { color: '#f44336', display: this.state.passwordRequired == 'visibile' ? 'block' : 'none' } },
+                { className: 'rtl', style: { color: '#f44336', display: this.state.NewUsernameRequired == 'visibile' ? 'block' : 'none' } },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'small',
                   null,
-                  '\u0646\u0627\u0645 \u06A9\u0627\u0631\u0628\u0631\u06CC.'
+                  '\u0646\u0627\u0645 \u06A9\u0627\u0631\u0628\u0631\u06CC \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F.'
                 )
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' })
@@ -59591,20 +59637,20 @@ var UserLogin = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
-                { className: 'rtl', style: { color: '#f44336', display: this.state.c_passwordRequired == 'visibile' ? 'block' : 'none' } },
+                { className: 'rtl', style: { color: '#f44336', display: this.state.NewC_passwordRequired == 'visibile' ? 'block' : 'none' } },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'small',
                   null,
-                  '\u0627\u06CC\u0645\u06CC\u0644 \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F.'
+                  '\u062A\u06A9\u0631\u0627\u0631 \u067E\u0633\u0648\u0631\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F.'
                 )
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
-                { className: 'rtl', style: { color: '#f44336', display: this.state.c_passwordCompare == 'visibile' ? 'block' : 'none' } },
+                { className: 'rtl', style: { color: '#f44336', display: this.state.C_passwordCompare == 'visibile' ? 'block' : 'none' } },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'small',
                   null,
-                  '\u0644\u0637\u0641\u0627 \u0627\u06CC\u0645\u06CC\u0644 \u0635\u062D\u06CC\u062D \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F.'
+                  '\u062A\u06A9\u0631\u0627\u0631 \u067E\u0633\u0648\u0631\u062F \u0635\u062D\u06CC\u062D \u0646\u06CC\u0633\u062A.'
                 )
               )
             ),
@@ -59632,20 +59678,20 @@ var UserLogin = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
-                { className: 'rtl', style: { color: '#f44336', display: this.state.passwordRequired == 'visibile' ? 'block' : 'none' } },
+                { className: 'rtl', style: { color: '#f44336', display: this.state.NewPasswordRequired == 'visibile' ? 'block' : 'none' } },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'small',
                   null,
-                  '\u0627\u06CC\u0645\u06CC\u0644 \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F.'
+                  '\u067E\u0633\u0648\u0631\u062F \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F.'
                 )
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
-                { className: 'rtl', style: { color: '#f44336', display: this.state.passwordLength == 'visibile' ? 'block' : 'none' } },
+                { className: 'rtl', style: { color: '#f44336', display: this.state.NewPasswordLength == 'visibile' ? 'block' : 'none' } },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'small',
                   null,
-                  '\u0644\u0637\u0641\u0627 \u0627\u06CC\u0645\u06CC\u0644 \u0635\u062D\u06CC\u062D \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F.'
+                  '\u067E\u0633\u0648\u0631\u062F \u0634\u0645\u0627 \u0628\u0627\u06CC\u062F \u062D\u062F\u0627\u0642\u0644 5 \u062D\u0631\u0641 \u0628\u0627\u0634\u062F.'
                 )
               )
             ),
@@ -59688,9 +59734,10 @@ var UserLogin = function (_Component) {
       var inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       switch (inputName) {
         case 'NewUsername':
-          this.setState(_defineProperty({
-            NewUsername: 'hidden'
-          }, 'NewUsername', inputValue));
+          this.setState({
+            NewUsernameRequired: 'hidden',
+            NewUsername: inputValue
+          });
           break;
         case 'NewEmail':
           this.setState({
@@ -59717,6 +59764,7 @@ var UserLogin = function (_Component) {
         case 'NewPassword':
           this.setState({
             NewPasswordRequired: 'hidden',
+            NewPasswordLength: 'hidden',
             NewPassword: inputValue
 
           });
@@ -59724,6 +59772,7 @@ var UserLogin = function (_Component) {
         case 'NewC_password':
           this.setState({
             NewC_passwordRequired: 'hidden',
+            C_passwordCompare: 'hidden',
             NewC_password: inputValue
 
           });
@@ -59735,43 +59784,81 @@ var UserLogin = function (_Component) {
   }, {
     key: '_handleRegister',
     value: function _handleRegister() {
+      var _this3 = this;
+
       var _state = this.state,
           NewEmail = _state.NewEmail,
           NewPassword = _state.NewPassword,
           NewUsername = _state.NewUsername,
           NewC_password = _state.NewC_password;
 
-      if (NewEmail != '') {
-        var valid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (valid.test(NewEmail)) {
-          this.setState({
-            NewValidEmail: 'hidden'
-          });
-          console.log(this._checkEmail(NewEmail));
-          if (this._checkEmail(NewEmail)) {
+      if (NewUsername != '') {
+        if (NewEmail != '') {
+          var valid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (valid.test(NewEmail)) {
             this.setState({
-              EmailRegisteredBefore: true
+              NewValidEmail: 'hidden'
+            });
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/email_check', {
+              email: NewEmail
+            }).then(function (response) {
+              if (response.data) {
+                _this3.setState({
+                  EmailRegisteredBefore: true
+                });
+                if (NewPassword != '') {
+                  if (NewPassword.length >= 5) {
+                    if (NewC_password != '') {
+                      if (NewPassword == NewC_password) {
+                        console.log('Registered');
+                      } else {
+                        _this3.setState({
+                          C_passwordCompare: 'visibile'
+                        });
+                      }
+                    } else {
+                      _this3.setState({
+                        NewC_passwordRequired: 'visibile'
+                      });
+                    }
+                  } else {
+                    _this3.setState({
+                      NewPasswordLength: 'visibile'
+                    });
+                  }
+                } else {
+                  _this3.setState({
+                    NewPasswordRequired: 'visibile'
+                  });
+                }
+              } else {
+                _this3.setState({
+                  EmailRegisteredBefore: false
+                });
+              }
+            }).catch(function (error) {
+              console.log(error);
             });
           } else {
             this.setState({
-              EmailRegisteredBefore: false
+              NewValidEmail: 'visibile'
             });
           }
         } else {
           this.setState({
-            NewValidEmail: 'visibile'
+            NewEmailRequired: 'visibile'
           });
         }
       } else {
         this.setState({
-          NewEmailRequired: 'visibile'
+          NewUsernameRequired: 'visibile'
         });
       }
     }
   }, {
     key: '_forgotPassword',
     value: function _forgotPassword() {
-      var _this3 = this;
+      var _this4 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -59830,7 +59917,7 @@ var UserLogin = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'button',
                 { className: 'btn btn-primary', onClick: function onClick() {
-                    return _this3._handleRegister();
+                    return _this4._handleRegister();
                   } },
                 '\u0628\u0627\u0632\u06CC\u0627\u0628\u06CC ',
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59848,7 +59935,7 @@ var UserLogin = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { className: 'btn btn-simple btn-info', onClick: function onClick() {
-                return _this3.setState({ loginForm: true, forgotPassword: false });
+                return _this4.setState({ loginForm: true, forgotPassword: false });
               } },
             '\u0642\u0628\u0644\u0627 \u062B\u0628\u062A \u0646\u0627\u0645 \u06A9\u0631\u062F\u0647 \u0627\u0645'
           )
@@ -59858,7 +59945,7 @@ var UserLogin = function (_Component) {
   }, {
     key: '_login',
     value: function _login() {
-      var _this4 = this;
+      var _this5 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -59957,21 +60044,21 @@ var UserLogin = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { className: 'btn btn-primary', onClick: function onClick() {
-                return _this4._handleSubmit(_this4);
+                return _this5._handleSubmit(_this5);
               } },
             '\u0648\u0631\u0648\u062F'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { className: 'btn btn-simple btn-info', onClick: function onClick() {
-                return _this4.setState({ loginForm: false });
+                return _this5.setState({ loginForm: false });
               } },
             '\u062B\u0628\u062A \u0646\u0627\u0645'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { className: 'btn btn-simple btn-warning pull-right', onClick: function onClick() {
-                return _this4.setState({ forgotPassword: true });
+                return _this5.setState({ forgotPassword: true });
               } },
             '\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0631\u0627 \u0641\u0631\u0627\u0645\u0648\u0634 \u06A9\u0631\u062F\u0647 \u0627\u0645'
           )
@@ -60020,7 +60107,7 @@ var UserLogin = function (_Component) {
   }, {
     key: '_handleSubmit',
     value: function _handleSubmit() {
-      var _this5 = this;
+      var _this6 = this;
 
       var email = this.state.email;
       var password = this.state.password;
@@ -60036,18 +60123,17 @@ var UserLogin = function (_Component) {
               password: password
             }).then(function (response) {
               if (response.status == 200) {
-                _this5.setState({
-                  display: 'none',
-                  Redirect: true
 
+                var token = response.data.success.token;
+                var cookie = new __WEBPACK_IMPORTED_MODULE_4_universal_cookie___default.a();
+                cookie.set('user_token', token, { path: '/' });
+
+                _this6.setState({
+                  Redirect: true
                 });
               }
             }).catch(function (error) {
-              if (error.response.data.error == "Unauthorised", error.response.status == 402) {
-                _this5.setState({
-                  login: 'failed'
-                });
-              }
+              console.log(error);
             });
           } else {
             this.setState({
@@ -60065,18 +60151,6 @@ var UserLogin = function (_Component) {
           EmailRequired: 'visibile'
         });
       }
-    }
-  }, {
-    key: '_checkEmail',
-    value: function _checkEmail(email) {
-      var NewEmail = email;
-      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/email_check', {
-        email: NewEmail
-      }).then(function (response) {
-        return response.data;
-      }).catch(function (error) {
-        console.log(error);
-      });
     }
   }, {
     key: 'render',
@@ -62713,6 +62787,11 @@ var AboutUs = function (_Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_universal_cookie__ = __webpack_require__(293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_universal_cookie__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__partials_Header__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__partials_Footer__ = __webpack_require__(43);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62723,28 +62802,143 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
+
+
+
 var UserDashboard = function (_Component) {
-  _inherits(UserDashboard, _Component);
+		_inherits(UserDashboard, _Component);
 
-  function UserDashboard() {
-    _classCallCheck(this, UserDashboard);
+		function UserDashboard(props) {
+				_classCallCheck(this, UserDashboard);
 
-    return _possibleConstructorReturn(this, (UserDashboard.__proto__ || Object.getPrototypeOf(UserDashboard)).call(this));
-  }
+				var _this = _possibleConstructorReturn(this, (UserDashboard.__proto__ || Object.getPrototypeOf(UserDashboard)).call(this, props));
 
-  _createClass(UserDashboard, [{
-    key: 'render',
-    value: function render() {
-      console.log('Called');
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'h1',
-        null,
-        'Dashboard'
-      );
-    }
-  }]);
+				_this.state = {
+						username: '',
+						useremail: '',
+						redirect: false
+				};
+				return _this;
+		}
 
-  return UserDashboard;
+		_createClass(UserDashboard, [{
+				key: 'componentWillMount',
+				value: function componentWillMount() {
+						var _this2 = this;
+
+						var cookie = new __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default.a();
+						var token = 'Bearer ' + cookie.get('user_token');
+
+						axios.post('/api/get_details', null, {
+								headers: { Authorization: token }
+						}).then(function (response) {
+								var _response$data = response.data,
+								    email = _response$data.email,
+								    name = _response$data.name;
+
+								_this2.setState({
+										username: name,
+										useremail: email
+								});
+						}).catch(function (error) {
+								console.log(error);
+						});
+				}
+		}, {
+				key: '_logOut',
+				value: function _logOut() {
+						var cookie = new __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default.a();
+						cookie.remove('user_token');
+						this.setState({
+								redirect: true
+						});
+				}
+		}, {
+				key: 'render',
+				value: function render() {
+						var _this3 = this;
+
+						var _state = this.state,
+						    useremail = _state.useremail,
+						    username = _state.username;
+
+						return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'div',
+								null,
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__partials_Header__["a" /* default */], null),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'div',
+										{ className: 'header header-filter' },
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'div',
+												{ className: 'container' },
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														'div',
+														{ className: 'row' },
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																'div',
+																{ className: 'col-md-8 col-md-offset-2' },
+																__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																		'div',
+																		{ className: 'brand' },
+																		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																				'h1',
+																				{ className: 'title white' },
+																				'\u0648\u0628\u06CC \u062A\u06A9'
+																		),
+																		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																				'div',
+																				{ className: 'separator separator-danger' },
+																				'\u273B'
+																		),
+																		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																				'h3',
+																				{ className: 'text-center' },
+																				'\u0645\u0627 \u0641\u0642\u0637 \u06CC\u06A9 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0637\u0631\u0627\u062D\u06CC \u0646\u0645\u06CC\u06A9\u0646\u06CC\u0645\u060C\u0645\u0627 \u0622\u0646\u0686\u0647 \u062F\u0631 \u0630\u0647\u0646 \u0648\u0631\u0648\u06CC\u0627\u06CC \u0634\u0645\u0627\u0633\u062A \u0628\u0647 \u0648\u0627\u0642\u0639\u06CC\u062A \u062A\u0628\u062F\u06CC\u0644 \u0645\u06CC\u06A9\u0646\u06CC\u0645'
+																		)
+																)
+														)
+												)
+										)
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'div',
+										{ className: 'main main-raised' },
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'nav',
+												{ className: 'navbar navbar-default' },
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														'div',
+														{ className: 'container-fluid' },
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'collapse navbar-collapse menu', id: 'example-navbar' })
+												)
+										),
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'h1',
+												null,
+												useremail
+										),
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'h1',
+												null,
+												username
+										),
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'button',
+												{ className: 'btn btn-primary', onClick: function onClick() {
+																return _this3._logOut();
+														} },
+												'LogOut'
+										),
+										this.state.redirect === true ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Redirect */], { to: '/' }) : null
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__partials_Footer__["a" /* default */], null)
+						);
+				}
+		}]);
+
+		return UserDashboard;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (UserDashboard);
@@ -62754,6 +62948,415 @@ var UserDashboard = function (_Component) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Cookies = __webpack_require__(296);
+
+var _Cookies2 = _interopRequireDefault(_Cookies);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Cookies2.default;
+module.exports = exports['default'];
+
+/***/ }),
+/* 294 */,
+/* 295 */,
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _cookie = __webpack_require__(297);
+
+var _cookie2 = _interopRequireDefault(_cookie);
+
+var _objectAssign = __webpack_require__(4);
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
+var _utils = __webpack_require__(298);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Cookies = function () {
+  function Cookies(cookies, hooks) {
+    _classCallCheck(this, Cookies);
+
+    this.cookies = parseCookies(cookies);
+    this.hooks = hooks;
+    this.HAS_DOCUMENT_COOKIE = (0, _utils.hasDocumentCookie)();
+  }
+
+  _createClass(Cookies, [{
+    key: '_updateBrowserValues',
+    value: function _updateBrowserValues() {
+      if (!this.HAS_DOCUMENT_COOKIE) {
+        return;
+      }
+
+      this.cookies = _cookie2.default.parse(document.cookie);
+    }
+  }, {
+    key: 'get',
+    value: function get(name) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      this._updateBrowserValues();
+      return readCookie(this.cookies[name], options);
+    }
+  }, {
+    key: 'getAll',
+    value: function getAll() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      this._updateBrowserValues();
+      var result = {};
+
+      for (var name in this.cookies) {
+        result[name] = readCookie(this.cookies[name], options);
+      }
+
+      return result;
+    }
+  }, {
+    key: 'set',
+    value: function set(name, value, options) {
+      if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
+        value = JSON.stringify(value);
+      }
+
+      if (this.hooks && this.hooks.onSet) {
+        this.hooks.onSet(name, value, options);
+      }
+
+      this.cookies[name] = value;
+
+      if (this.HAS_DOCUMENT_COOKIE) {
+        document.cookie = _cookie2.default.serialize(name, value, options);
+      }
+    }
+  }, {
+    key: 'remove',
+    value: function remove(name, options) {
+      var finalOptions = options = (0, _objectAssign2.default)({}, options, {
+        expires: new Date(1970, 1, 1, 0, 0, 1),
+        maxAge: 0
+      });
+
+      if (this.hooks && this.hooks.onRemove) {
+        this.hooks.onRemove(name, finalOptions);
+      }
+
+      delete this.cookies[name];
+
+      if (this.HAS_DOCUMENT_COOKIE) {
+        document.cookie = _cookie2.default.serialize(name, '', finalOptions);
+      }
+    }
+  }]);
+
+  return Cookies;
+}();
+
+exports.default = Cookies;
+
+
+function parseCookies(cookies) {
+  if (typeof cookies === 'string') {
+    return _cookie2.default.parse(cookies);
+  } else if ((typeof cookies === 'undefined' ? 'undefined' : _typeof(cookies)) === 'object' && cookies !== null) {
+    return cookies;
+  } else {
+    return {};
+  }
+}
+
+function isParsingCookie(value, doNotParse) {
+  if (typeof doNotParse === 'undefined') {
+    // We guess if the cookie start with { or [, it has been serialized
+    doNotParse = !value || value[0] !== '{' && value[0] !== '[' && value[0] !== '"';
+  }
+
+  return !doNotParse;
+}
+
+function readCookie(value) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  if (isParsingCookie(value, options.doNotParse)) {
+    try {
+      return JSON.parse(value);
+    } catch (e) {
+      // At least we tried
+    }
+  }
+
+  return value;
+}
+module.exports = exports['default'];
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * cookie
+ * Copyright(c) 2012-2014 Roman Shtylman
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+
+
+/**
+ * Module exports.
+ * @public
+ */
+
+exports.parse = parse;
+exports.serialize = serialize;
+
+/**
+ * Module variables.
+ * @private
+ */
+
+var decode = decodeURIComponent;
+var encode = encodeURIComponent;
+var pairSplitRegExp = /; */;
+
+/**
+ * RegExp to match field-content in RFC 7230 sec 3.2
+ *
+ * field-content = field-vchar [ 1*( SP / HTAB ) field-vchar ]
+ * field-vchar   = VCHAR / obs-text
+ * obs-text      = %x80-FF
+ */
+
+var fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
+
+/**
+ * Parse a cookie header.
+ *
+ * Parse the given cookie header string into an object
+ * The object has the various cookies as keys(names) => values
+ *
+ * @param {string} str
+ * @param {object} [options]
+ * @return {object}
+ * @public
+ */
+
+function parse(str, options) {
+  if (typeof str !== 'string') {
+    throw new TypeError('argument str must be a string');
+  }
+
+  var obj = {}
+  var opt = options || {};
+  var pairs = str.split(pairSplitRegExp);
+  var dec = opt.decode || decode;
+
+  for (var i = 0; i < pairs.length; i++) {
+    var pair = pairs[i];
+    var eq_idx = pair.indexOf('=');
+
+    // skip things that don't look like key=value
+    if (eq_idx < 0) {
+      continue;
+    }
+
+    var key = pair.substr(0, eq_idx).trim()
+    var val = pair.substr(++eq_idx, pair.length).trim();
+
+    // quoted values
+    if ('"' == val[0]) {
+      val = val.slice(1, -1);
+    }
+
+    // only assign once
+    if (undefined == obj[key]) {
+      obj[key] = tryDecode(val, dec);
+    }
+  }
+
+  return obj;
+}
+
+/**
+ * Serialize data into a cookie header.
+ *
+ * Serialize the a name value pair into a cookie string suitable for
+ * http headers. An optional options object specified cookie parameters.
+ *
+ * serialize('foo', 'bar', { httpOnly: true })
+ *   => "foo=bar; httpOnly"
+ *
+ * @param {string} name
+ * @param {string} val
+ * @param {object} [options]
+ * @return {string}
+ * @public
+ */
+
+function serialize(name, val, options) {
+  var opt = options || {};
+  var enc = opt.encode || encode;
+
+  if (typeof enc !== 'function') {
+    throw new TypeError('option encode is invalid');
+  }
+
+  if (!fieldContentRegExp.test(name)) {
+    throw new TypeError('argument name is invalid');
+  }
+
+  var value = enc(val);
+
+  if (value && !fieldContentRegExp.test(value)) {
+    throw new TypeError('argument val is invalid');
+  }
+
+  var str = name + '=' + value;
+
+  if (null != opt.maxAge) {
+    var maxAge = opt.maxAge - 0;
+    if (isNaN(maxAge)) throw new Error('maxAge should be a Number');
+    str += '; Max-Age=' + Math.floor(maxAge);
+  }
+
+  if (opt.domain) {
+    if (!fieldContentRegExp.test(opt.domain)) {
+      throw new TypeError('option domain is invalid');
+    }
+
+    str += '; Domain=' + opt.domain;
+  }
+
+  if (opt.path) {
+    if (!fieldContentRegExp.test(opt.path)) {
+      throw new TypeError('option path is invalid');
+    }
+
+    str += '; Path=' + opt.path;
+  }
+
+  if (opt.expires) {
+    if (typeof opt.expires.toUTCString !== 'function') {
+      throw new TypeError('option expires is invalid');
+    }
+
+    str += '; Expires=' + opt.expires.toUTCString();
+  }
+
+  if (opt.httpOnly) {
+    str += '; HttpOnly';
+  }
+
+  if (opt.secure) {
+    str += '; Secure';
+  }
+
+  if (opt.sameSite) {
+    var sameSite = typeof opt.sameSite === 'string'
+      ? opt.sameSite.toLowerCase() : opt.sameSite;
+
+    switch (sameSite) {
+      case true:
+        str += '; SameSite=Strict';
+        break;
+      case 'lax':
+        str += '; SameSite=Lax';
+        break;
+      case 'strict':
+        str += '; SameSite=Strict';
+        break;
+      default:
+        throw new TypeError('option sameSite is invalid');
+    }
+  }
+
+  return str;
+}
+
+/**
+ * Try decoding a string using a decoding function.
+ *
+ * @param {string} str
+ * @param {function} decode
+ * @private
+ */
+
+function tryDecode(str, decode) {
+  try {
+    return decode(str);
+  } catch (e) {
+    return str;
+  }
+}
+
+
+/***/ }),
+/* 298 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.hasDocumentCookie = hasDocumentCookie;
+exports.cleanCookies = cleanCookies;
+// Can we get/set cookies on document.cookie?
+
+function hasDocumentCookie() {
+  return (typeof document === 'undefined' ? 'undefined' : _typeof(document)) === 'object' && typeof document.cookie === 'string';
+}
+
+//backwards compatibility
+var HAS_DOCUMENT_COOKIE = exports.HAS_DOCUMENT_COOKIE = hasDocumentCookie();
+
+function cleanCookies() {
+  document.cookie.split(';').forEach(function (c) {
+    document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+  });
+}
 
 /***/ })
 /******/ ]);
