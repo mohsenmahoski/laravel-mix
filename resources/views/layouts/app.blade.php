@@ -11,69 +11,35 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     <link href="{{mix('css/app.css')}}" rel="stylesheet" type="text/css">
+     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+     <link href="{{asset('css/material-kit.css')}}" rel="stylesheet" type="text/css">
+     <link href="{{asset('css/styles.css')}}" rel="stylesheet" type="text/css">
+     <link rel="stylesheet" href="{{ asset('css/maxcdn.css') }}" />
 </head>
 <body>
+    
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+        <div class="header header-filter"><div class="container"><div class="row"><div class="col-md-8 col-md-offset-2"><div class="brand"><h1 class="title white">وبی تک</h1><div class="separator separator-danger">✻</div><h3 class="text-center">ما فقط یک وب سایت طراحی نمیکنیم،ما آنچه در ذهن ورویای شماست به واقعیت تبدیل میکنیم</h3></div></div></div></div></div>
+        <div class="main main-raised">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse menu" id="example-navbar">
+                         
+                    </div>
                 </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        @yield('content')
+            </nav> 
+            @yield('content')
+        </div>
     </div>
-
+<footer class="footer"><div class="container"><div class="col-md-8"><nav class="col-md-4 pull-left"><ul><li><a href="http://www.creative-tim.com">Creative Tim</a></li><li><a href="http://presentation.creative-tim.com">About Us</a></li><li><a href="http://blog.creative-tim.com">Blog</a></li><li><a href="http://www.creative-tim.com/license">Licenses</a></li></ul></nav><nav class="col-md-4 pull-left"><ul><li><a href="http://www.creative-tim.com">Creative Tim</a></li><li><a href="http://presentation.creative-tim.com">About Us</a></li><li><a href="http://blog.creative-tim.com">Blog</a></li><li><a href="http://www.creative-tim.com/license">Licenses</a></li></ul></nav><nav class="col-md-4 pull-left"><ul><li><a href="http://www.creative-tim.com">Creative Tim</a></li><li><a href="http://presentation.creative-tim.com">About Us</a></li><li><a href="http://blog.creative-tim.com">Blog</a></li><li><a href="http://www.creative-tim.com/license">Licenses</a></li></ul></nav></div><div class="col-md-4"><div class="copyright pull-right col-md-"><!-- react-text: 230 -->© 2016, made with <!-- /react-text --><i class="material-icons">favorite</i><!-- react-text: 232 --> by Creative Tim for a better web.<!-- /react-text --></div></div></div></footer>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{mix('js/app.js')}}" ></script> 
+    <script src="{{asset('js/jquery.min.js')}}" ></script>
+    <script src="{{asset('js/theme/bootstarp.min.js')}}" ></script>
+    <script src="{{asset('js/material.min.js')}}" ></script>
+    <script src="{{asset('js/theme/bootstrap-datepicker.js')}}" ></script>
+    <script src="{{asset('js/theme/material-kit.js')}}" ></script>
 </body>
 </html>

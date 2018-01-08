@@ -21,7 +21,6 @@ export default class UserDashboard extends Component{
       		headers:{Authorization:token}
       	})
              .then(response=>{
-             	
              	 let {email ,name } = response.data;
              	 this.setState({
              	 	username:name,

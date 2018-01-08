@@ -31,7 +31,7 @@ class NewUserRegister extends Mailable
      * @return $this
      */
     public function build()
-    {
+    {  
         return $this->markdown('emails.users.newuserswelcome');
     }
 }

@@ -18,6 +18,8 @@ class UsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('user_key');
+            $table->boolean('confirm')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

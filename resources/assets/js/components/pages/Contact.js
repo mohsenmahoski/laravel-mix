@@ -94,7 +94,7 @@ class Contact extends Component {
                 if (email !=='' ){
                         if (message !== '' && message.length > 10) {
                              if (no_robot !== false) {
-                                    axios.post('/contact', {
+                                    axios.post('/api/contact', {
                                   name : name,
                                   family : family,
                                   message : message,

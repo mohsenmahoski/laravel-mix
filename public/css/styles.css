@@ -29,6 +29,7 @@ h1,h2,h3,h4,h5,h6,div,p,li,a,b,span,small{
 }
 .rtl{direction:rtl;}
 .ltr{direction:ltr;}
+.pd-20{padding:20px;}
 .pt-5{padding-top:5px;}
 .pt-10{padding-top:10px;}
 .pb-5{padding-bottom:5px;}
@@ -692,6 +693,9 @@ path[fill='#123456'] {
 .list-group-item-text
 {
     margin: 0 0 11px;
+}
+.min-height-235{
+  min-height:235px;
 }
 .user-cards li{list-style:none;}
 .user-cards li a{

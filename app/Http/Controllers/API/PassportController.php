@@ -8,19 +8,30 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
+use Cookie;
 
 class PassportController extends Controller
 {
-    public $successStatus =200;
+    
     public function login(Request $request){
          if (Auth::attempt(['email' => $request->email , 'password' => $request->password])) {
                      $user = Auth::user();
                      $success['token'] = $user->createToken('Laravel APP')->accessToken;
-                     return response()->json(['success' => $success],200);       
+                     
+                     return response()->json(['success' => $success , 'confirm'=>$user['confirm']],200);       
          }
          else{
          	return response()->json(['error'=>'Unauthorised'],402);
          }
+    }
+    public function generateRandomString($length = 16) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
     }
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
@@ -32,15 +43,16 @@ class PassportController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(),401);
         }
-
         $inputs = $request->all();
         $inputs['password'] = bcrypt($inputs['password']);
+        $inputs['user_key'] = $this->generateRandomString();
         $user = User::create($inputs);
         $success['token'] = $user->createToken('Laravel APP')->accessToken;
         $success['name'] = $user->name;
        
         
-        return response()->json(['success'=>$success],$this->successStatus);
+        return $user;
+        
     }
     public function get_details(){
         $user = Auth::user();
@@ -56,5 +68,20 @@ class PassportController extends Controller
          }
          
       
+    }
+    public function confirm_user(Request $request){
+        $user_key = $request->user_key;
+        $user  = User::where('user_key' , $user_key)->first();
+        return response()->json(['user'=>$user]);
+
+    }
+    public function confirmed_user(Request $request){
+        $user_key = $request->user_key;
+        $user  = User::where('user_key' , $user_key)->first();
+        $token = $user->createToken('Laravel APP')->accessToken;
+        $user->confirm = true;
+        $user->save();
+        return response()->json(['token'=>$token],200);
+
     }
 }

@@ -4,6 +4,7 @@ import CardBlog from '../items/CardBlog';
 import InfiniteScroll from 'react-infinite-scroller';
 import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
+import { DotLoader } from 'react-spinners';
 
 
 export default class Blog extends Component{
@@ -18,7 +19,7 @@ export default class Blog extends Component{
 	loadMore(){	
        
 		
-			 axios.get('/blog?page='+this.state.nextPage)
+			 axios.get('/api/blog?page='+this.state.nextPage)
 		      .then(response=>{
 		      	const {current_page , last_page ,data} = response.data;
 		      		this.setState(prevState=>({
@@ -67,7 +68,12 @@ export default class Blog extends Component{
 													     hasMore={this.state.hasMore}
 													     threshold={0.005}
 													     className="row"	
-													     loader={<h1>Loading ...</h1>}											>
+													     loader={<div className="col-md-12"><div className='sweet-loading'>
+												                    <DotLoader
+												                      color={'#123abc'} 
+												                      loading={true} 
+												                    />
+												                  </div></div>}											>
 														{ articles.map((card , index)=><CardBlog card={card}  key={index} /> ) }
 													</InfiniteScroll>
 												</div>

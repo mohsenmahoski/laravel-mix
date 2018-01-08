@@ -7,40 +7,39 @@ import { Link , Route  } from 'react-router-dom';
 
 export default class SingleBlog extends Component{
   constructor(props){
-		super(props);
-		this.state={
-			  data:{},
-		      message:'',
-		      subscribe:'',
+			super(props);
+			this.state={
+				  data:{},
+			      message:'',
+			      subscribe:'',
 
-		      SuccessMessage:null,
- 			  displaySuccess:'none',
-              hasSuccess:false,
+			      SuccessMessage:null,
+	 			  displaySuccess:'none',
+	              hasSuccess:false,
 
-		      Failmessage:null,
- 			  displayError:'none',
- 			  hasError:false,
+			      Failmessage:null,
+	 			  displayError:'none',
+	 			  hasError:false,
 
-		      validEmail:'hidden',
-		      EmailRequired:'hidden',
-		      MessageRequired:'hidden',
-		      MessageLength:'hidden',
-		     
-		     
-		      comments:null,
-		      searchIcon:'search',
-		      searchResult:[],
-		      searchInput:'',
-		      
-		} 
-		
-	}
+			      validEmail:'hidden',
+			      EmailRequired:'hidden',
+			      MessageRequired:'hidden',
+			      MessageLength:'hidden',
+			     
+			     
+			      comments:null,
+			      searchIcon:'search',
+			      searchResult:[],
+			      searchInput:'',
+			      
+			} 	
+  }
   componentDidMount(){
 	      this._getData();
   }
   _getData(){
   	 const id =  this.props.match.params.id;     
-		  axios.post('/blog/'+id, {
+		  axios.post('/api/blog/'+id, {
 			    id: id
 			  })
 			  .then((response) => {
@@ -57,7 +56,7 @@ export default class SingleBlog extends Component{
 			  });
   }
   _updateComponent(id){
-		  axios.post('/blog/'+id, {
+		  axios.post('/api/blog/'+id, {
 			    id: id
 			  })
 			  .then((response) => {
@@ -289,12 +288,12 @@ export default class SingleBlog extends Component{
 			);
    }
    _clearSearch(){
-   	console.log('called');
-   	  this.setState({
-   	  	  searchResult:[],
-  	      searchIcon:'search',
-  	      searchInput:'',
-   	  });
+   		console.log('called');
+	   	  this.setState({
+	   	  	  searchResult:[],
+	  	      searchIcon:'search',
+	  	      searchInput:'',
+	   	  });
    }
   _renderMessage(message){
 		
@@ -315,7 +314,7 @@ export default class SingleBlog extends Component{
   	    	this.setState({
   	    		searchInput:search
   	    	});
-		    axios.post('/search/',{
+		    axios.post('/api/search/',{
 		    	search
 		    })
 		     .then(response=>{
@@ -340,7 +339,7 @@ export default class SingleBlog extends Component{
                 <Link onClick={()=>this._updateComponent(item.id)} to={`/blog/${item.id}`} className="col-md-12 rtl hvr-sweep-to-left" key={index}>{item.title}</Link>
           	);
   }
-	render(){
+  render(){
 		const { title , body , image , category_name  } = this.state.data;
         const comments = this.state.comments;
 		
@@ -428,7 +427,7 @@ export default class SingleBlog extends Component{
 													                    </div>
 													     </div>
 														 <div className="col-md-8 ">
-															     <img src={ image } className="responsive-image blog-banner" />
+															     <img src={image} className="responsive-image blog-banner" />
 															 	 <h3 className="well">{ title }</h3>
 															 	
 															 	 <div className="col-md-12" dangerouslySetInnerHTML={{__html: body}} />
@@ -455,5 +454,5 @@ export default class SingleBlog extends Component{
 								</div>
            </div>
 			);
-	}
+  }
 }

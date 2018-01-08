@@ -26,7 +26,6 @@ class Header extends Component{
          let cookie = new Cookie;
          let user_token =  cookie.get('user_token');
          let token = 'Bearer '+ user_token;
-         
          if (user_token !== undefined){
              axios.post('/api/get_details',null,{
                 headers:{Authorization:token}

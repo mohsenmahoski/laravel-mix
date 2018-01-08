@@ -3,433 +3,487 @@ import Modal from '../items/Modal';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Cookie from 'universal-cookie';
+import { DotLoader } from 'react-spinners';
 
 export default class UserLogin extends Component{
-	 constructor(props){
-    super(props);
-    this.state={
-      display:this.props.display,
+        constructor(props){
+                  super(props);
+                  this.state={
+                    display:this.props.display,
+                    loginspinner:false,
+                    registerspinner:false,
+                    notconfirm:false,
+                    registersuccess:false,
+                    unauthorized:false,
 
-      Redirect:false,
-      login:null,
-      email:'',
-      password:'',
-      EmailRequired:'hidden',
-      validEmail:'hidden',
-      passwordRequired:'hidden',
-
-
-      NewEmail:'',
-      NewUsername:'',
-      NewPassword:'',
-      NewC_password:'',
-      NewPasswordLength:'hidden',
-      NewEmailRequired:'hidden',
-      NewValidEmail:'hidden',
-      NewUsernameRequired:'hidden',
-      NewPasswordRequired:'hidden',
-      NewC_passwordRequired:'hidden',
-      C_passwordCompare:'hidden',
-      EmailRegisteredBefore:true,
+                    redirect:false,
+                    login:null,
+                    email:'',
+                    password:'',
+                    emailrequired:'hidden',
+                    validemail:'hidden',
+                    passwordrequired:'hidden',
 
 
-      loginForm:true,
-      forgotPassword:false,
-
-    }
-  }
-	componentWillReceiveProps(nextProps){
-      this.setState({
-         display:nextProps.display
-      });
-  }
-
-  _handleClick(){
-           axios.post('/api/login',{
-           	email:'user2@gmail.com',
-           	password:'123123123'
-           })
-             .then(response=>{
-             	 console.log(response.data);
-             }) 
-               .catch(error=>{
-               	console.log(error);
-               });
-  }
-  
-  _handleGetdata(){
-      	const token ="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjVmYzgxMTljNjJjNzlkOTgwNGRhNDM3M2E1ZDMxMTQ4ZWU3ZGMzYzViYTY5ZmRlYmYyYWRhMzU5ZDEwOWFlODIyODMxM2Y3YTZmNDZkNmYyIn0.eyJhdWQiOiIxIiwianRpIjoiNWZjODExOWM2MmM3OWQ5ODA0ZGE0MzczYTVkMzExNDhlZTdkYzNjNWJhNjlmZGViZjJhZGEzNTlkMTA5YWU4MjI4MzEzZjdhNmY0NmQ2ZjIiLCJpYXQiOjE1MTUyNTEzMTMsIm5iZiI6MTUxNTI1MTMxMywiZXhwIjoxNTQ2Nzg3MzEzLCJzdWIiOiIxNiIsInNjb3BlcyI6W119.HYF0ziG9mlTrE6nHWeDZZGJLgIritVDGO51Mh-pa9WAY76x7jbUCdX8EDRrSFmieUPtdUm3mHa7DEfVwtUD9t-UXjFoM_Gkk9YrMxALT3hPOF18wEY1mOfDSjXYiF_ZV9YHrBsUoadMX1SkKxHnZG4j_O8sHjsHMO51VAnhvqBi-bJr6h8YpV_Ut3_k_wxKWTQP3Or4_MgwHi9AMtZ8cilKnmU35oqwMaHSLdm0HLzTa2MA9uVOYlUkIHU2dolt9xLTUwpZSKDE5nw0s71-TjPBpEEPq7DQB2_lR1qn_4gYmnQ3rbNOd4KUT5qpmZe6lNwmWpCsIBFjT1ZZHnRQpDK6IbJvF8fW7NJbUWVVkbtxAMZGEmaIqIEbbUM84S1c2FaW44toahcIbBoG78IGRVCKg2IYYOSfewOBD6C2aok0M2IGTreGP2S5LFrL1pLJQsG9aCNKLrjgPFTJF_-UcYDi1u5nZrZkeHuA2WG60par75x1B8MQ7QQcgeD5BRKiHzfgInKEj-xW0X8rn24zD9fXzSmOayP7APU1s1U74khUZBAJ3cWzEwfPThWLuxqSkrcnHfLS_nQHq7f8h-Rh_W2DiJsQyCfNNj3hiqRNFk6nidwm0Z85O866U1dl-cv93TMkTIigD0sP13pK_yuF6f27pE4kbOsOabxyPLWDGk68";
-      	axios.post('/api/get_details',null,{
-      		headers:{Authorization:token}
-      	})
-             .then(response=>{
-             	 console.log(response.data);
-             }) 
-               .catch(error=>{
-               	console.log(error);
-               });
-  }
- 
-  
-  
-_register(){
-    return(
-
-      <div>
-             {this.state.Redirect===true ? <Redirect to="/dashboard"/> : null}
-                      <div className="col-md-12">
-                         <h5 className="text-center col-md-12 rtl title">
-                          ایجاد حساب کاربری جدید
-                         </h5>
-                      </div>
-                      <div className="col-md-6 mb-10">
-                            <div className="input-group">
-                                 <div className="form-group is-empty">
-                                   <input name="NewEmail"  type="email" className="form-control rtl" placeholder="آدرس پست الکترونیکی..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.NewEmail}  />
-                                   <span className="material-input"></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.NewEmailRequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.NewValidEmail=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.EmailRegisteredBefore===false ? 'block' : 'none'}}><small>این ایمیل قبلا در سایت ثبت شده.</small></span>
-                                 </div>
-                                <span className="input-group-addon">
-                                    <i className="material-icons">mail_outline</i>
-                                </span>
-                           </div>
-                     </div>
-                      <div className="col-md-6 mb-10">
-                            <div className="input-group">
-                                <div className="form-group is-empty">
-                                   <input name="NewUsername" type="text" className="form-control rtl" placeholder="نام کاربری" onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.NewUsername} />
-                                     <span className="rtl" style={{ color:'#f44336',display: this.state.NewUsernameRequired=='visibile' ? 'block' : 'none'}}><small>نام کاربری خود را وارد کنید.</small></span>
-                                   <span className="material-input"></span>
-                                </div>
-                                <span className="input-group-addon">
-                                    <i className="material-icons">face</i>
-                                </span>
-                           </div>
-                     </div>
-                   
-                     <div className="col-md-6 mb-10">
-                            <div className="input-group">
-                                 <div className="form-group is-empty">
-                                   <input name="NewC_password"  type="password" className="form-control rtl" placeholder="تکرار پسورد..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.NewC_password} />
-                                   <span className="material-input"></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.NewC_passwordRequired=='visibile' ? 'block' : 'none'}}><small>تکرار پسورد را وارد کنید.</small></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.C_passwordCompare=='visibile' ? 'block' : 'none'}}><small>تکرار پسورد صحیح نیست.</small></span>
-                                 </div>
-                                <span className="input-group-addon">
-                                    <i className="material-icons">lock_outline</i>
-                                </span>
-                           </div>
-                     </div>  
-                     <div className="col-md-6 mb-10">
-                            <div className="input-group">
-                                 <div className="form-group is-empty">
-                                   <input name="NewPassword"  type="password" className="form-control rtl" placeholder="پسورد ..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.NewPassword}  />
-                                   <span className="material-input"></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.NewPasswordRequired=='visibile' ? 'block' : 'none'}}><small>پسورد خود را وارد کنید.</small></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.NewPasswordLength=='visibile' ? 'block' : 'none'}}><small>پسورد شما باید حداقل 5 حرف باشد.</small></span>
-                                 </div>
-                                <span className="input-group-addon">
-                                    <i className="material-icons">lock_open</i>
-                                </span>
-                           </div>
-                     </div>
-                     <div className="col-md-12">
-                        <button className="btn btn-primary" onClick={()=>this._handleRegister()}>ثبت نام</button>
-                        <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginForm:true})}>قبلا ثبت نام کرده ام</button>
-                    </div>
-          </div>
-      );
-}
-_handleRegisterKeyPress(event){
-
-              const inputName =  event.target.name;
-              const inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;   
-              switch (inputName) {
-                  case 'NewUsername':
-                     this.setState({
-                                  NewUsernameRequired:'hidden',
-                                  NewUsername:inputValue,   
-                      });
-                   break;
-                  case 'NewEmail':
-                      this.setState({
-                                        NewEmailRequired:'hidden',
-                                        
-                        });
-                      const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                         if (valid.test(inputValue)) {
-                             this.setState({
-                                      NewValidEmail:'hidden',
-                                      
-                             });
-                         }else{
-                            this.setState({
-                                      NewValidEmail:'visibile',
-                                    
-                            });
-                         }
-                         this.setState({
-                                      NewEmail:inputValue,
-                                      
-                         });
-                    break;
-                    case 'NewPassword':
-                         this.setState({
-                                      NewPasswordRequired:'hidden',
-                                      NewPasswordLength:'hidden',
-                                      NewPassword:inputValue,
-                                     
-                          });
-                   break;
-                   case 'NewC_password':
-                         this.setState({
-                                      NewC_passwordRequired:'hidden',
-                                      C_passwordCompare:'hidden',
-                                      NewC_password:inputValue,
-                                     
-                          });
-                   break;
-                   default:
-                    console.log('Sorry, the state not found.');
-              }
-}
-_handleRegister(){
-      const{NewEmail , NewPassword , NewUsername , NewC_password} = this.state;
-      if (NewUsername != '' ){
-           if (NewEmail != '' ){
-              const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-              if (valid.test(NewEmail)) {
-                    this.setState({
-                            NewValidEmail:'hidden',   
-                    });
-                    axios.post('/api/email_check',{
-                              email:NewEmail
-                       })
-                         .then(response=>{
-                             if (response.data) {
-                                this.setState({
-                                  EmailRegisteredBefore:true
-                                });
-                               if(NewPassword != '' ){
-                                  if (NewPassword.length >= 5){
-                                      if (NewC_password != ''){
-                                              if (NewPassword == NewC_password){
-                                                  console.log('Registered');
-                                              }else{
-                                                this.setState({
-                                                   C_passwordCompare:'visibile'
-                                                });
-                                              }
-                                    }else{
-                                      this.setState({
-                                         NewC_passwordRequired:'visibile'
-                                      });
-                                    }
-                                  }else{
-                                     this.setState({
-                                        NewPasswordLength:'visibile'
-                                     });
-                                  }
-                               }else{
-                                  this.setState({
-                                     NewPasswordRequired:'visibile',
-                                  });
-                               }
-                                  
-                             }else{
-                                  this.setState({
-                                    EmailRegisteredBefore:false
-                                  });
-                             }
-                         }) 
-                           .catch(error=>{
-                              console.log(error);
-                           });
-                    
-            }else{
-                 this.setState({
-                        NewValidEmail:'visibile',
-                  });
-           }    
-      }else{
-        this.setState({
-             NewEmailRequired:'visibile'
-        });
-      }
-     }else{
-       this.setState({
-            NewUsernameRequired:'visibile'
-       });
-     }
-}
+                    newEmail:'',
+                    newusername:'',
+                    newpassword:'',
+                    newc_password:'',
+                    newpasswordlength:'hidden',
+                    newemailrequired:'hidden',
+                    newvalidemail:'hidden',
+                    newusernamerequired:'hidden',
+                    newpasswordrequired:'hidden',
+                    newc_passwordrequired:'hidden',
+                    c_passwordcompare:'hidden',
+                    emailregisteredbefore:true,
 
 
-_forgotPassword(){
-    return( 
+                    loginform:true,
+                    forgotpassword:false,
+                  }
+        }
+        componentWillReceiveProps(nextProps){
+              this.setState({
+                 display:nextProps.display
+              });
+        } 
+
+        _register(){
+            return(
                   <div>
-                     <div className="col-md-12 mb-10">
-                            <h5 className="text-center col-md-12 rtl title" >برای بازیابی رمز عبور ایمیل خود را وارد کنید.</h5>
-                            <div className="input-group pull-right col-md-8">
-                                 <div className="form-group is-empty">
-                                   <input name="forgot" type="email" className="form-control rtl" placeholder="ایمیل خود را وارد کنید..." onChange={this._handleKeyPress.bind(this)} />
-                                   <span className="material-input"></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.passwordRequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.passwordLength=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
-                                 </div>
-                                <span className="input-group-addon">
-                                    <i className="material-icons">email</i>
-                                </span>
-                           </div>
-                           <div className="input-group pull-right col-md-4">
-                                 <div className="form-group is-empty">
-                                   <button className="btn btn-primary" onClick={()=>this._handleRegister()}>بازیابی <i className="material-icons">cached</i></button>
-                                 </div>
-                           </div>
-                     </div>
-                     <div className="col-md-12 text-center">
-                        <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginForm:true,forgotPassword:false})}>قبلا ثبت نام کرده ام</button>
-                    </div>
+                              <div className="col-md-12">
+                                 <h5 className="text-center col-md-12 rtl title">
+                                  ایجاد حساب کاربری جدید
+                                 </h5>
+                              </div>
+                              <div className="col-md-6 mb-10">
+                                    <div className="input-group">
+                                         <div className="form-group is-empty">
+                                           <input name="newEmail"  type="email" className="form-control rtl" placeholder="آدرس پست الکترونیکی..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newEmail}  />
+                                           <span className="material-input"></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.newemailrequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.newvalidemail=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.emailregisteredbefore===false ? 'block' : 'none'}}><small>این ایمیل قبلا در سایت ثبت شده.</small></span>
+                                         </div>
+                                        <span className="input-group-addon">
+                                            <i className="material-icons">mail_outline</i>
+                                        </span>
+                                   </div>
+                             </div>
+                              <div className="col-md-6 mb-10">
+                                    <div className="input-group">
+                                        <div className="form-group is-empty">
+                                           <input name="newusername" type="text" className="form-control rtl" placeholder="نام کاربری" onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newusername} />
+                                             <span className="rtl" style={{ color:'#f44336',display: this.state.newusernamerequired=='visibile' ? 'block' : 'none'}}><small>نام کاربری خود را وارد کنید.</small></span>
+                                           <span className="material-input"></span>
+                                        </div>
+                                        <span className="input-group-addon">
+                                            <i className="material-icons">face</i>
+                                        </span>
+                                   </div>
+                             </div>
+                           
+                             <div className="col-md-6 mb-10">
+                                    <div className="input-group">
+                                         <div className="form-group is-empty">
+                                           <input name="newc_password"  type="password" className="form-control rtl" placeholder="تکرار پسورد..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newc_password} />
+                                           <span className="material-input"></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.newc_passwordrequired=='visibile' ? 'block' : 'none'}}><small>تکرار پسورد را وارد کنید.</small></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.c_passwordcompare=='visibile' ? 'block' : 'none'}}><small>تکرار پسورد صحیح نیست.</small></span>
+                                         </div>
+                                        <span className="input-group-addon">
+                                            <i className="material-icons">lock_outline</i>
+                                        </span>
+                                   </div>
+                             </div>  
+                             <div className="col-md-6 mb-10">
+                                    <div className="input-group">
+                                         <div className="form-group is-empty">
+                                           <input name="newpassword"  type="password" className="form-control rtl" placeholder="پسورد ..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newpassword}  />
+                                           <span className="material-input"></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.newpasswordrequired=='visibile' ? 'block' : 'none'}}><small>پسورد خود را وارد کنید.</small></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.newpasswordlength=='visibile' ? 'block' : 'none'}}><small>پسورد شما باید حداقل 5 حرف باشد.</small></span>
+                                         </div>
+                                        <span className="input-group-addon">
+                                            <i className="material-icons">lock_open</i>
+                                        </span>
+                                   </div>
+                             </div>
+                             <div className="col-md-12">
+                                {this.state.registerspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.registerspinner} /></div>: (this.state.registersuccess==true ? this._successRegister() : this._registerButtons())}
+                             </div>
                   </div>
-            );
-}
+              );
+        }
+        _handleRegisterKeyPress(event){
 
-
-
-_login(){
-    return(
-          <div>
-             {this.state.Redirect===true ? <Redirect to="/dashboard"/> : null}
-                      <div className="col-md-12">
-                         <h5 className="text-center col-md-12 rtl title">
-                          ورود به حساب کاربری
-                         </h5>
-                      </div>
-                      <div className="col-md-6 mb-10">
-                            <div className="input-group">
-                                <div className="form-group is-empty">
-                                   <input name="password" type="password" className="form-control rtl" placeholder="پسورد..." onChange={this._handleKeyPress.bind(this)} value={this.state.password} />
-                                     <span className="rtl" style={{ color:'#f44336',display: this.state.passwordRequired=='visibile' ? 'block' : 'none'}}><small>لطفا پسورد خود را وارد کنید.</small></span>
-                                   <span className="material-input"></span>
-                                </div>
-                                <span className="input-group-addon">
-                                    <i className="material-icons">lock_outline</i>
-                                </span>
-                           </div>
-                     </div>
-                     <div className="col-md-6 mb-10">
-                            <div className="input-group">
-                                 <div className="form-group is-empty">
-                                   <input name="email"  type="text" className="form-control rtl" placeholder="آدرس پست الکترونیکی..." onChange={this._handleKeyPress.bind(this)} value={this.state.email} />
-                                   <span className="material-input"></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.EmailRequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
-                                   <span className="rtl" style={{ color:'#f44336',display: this.state.validEmail=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
-                                 </div>
-                                <span className="input-group-addon">
-                                    <i className="material-icons">mail_outline</i>
-                                </span>
-                           </div>
-                     </div>
-                   <div className="col-md-12">
-                       <p className="col-md-12 col-sm-12 pull-right text-center rtl error" style={{ display:this.state.login === 'failed' ? 'block' : 'none' , }} >ایمیل یا پسورد شما صحیح نیست ، مجددا تلاش کنید.</p>
-                      <button className="btn btn-primary" onClick={()=>this._handleSubmit(this)}>ورود</button>
-                      <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginForm:false})}>ثبت نام</button>
-                      <button className="btn btn-simple btn-warning pull-right" onClick={()=>this.setState({forgotPassword:true})}>رمز عبور را فراموش کرده ام</button>
-                   </div>
-          </div>
-      );
-}
-_handleKeyPress(event){
-              const inputName =  event.target.name;
-              const inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;   
-              switch (inputName) {
-                  case 'email':
-                  this.setState({
-                                  EmailRequired:'hidden',
-                                  login:null
-                  });
-                  const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                     if (valid.test(inputValue)) {
-                         this.setState({
-                                  validEmail:'hidden',
-                                  login:null,
-                         });
-                     }else{
-                        this.setState({
-                                  validEmail:'visibile',
-                                  login:null
-                        });
-                     }
-                     this.setState({
-                                  email:inputValue,
-                                  login:null
-                     });
-                    break;
-                  case 'password':
-                     this.setState({
-                                  passwordRequired:'hidden',
-                                  password:inputValue,
-                                  login:null
-                      });
-                   break;
-                  default:
-                    console.log('Sorry, the state not found.');
-              }        
-}
-_handleSubmit(){
-        const email = this.state.email;
-        const password = this.state.password;
-        if (email !== '') {
-          const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-               if (valid.test(email)) {
-                   this.setState({
-                            validEmail:'hidden',
-                   });
-                   if (password != '' ) {
-                        axios.post('/api/login',{
-                          email,
-                          password
-                         })
-                   .then(response=>{
-                      if (response.status==200) {
-
-                              let token = response.data.success.token;
-                              let cookie = new Cookie;
-                              cookie.set('user_token' , token , {path : '/'});
-                          
-                            this.setState({
-                               Redirect:true,
-                            });
+                      const inputName =  event.target.name;
+                      const inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;   
+                      switch (inputName) {
+                          case 'newusername':
+                             this.setState({
+                                          newusernamerequired:'hidden',
+                                          newusername:inputValue,   
+                              });
+                           break;
+                          case 'newEmail':
+                              this.setState({
+                                                newemailrequired:'hidden',
+                                                
+                                });
+                              const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                                 if (valid.test(inputValue)) {
+                                     this.setState({
+                                              newvalidemail:'hidden',
+                                              
+                                     });
+                                 }else{
+                                    this.setState({
+                                              newvalidemail:'visibile',
+                                            
+                                    });
+                                 }
+                                 this.setState({
+                                              newEmail:inputValue,
+                                              
+                                 });
+                            break;
+                            case 'newpassword':
+                                 this.setState({
+                                              newpasswordrequired:'hidden',
+                                              newpasswordlength:'hidden',
+                                              newpassword:inputValue,
+                                             
+                                  });
+                           break;
+                           case 'newc_password':
+                                 this.setState({
+                                              newc_passwordrequired:'hidden',
+                                              c_passwordcompare:'hidden',
+                                              newc_password:inputValue,
+                                             
+                                  });
+                           break;
+                           default:
+                            console.log('Sorry, the state not found.');
                       }
-                   }) 
-                     .catch(error=>{
-                        console.log(error);
-                     });
-                   }else{
-                      this.setState({
-                        passwordRequired:'visibile'
-                      });
-                   }
-               }else{
+        }
+        _handleRegister(){
+              const{newEmail , newpassword , newusername , newc_password} = this.state;
+              if (newusername != '' ){
+                   if (newEmail != '' ){
+                      const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                      if (valid.test(newEmail)) {
+                            this.setState({
+                                    newvalidemail:'hidden',   
+                            });
+                            axios.post('/api/email_check',{
+                                      email:newEmail
+                               })
+                                 .then(response=>{
+                                     if (response.data) {
+                                        this.setState({
+                                          emailregisteredbefore:true
+                                        });
+                                       if(newpassword != '' ){
+                                          if (newpassword.length >= 5){
+                                              if (newc_password != ''){
+                                                      if (newpassword == newc_password){
+                                                          this.setState({
+                                                            registerspinner:true,
+                                                          });
+                                                          axios.post('/api/register',{
+                                                             name : newusername,
+                                                             email : newEmail,
+                                                             password : newpassword,
+                                                             c_password : newc_password
+                                                          })
+                                                           .then(response=>{
+                                                               if (response.status==200){
+                                                                 this.setState({
+                                                                   registerspinner:false,
+                                                                   registersuccess:true,
+                                                                 });
+                                                               }
+                                                           })
+                                                            .catch(error=>{
+                                                              console.log(error);
+                                                            });
+                                                      }else{
+                                                        this.setState({
+                                                           c_passwordcompare:'visibile'
+                                                        });
+                                                      }
+                                            }else{
+                                              this.setState({
+                                                 newc_passwordrequired:'visibile'
+                                              });
+                                            }
+                                          }else{
+                                             this.setState({
+                                                newpasswordlength:'visibile'
+                                             });
+                                          }
+                                       }else{
+                                          this.setState({
+                                             newpasswordrequired:'visibile',
+                                          });
+                                       }
+                                          
+                                     }else{
+                                          this.setState({
+                                            emailregisteredbefore:false
+                                          });
+                                     }
+                                 }) 
+                                   .catch(error=>{
+                                      console.log(error);
+                                   });
+                            
+                    }else{
+                         this.setState({
+                                newvalidemail:'visibile',
+                          });
+                   }    
+              }else{
+                this.setState({
+                     newemailrequired:'visibile'
+                });
+              }
+             }else{
+               this.setState({
+                    newusernamerequired:'visibile'
+               });
+             }
+        }
+        _registerButtons(){
+          return(
+                     <div>
+                       <button className="btn btn-primary" onClick={()=>this._handleRegister()}>ثبت نام</button>
+                       <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginform:true})}>قبلا ثبت نام کرده ام</button>
+                     </div>
+            );
+        }
+        _successRegister(){
+          return(
+                       <div className="alert-success text-justify">
+                          <div className="container-fluid">
+                              <div className="col-md-12">
+                                  <button type="button" className="close mt-10" data-dismiss="alert" aria-label="Close" onClick={()=>this.setState({display:'none'})}>
+                                       <span aria-hidden="true"><i className="material-icons">clear</i></span>
+                                  </button>
+                             
+                                  <p className="pd-20">حساب شما با موفقیت ایجاد شد.لینک تایید حساب به پست الکترونیکی شما ارسال شد ، با کلیک بر روی لینک حساب شما فعال خواهد شد. <i className="material-icons">check</i></p>
+                              </div>
+                          </div>
+                      </div>
+                );
+        }
+
+        _forgotPassword(){
+            return( 
+                          <div>
+                             <div className="col-md-12 mb-10">
+                                    <h5 className="text-center col-md-12 rtl title" >برای بازیابی رمز عبور ایمیل خود را وارد کنید.</h5>
+                                    <div className="input-group pull-right col-md-8">
+                                         <div className="form-group is-empty">
+                                           <input name="forgot" type="email" className="form-control rtl" placeholder="ایمیل خود را وارد کنید..." onChange={this._handleKeyPress.bind(this)} />
+                                           <span className="material-input"></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.passwordrequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.passwordLength=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
+                                         </div>
+                                        <span className="input-group-addon">
+                                            <i className="material-icons">email</i>
+                                        </span>
+                                   </div>
+                                   <div className="input-group pull-right col-md-4">
+                                         <div className="form-group is-empty">
+                                           <button className="btn btn-primary" onClick={()=>this._handleRegister()}>بازیابی <i className="material-icons">cached</i></button>
+                                         </div>
+                                   </div>
+                             </div>
+                             <div className="col-md-12 text-center">
+                                <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginform:true,forgotpassword:false})}>قبلا ثبت نام کرده ام</button>
+                            </div>
+                          </div>
+                    );
+        }
+        _login(){
+            return(
+                  <div>
+                     {this.state.redirect===true ? <Redirect to="/dashboard"/> : null}
+                              <div className="col-md-12">
+                                 <h5 className="text-center col-md-12 rtl title">
+                                  ورود به حساب کاربری
+                                 </h5>
+                              </div>
+                              <div className="col-md-6 mb-10">
+                                    <div className="input-group">
+                                        <div className="form-group is-empty">
+                                           <input name="password" type="password" className="form-control rtl" placeholder="پسورد..." onChange={this._handleKeyPress.bind(this)} value={this.state.password} />
+                                             <span className="rtl" style={{ color:'#f44336',display: this.state.passwordrequired=='visibile' ? 'block' : 'none'}}><small>لطفا پسورد خود را وارد کنید.</small></span>
+                                           <span className="material-input"></span>
+                                        </div>
+                                        <span className="input-group-addon">
+                                            <i className="material-icons">lock_outline</i>
+                                        </span>
+                                   </div>
+                             </div>
+                             <div className="col-md-6 mb-10">
+                                    <div className="input-group">
+                                         <div className="form-group is-empty">
+                                           <input name="email"  type="text" className="form-control rtl" placeholder="آدرس پست الکترونیکی..." onChange={this._handleKeyPress.bind(this)} value={this.state.email} />
+                                           <span className="material-input"></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.emailrequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.validemail=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
+                                         </div>
+                                        <span className="input-group-addon">
+                                            <i className="material-icons">mail_outline</i>
+                                        </span>
+                                   </div>
+                             </div>
+                           <div className="col-md-12">
+                              <p className="col-md-12 col-sm-12 pull-right text-center rtl error" style={{ display:this.state.login === 'failed' ? 'block' : 'none' , }} >ایمیل یا پسورد شما صحیح نیست ، مجددا تلاش کنید.</p>
+                              <button className="btn btn-primary" onClick={()=>this._handleSubmit(this)}>ورود</button>
+                              <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginform:false})}>ثبت نام</button>
+                              <button className="btn btn-simple btn-warning pull-right" onClick={()=>this.setState({forgotpassword:true})}>رمز عبور را فراموش کرده ام</button>
+                             {this.state.notconfirm == true ? this._notConfirm('این حساب غیر فعال می باشد.') : null }
+                             {this.state.unauthorized == true ? this._notConfirm('این حساب کاربری وجود ندارد') : null }
+                             {this.state.loginspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.loginspinner} /></div>:null}
+                            }
+                           </div>
+                  </div>
+              );
+        }
+        _notConfirm(message){
+          console.log('Not Confirm');
+          return(
+                   <div className="alert-danger text-justify mt-10">
+                          <div className="container-fluid">
+                              <div className="col-md-12">
+                                  <button type="button" className="close mt-10" data-dismiss="alert" aria-label="Close" onClick={()=>this.setState({display:'none'})}>
+                                       <span aria-hidden="true"><i className="material-icons">clear</i></span>
+                                  </button>
+                             
+                                  <p className="pd-20">{message}<i className="material-icons">check</i></p>
+                              </div>
+                          </div>
+                      </div>
+            );
+        }
+        _handleKeyPress(event){
+                      const inputName =  event.target.name;
+                      const inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;   
+                      switch (inputName) {
+                          case 'email':
+                          this.setState({
+                                          emailrequired:'hidden',
+                                          login:null
+                          });
+                          const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                             if (valid.test(inputValue)) {
+                                 this.setState({
+                                          validemail:'hidden',
+                                          login:null,
+                                 });
+                             }else{
+                                this.setState({
+                                          validemail:'visibile',
+                                          login:null
+                                });
+                             }
+                             this.setState({
+                                          email:inputValue,
+                                          login:null
+                             });
+                            break;
+                          case 'password':
+                             this.setState({
+                                          passwordrequired:'hidden',
+                                          password:inputValue,
+                                          login:null
+                              });
+                           break;
+                          default:
+                            console.log('Sorry, the state not found.');
+                      }        
+        }
+        _handleSubmit(){
+                this.setState({
+                   notconfirm:false,
+                   unauthorized:false
+                });
+                const email = this.state.email;
+                const password = this.state.password;
+                if (email !== '') {
+                  const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                       if (valid.test(email)) {
+                           this.setState({
+                                    validemail:'hidden',
+                           });
+                           if (password != '' ){
+                                 this.setState({
+                                    loginspinner:true
+                                 });
+                                 axios.post('/api/login',{
+                                        email,
+                                        password
+                                       })
+                                 .then(response=>{
+                                    if (response.status==200) {
+                                           if (response.data.confirm){
+                                              let token = response.data.success.token;
+                                              let cookie = new Cookie;
+                                              cookie.set('user_token' , token , {path : '/'});
+                                              this.setState({
+                                                 loginspinner:false,
+                                                 redirect:true,
+                                             });
+                                           }else{
+                                              this.setState({
+                                                loginspinner:false,
+                                                unauthorized:false,
+                                                notconfirm:true,
+                                              });
+                                           }
+                                    }
+                                 }) 
+                                 .catch(error=>{
+                                      let {status} = error.response;
+                                      console.log(error.response);
+                                      if(status==402){
+                                          this.setState({
+                                                   unauthorized:true,
+                                                   loginspinner:false,
+                                                   notconfirm:false,
+                                              });
+                                      }
+                                   });
+                           }else{
+                              this.setState({
+                                passwordrequired:'visibile'
+                              });
+                           }
+                       }else{
+                          this.setState({
+                                    validemail:'visibile'
+                          });
+                       }
+                }else{
                   this.setState({
-                            validEmail:'visibile'
+                    validemail:'hidden',
+                    emailrequired:'visibile',
                   });
-               }
-        }else{
-          this.setState({
-            validEmail:'hidden',
-            EmailRequired:'visibile',
-          });
-        }      
-}
-render(){
-		return(
-                <Modal display={this.state.display} > 
-                   {this.state.loginForm ? (this.state.forgotPassword ? this._forgotPassword() : this._login()) : this._register()}
-                </Modal>
-			);
-	}
+                }      
+        }
+        render(){
+        		return(
+                        <Modal display={this.state.display} > 
+                           {this.state.loginform ? (this.state.forgotpassword ? this._forgotPassword() : this._login()) : this._register()}
+                        </Modal>
+        			);
+        }
 } 
 
 

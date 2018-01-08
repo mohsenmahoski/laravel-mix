@@ -7,6 +7,7 @@ export default class CardBlog extends Component{
 	render(){
 		
             const {title,body,slug,image , id} = this.props.card;
+            const subBody = body.substr(1, 20);
 		return(
              <div className="col-md-4 mb-10">
                <div className="card">
@@ -20,21 +21,19 @@ export default class CardBlog extends Component{
                                                 </div>
                                  </div>
                            </Link>
-                           <div className="content">
+                           <div className="content min-height-235">
                                        <a href="http://localhost:8080/blog/ergergerg">
                                             <div className="row pad-r-10">
                                               <small className="pull-right text-muted">تاریخ انتشار: Dec J,2017
                                               </small>
                                             </div>
                                             <h3 className="blog-title text-right">
-                                                      <b className="pull-right">
                                                         { title }
-                                                      </b> 
                                             </h3>
                                                                                                    
                                                  
                                             <p className="blog-desc text-right">
-                                                       {body}
+                                                       {subBody}
                                             </p>      
                                       </a>
                                       <a className="text-info" href="#">
