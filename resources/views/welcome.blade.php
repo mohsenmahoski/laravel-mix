@@ -21,11 +21,8 @@
         
         <div id="root">
         	<!-- content of website -->
-        </div>
-        <div class="section">
-             <a class="btn btn-primary btn-lg" href={{ route('UserSendMail') }}>SEND EMAIL</a>
-        </div>
-        <script src="{{mix('js/app.js')}}" ></script> 
+        </div>       
+         <script src="{{mix('js/app.js')}}" ></script> 
         <script src="{{asset('js/jquery.min.js')}}" ></script>
         <script src="{{asset('js/theme/bootstarp.min.js')}}" ></script>
        

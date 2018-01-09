@@ -42,9 +42,8 @@ Route::group(['prefix' => 'admin'],function(){
           //category routees
           Route::resource('categories' , 'CategoryController',['except' => 'create']);
           //comment routes
-          Route::post('/comment/' ,['uses' => 'CommentController@store' ,'as' => 'comment.store']);
-          Route::post('/comment/likes/','CommentController@likes')->name('comment.likes');
-          Route::post('/comment/dislikes/','CommentController@dislikes')->name('comment.dislikes');
+         
+         
           Route::get('/comment/{id}/edit' , ['uses' => 'CommentController@edit' ,'as' => 'comment.edit']);
           Route::put('/comment/{id}' , ['uses' => 'CommentController@update' ,'as' => 'comment.update']);
           Route::delete('/comment/{id}' , ['uses' => 'CommentController@destroy' ,'as' => 'comment.destroy']);
@@ -57,8 +56,9 @@ Route::group(['prefix' => 'admin'],function(){
           //subscribe
           Route::post('subscribe' , 'PagesController@subscribe' )->name('subscribe');
 });
-
-
+Route::middleware('auth:api')->post('/comment/' ,['uses' => 'CommentController@store' ,'as' => 'comment.store']);
+Route::middleware('auth:api')->post('/comment/likes/','CommentController@likes')->name('comment.likes');
+Route::middleware('auth:api')->post('/comment/dislikes/','CommentController@dislikes')->name('comment.dislikes');
 
 
 //Seller Routes
@@ -77,8 +77,7 @@ Route::group(['prefix' => 'admin'],function(){
     Route::group(['prefix' => 'author'],function(){
        Route::get('/login' , 'author\AuthorLoginController@showloginform')->name('author.login');
        Route::post('/login' , 'author\AuthorLoginController@login')->name('author.login.submit');
-       Route::get( '/register' , 'RegisterAuthorController@show_register_form' )->name('author.register');
-       Route::post( '/register' , 'RegisterAuthorController@new_author' )->name('author.submit');
+       
        Route::get('/' , 'author\AuthorController@index')->name('author.dashboard');
        Route::post('/password/email','Auth\AuthorForgotPasswordController@sendResetLinkEmail')->name('author.password.email');
        Route::get('/password/reset','Auth\AuthorForgotPasswordController@showLinkRequestForm')->name('author.password.request');

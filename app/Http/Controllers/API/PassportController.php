@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Seller;
 use App\User;
+use App\Post;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,6 +58,16 @@ class PassportController extends Controller
     public function get_details(){
         $user = Auth::user();
         return $user;   
+    }
+      public function get_userprofile(){
+        $user = Auth::user();
+        $usercomments = $user->comments;
+        $comments = [] ;
+        foreach ($usercomments as $comment) {
+          $post = Post::find($comment->post_id);
+          array_push($comments,[$comment , $post]);
+        }
+        return response()->json(['user'=>$user , 'comments'=>$comments]);   
     }
     public function email_check(Request $request){
 

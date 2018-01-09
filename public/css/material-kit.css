@@ -768,7 +768,7 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .btn.btn-fab.btn-fab-mini .material-icons, .btn-group-sm .btn.btn-fab .material-icons,
 .navbar .navbar-nav > li > a.btn.btn-fab.btn-fab-mini .material-icons, .btn-group-sm
 .navbar .navbar-nav > li > a.btn.btn-fab .material-icons {
-  font-size: 17px;
+  font-size: 22px;
 }
 .btn.btn-fab i.material-icons,
 .navbar .navbar-nav > li > a.btn.btn-fab i.material-icons {
@@ -3032,7 +3032,7 @@ h2.title {
   border-radius: 3px;
   color: rgba(0,0,0, 0.87);
   background: #fff;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 3px 2px 15px 5px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 .card .card-height-indicator {
   margin-top: 100%;

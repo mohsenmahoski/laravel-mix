@@ -15,8 +15,7 @@ class PostCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email');
+            $table->integer('user_id')->unsigned();
             $table->text('comment');
             $table->boolean('approved');
             $table->integer('post_id')->unsigned();

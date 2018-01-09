@@ -11,7 +11,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasApiTokens,Notifiable;
-
+    public function comments(){
+         return $this->hasMany('App\Comment');
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\UserCommentVote;
 use App\Post;
 use Auth;
 use Session;
@@ -38,16 +39,10 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        
-       
-       if (Auth::check()) {
-                
-                
                 try {
-
+                    $user = Auth::user();
                     $comment = new Comment;
-                    $comment->name = Auth::user()->name;
-                    $comment->email = Auth::user()->email;
+                    $comment->user_id = Auth::user()->id;
                     $comment->comment = $request->comment;
                     $comment->approved = false;
                     $comment->likes = 0;
@@ -55,37 +50,66 @@ class CommentController extends Controller
                     $comment->post_id = $request->id;
                     $post = Post::find($request->id);
                     $comment->post()->associate($post);
+                    $comment->user()->associate($user);
                     $comment->save();
                     return 'message saved';
-
                 } catch (Exception $e) {
                        return $e;
                 }
 
-       }else{
-                return 'not login';
-       }
     }
     public function likes(Request $request){
        
-         if (Auth::check()) {
-              $comment = Comment::find($request->id);
-              $comment->likes = $comment->likes +1 ;
-              $comment->save();
-              return $comment->likes;
-         }
-         else{
-                return 'not login';
-        }
+           if (Auth::check()) { 
+                  $user = Auth::user();
+                  $votes = UserCommentVote::where('user_id' , $user->id)->get();
+                  $check = true;
+                  foreach ($votes as $vote) {
+                      if ( $vote->comment_id == $request->id ) {
+                         $check =false;
+                      }
+                  }
+                  if ($check) {
+                          $comment = Comment::find($request->id);
+                          $vote = new UserCommentVote;
+                          $vote->user_id = $user->id;
+                          $vote->comment_id = $comment->id;
+                          $vote->save();
+                          $comment->likes = $comment->likes + 1 ;
+                          $comment->save(); 
+                          return $comment->likes;
+                  }else{
+                    return 'voted before';
+                  }
+             }
+             else{
+                  return 'not login';
+            }
           
     }
     public function dislikes(Request $request){
-       
+
               if (Auth::check()) { 
-                  $comment = Comment::find($request->id);
-                  $comment->dislikes = $comment->dislikes + 1 ;
-                  $comment->save();
-                  return $comment->dislikes;
+                  $user = Auth::user();
+                  $votes = UserCommentVote::where('user_id' , $user->id)->get();
+                  $check = true;
+                  foreach ($votes as $vote) {
+                      if ( $vote->comment_id == $request->id ) {
+                         $check =false;
+                      }
+                  }
+                  if ($check) {
+                          $comment = Comment::find($request->id);
+                          $vote = new UserCommentVote;
+                          $vote->user_id = $user->id;
+                          $vote->comment_id = $comment->id;
+                          $vote->save();
+                          $comment->dislikes = $comment->dislikes + 1 ;
+                          $comment->save(); 
+                          return $comment->dislikes;
+                  }else{
+                    return 'voted before';
+                  }
              }
              else{
                   return 'not login';

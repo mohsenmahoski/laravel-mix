@@ -4,12 +4,16 @@ import SuccessMessage from '../items/SuccessMessage';
 import FailMessage from '../items/FailMessage';
 import NavItem from '../items/NavItem';
 import { Link , Route  } from 'react-router-dom';
+import Header from '../_partials/Header';
+import Footer from '../_partials/Footer';
+import Cookie from 'universal-cookie';
 
 export default class SingleBlog extends Component{
   constructor(props){
 			super(props);
 			this.state={
 				  data:{},
+				  token:undefined,
 			      message:'',
 			      subscribe:'',
 
@@ -35,6 +39,12 @@ export default class SingleBlog extends Component{
 			} 	
   }
   componentDidMount(){
+  	      let cookie = new Cookie;
+	      let user_token =  cookie.get('user_token');
+	      let token = user_token;
+	      this.setState({
+	      	token
+	      });
 	      this._getData();
   }
   _getData(){
@@ -159,32 +169,46 @@ export default class SingleBlog extends Component{
         e.preventDefault();
         const message = this.state.message;
                         if (message !== '' && message.length > 10) {
-                             axios.post('/admin/comment/', {
-                                  comment : message,
-                                  id : this.props.match.params.id
-                                })
-                                .then((response) => {
-                                  if (response.data == 'message saved') {
-	                                     this.setState({
-	                                            message:'',
-	                                            hasSuccess:true,
-	                                            displaySuccess:'block',
-	                                            SuccessMessage:'پیام شما با موفقیت ارسال شد و پس از بازبینی مورد تایید قرار خواهد گرفت.',
-	                                    });
-                                   }
-                                   else if(response.data=='not login'){
-                                    	this.setState({
-	                                            Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
-	                                            displayError:'block',
-	                                            hasError:true
-	                                    });
-                                    }
-                                   
-                                 
-                                })
-                                .catch(function (error) {
-                                  console.log(error);
-                                }); 
+                        	 let token = 'Bearer '+ this.state.token;
+                        	 console.log(token);
+			                 if (token != undefined) {
+		                                axios.post('/comment/',{
+											comment : message,
+											id : this.props.match.params.id,
+		                                 },{
+		                                  
+		                                  headers:{Authorization:token}
+		                                })
+		                                .then((response) => {
+		                                  console.log(response.data);
+		                                  if (response.data == 'message saved') {
+			                                     this.setState({
+			                                            message:'',
+			                                            hasSuccess:true,
+			                                            displaySuccess:'block',
+			                                            SuccessMessage:'پیام شما با موفقیت ارسال شد و پس از بازبینی مورد تایید قرار خواهد گرفت.',
+			                                    });
+		                                   }
+		                                   else if(response.data=='not login'){
+		                                    	this.setState({
+			                                            Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+			                                            displayError:'block',
+			                                            hasError:true
+			                                    });
+		                                    }
+		                                   
+		                                 
+		                                })
+		                                .catch(function (error) {
+		                                  console.log(error);
+		                                }); 
+	                             }else{
+	                             	this.setState({
+			                                            Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+			                                            displayError:'block',
+			                                            hasError:true
+			                                    });
+	                             }
                              }
                         else{
 	                            if (message.length<10 && message.length > 0 ) {
@@ -204,52 +228,99 @@ export default class SingleBlog extends Component{
                         }    
   }
   _handleLike(id){
-  	  axios.post('/admin/comment/likes',{
-			    id: id
-             })
-			  .then((response) => {
-				  	if(response.data=='not login'){
-	                     this.setState({
-		                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
-		                     displayError:'block',
-		                     hasError:true
-		                 });
-	                }else{
-	                	this.setState({
-					  		hasSuccess:false,
-						    hasError:false
-					  	});
-	                	this._getData();
-	                }
-			  	
-			  })
-			  .catch((error) => {
-			    console.log(error);
-			  });	
+  	  const token = this.state.token;
+      
+  	  if (token != undefined ) {
+  	  	       let header = 'Bearer '+ token;
+		  	  	axios.post('/comment/likes',{
+					    id: id
+		             },{
+                         headers:{Authorization:header}
+		             })
+					  .then((response) => {
+					  	  
+						  	if(response.data=='not login'){
+			                     this.setState({
+				                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+				                     displayError:'block',
+				                     hasError:true
+				                 });
+			                }else if(response.data == 'voted before'){
+                                  this.setState({
+				                     Failmessage:'فقط یک بار می توانید رای دهید.',
+				                     displayError:'block',
+				                     hasError:true
+				                   });
+			                }else{
+			                	this.setState({
+							  		hasSuccess:false,
+								    hasError:false
+							  	});
+			                	this._getData();
+			                }
+					  	
+					  })
+					  .catch((error) => {
+					             this.setState({
+				                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+				                     displayError:'block',
+				                     hasError:true
+				                 });
+					  });	
+  	  }else {
+            this.setState({
+				             Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+				             displayError:'block',
+				             hasError:true
+			});
+  	  }
   }
- _handleDisLike(id){
-
-  	  axios.post('/admin/comment/dislikes',{
-			    id: id
-			  })
-			  .then((response) => {
-			  	if (response.data == 'not login') {
-                     this.setState({
-		                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
-		                     displayError:'block',
-		                     hasError:true
-		                 });
-			  	}else{
-				  	this.setState({
-				  		hasSuccess:false,
-					    hasError:false
-				  	});
-				  	this._getData();
-			  	}
-			  })
-			  .catch((error) => {
-			    console.log(error);
-			  });	
+_handleDisLike(id){
+  	  const token = this.state.token;
+      
+  	  if (token != undefined ) {
+  	  	       let header = 'Bearer '+ token;
+		  	  	axios.post('/comment/dislikes',{
+					    id: id
+		             },{
+                         headers:{Authorization:header}
+		             })
+					  .then((response) => {
+						  	if(response.data=='not login'){
+			                     this.setState({
+				                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+				                     displayError:'block',
+				                     hasError:true
+				                 });
+			                }else if(response.data == 'voted before'){
+                                  this.setState({
+				                     Failmessage:'فقط یک بار می توانید رای دهید.',
+				                     displayError:'block',
+				                     hasError:true
+				                   });
+			                }else{
+			                	this.setState({
+							  		hasSuccess:false,
+								    hasError:false
+							  	});
+			                	this._getData();
+			                }
+					  	
+					  })
+					  .catch((error) => {
+					             this.setState({
+				                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+				                     displayError:'block',
+				                     hasError:true
+				                 });
+					  });	
+  	  }else {
+            this.setState({
+				             Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+				             displayError:'block',
+				             hasError:true
+			});
+  	  }
   }
   _comments(item , index){
   	    const id = item.id;
@@ -345,7 +416,7 @@ export default class SingleBlog extends Component{
 		
 		return(
             <div>
-            
+            <Header />
 	                { this.state.hasError == true ? this._renderMessage('failed') : null }
                     { this.state.hasSuccess == true ? this._renderMessage('success') : null }
 		                     	<div className="header header-filter">
@@ -452,6 +523,7 @@ export default class SingleBlog extends Component{
 								      </div>
 								    </div>
 								</div>
+				<Footer />
            </div>
 			);
   }

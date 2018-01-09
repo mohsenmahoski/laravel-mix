@@ -28,6 +28,7 @@ Route::post('/blog/{id}',['uses' => 'BlogController@getsingleblog', 'as' => 'blo
 
 Route::group(['middleware'=>'auth:api'],function(){
 	Route::post('/get_details','API\PassportController@get_details')->name('api.userdetails');
+	Route::post('/get_userprofile','API\PassportController@get_userprofile')->name('api.userdetails');
 });
 
 
