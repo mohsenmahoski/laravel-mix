@@ -9,7 +9,7 @@ import Footer from '../_partials/Footer';
 import Cookie from 'universal-cookie';
 
 export default class SingleBlog extends Component{
-  constructor(props){
+   constructor(props){
 			super(props);
 			this.state={
 				  data:{},
@@ -37,8 +37,8 @@ export default class SingleBlog extends Component{
 			      searchInput:'',
 			      
 			} 	
-  }
-  componentDidMount(){
+   }
+   componentDidMount(){
   	      let cookie = new Cookie;
 	      let user_token =  cookie.get('user_token');
 	      let token = user_token;
@@ -46,8 +46,8 @@ export default class SingleBlog extends Component{
 	      	token
 	      });
 	      this._getData();
-  }
-  _getData(){
+   }
+   _getData(){
   	 const id =  this.props.match.params.id;     
 		  axios.post('/api/blog/'+id, {
 			    id: id
@@ -64,8 +64,8 @@ export default class SingleBlog extends Component{
 			  .catch((error) => {
 			    console.log(error);
 			  });
-  }
-  _updateComponent(id){
+   }
+   _updateComponent(id){
 		  axios.post('/api/blog/'+id, {
 			    id: id
 			  })
@@ -81,8 +81,8 @@ export default class SingleBlog extends Component{
 			  .catch((error) => {
 			    console.log(error);
 			  });
-  }
-  _handleSubscribe(){
+   }
+   _handleSubscribe(){
   	
        const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	   const email = this.state.subscribe; 
@@ -123,8 +123,8 @@ export default class SingleBlog extends Component{
 				hasError:false
              });
 	   }
-  }
-  _handleKeyPress(evnt){
+   }
+   _handleKeyPress(evnt){
           const inputValue = evnt.target.type === 'checkbox' ? evnt.target.checked : evnt.target.value; 
           const inputName =  evnt.target.name;
           switch (inputName) {
@@ -164,8 +164,8 @@ export default class SingleBlog extends Component{
             default:
               console.log('Sorry, the state not found.');
           }
-  }
-  _handleSubmit(e){
+   }
+   _handleSubmit(e){
         e.preventDefault();
         const message = this.state.message;
                         if (message !== '' && message.length > 10) {
@@ -180,7 +180,7 @@ export default class SingleBlog extends Component{
 		                                  headers:{Authorization:token}
 		                                })
 		                                .then((response) => {
-		                                  console.log(response.data);
+		                                  
 		                                  if (response.data == 'message saved') {
 			                                     this.setState({
 			                                            message:'',
@@ -226,8 +226,8 @@ export default class SingleBlog extends Component{
 		                              });
 	                           }
                         }    
-  }
-  _handleLike(id){
+   }
+   _handleLike(id){
   	  const token = this.state.token;
       
   	  if (token != undefined ) {
@@ -238,15 +238,23 @@ export default class SingleBlog extends Component{
                          headers:{Authorization:header}
 		             })
 					  .then((response) => {
-					  	  
-						  	if(response.data=='not login'){
+						  	if(response.status == 202){
+						  		
 			                     this.setState({
 				                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
 				                     displayError:'block',
 				                     hasError:true
 				                 });
-			                }else if(response.data == 'voted before'){
+			                }else if(response.status == 203){
+			                	
                                   this.setState({
+				                     Failmessage:'نمی توانید به رای خود نظر دهی کنید.',
+				                     displayError:'block',
+				                     hasError:true
+				                   });
+			                }else if(response.status == 201){
+			                	
+			                	 this.setState({
 				                     Failmessage:'فقط یک بار می توانید رای دهید.',
 				                     displayError:'block',
 				                     hasError:true
@@ -262,7 +270,7 @@ export default class SingleBlog extends Component{
 					  })
 					  .catch((error) => {
 					             this.setState({
-				                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+				                     Failmessage:'مشکلی در نظر دهی به وجود آمده.',
 				                     displayError:'block',
 				                     hasError:true
 				                 });
@@ -274,10 +282,9 @@ export default class SingleBlog extends Component{
 				             hasError:true
 			});
   	  }
-  }
-_handleDisLike(id){
+   }
+   _handleDisLike(id){
   	  const token = this.state.token;
-      
   	  if (token != undefined ) {
   	  	       let header = 'Bearer '+ token;
 		  	  	axios.post('/comment/dislikes',{
@@ -286,14 +293,22 @@ _handleDisLike(id){
                          headers:{Authorization:header}
 		             })
 					  .then((response) => {
-						  	if(response.data=='not login'){
+						  	if(response.status == 202){
 			                     this.setState({
 				                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
 				                     displayError:'block',
 				                     hasError:true
 				                 });
-			                }else if(response.data == 'voted before'){
+			                }else if(response.status == 203){
+			                	
                                   this.setState({
+				                     Failmessage:'نمی توانید به رای خود نظر دهی کنید.',
+				                     displayError:'block',
+				                     hasError:true
+				                   });
+			                }else if(response.status == 201){
+			                	
+			                	 this.setState({
 				                     Failmessage:'فقط یک بار می توانید رای دهید.',
 				                     displayError:'block',
 				                     hasError:true
@@ -309,7 +324,7 @@ _handleDisLike(id){
 					  })
 					  .catch((error) => {
 					             this.setState({
-				                     Failmessage:'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+				                     Failmessage:'مشکلی در نظر دهی به وجود آمده.',
 				                     displayError:'block',
 				                     hasError:true
 				                 });
@@ -321,8 +336,8 @@ _handleDisLike(id){
 				             hasError:true
 			});
   	  }
-  }
-  _comments(item , index){
+   }
+   _comments(item , index){
   	    const id = item.id;
 		return (
               <div className="blogcard mt-20 container-fluid" key={index} >
@@ -366,7 +381,7 @@ _handleDisLike(id){
 	  	      searchInput:'',
 	   	  });
    }
-  _renderMessage(message){
+   _renderMessage(message){
 		
 		if (message=='failed'){
               return(
@@ -379,7 +394,7 @@ _handleDisLike(id){
 		}
 		
 	 }
-  _searchMethod(event){
+   _searchMethod(event){
   	    let search = event.target.value.trim();
   	    if ( search != '') {
   	    	this.setState({
@@ -404,13 +419,13 @@ _handleDisLike(id){
   	    		searchInput:'',
   	    	});
   	    }
-  }
-  _showResult(item , index){
+   }
+   _showResult(item , index){
           return(
                 <Link onClick={()=>this._updateComponent(item.id)} to={`/blog/${item.id}`} className="col-md-12 rtl hvr-sweep-to-left" key={index}>{item.title}</Link>
           	);
-  }
-  render(){
+   }
+   render(){
 		const { title , body , image , category_name  } = this.state.data;
         const comments = this.state.comments;
 		
@@ -526,5 +541,5 @@ _handleDisLike(id){
 				<Footer />
            </div>
 			);
-  }
+   }
 }

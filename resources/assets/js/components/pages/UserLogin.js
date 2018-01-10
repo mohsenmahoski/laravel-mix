@@ -24,6 +24,12 @@ export default class UserLogin extends Component{
                     validemail:'hidden',
                     passwordrequired:'hidden',
 
+                    forgotemail:'',
+                    emailforgotrequired:'hidden',
+                    validforgotemail:'hidden',
+                    emailnotfound:false,
+                    emailsended:false,
+                    forgotspinner:false,
 
                     newEmail:'',
                     newusername:'',
@@ -111,13 +117,12 @@ export default class UserLogin extends Component{
                                    </div>
                              </div>
                              <div className="col-md-12">
-                                {this.state.registerspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.registerspinner} /></div>: (this.state.registersuccess==true ? this._successRegister() : this._registerButtons())}
+                                {this.state.registerspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.registerspinner} /></div>: (this.state.registersuccess==true ? this._successRegister( 'حساب شما با موفقیت ایجاد شد.لینک تایید حساب به پست الکترونیکی شما ارسال شد ، با کلیک بر روی لینک حساب شما فعال خواهد شد. ' ) : this._registerButtons())}
                              </div>
                   </div>
               );
         }
         _handleRegisterKeyPress(event){
-
                       const inputName =  event.target.name;
                       const inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;   
                       switch (inputName) {
@@ -265,7 +270,7 @@ export default class UserLogin extends Component{
                      </div>
             );
         }
-        _successRegister(){
+        _successRegister(message){
           return(
                        <div className="alert-success text-justify">
                           <div className="container-fluid">
@@ -274,13 +279,53 @@ export default class UserLogin extends Component{
                                        <span aria-hidden="true"><i className="material-icons">clear</i></span>
                                   </button>
                              
-                                  <p className="pd-20">حساب شما با موفقیت ایجاد شد.لینک تایید حساب به پست الکترونیکی شما ارسال شد ، با کلیک بر روی لینک حساب شما فعال خواهد شد. <i className="material-icons">check</i></p>
+                                  <p className="pd-20">{message}<i className="material-icons">check</i></p>
                               </div>
                           </div>
                       </div>
                 );
         }
-
+        _sendforgotemail(){
+                this.setState({
+                  forgotspinner:true
+                 });
+                if (this.state.forgotemail != ''){
+                       const forgotemail = this.state.forgotemail;
+                       const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                       if (valid.test(forgotemail)){
+                              axios.post('/api/forgotpassword/',{
+                                 email:forgotemail
+                              })
+                              .then(response=>{
+                                  if (response.status == 201){
+                                         this.setState({
+                                            forgotspinner:false,
+                                            emailnotfound:true
+                                         });
+                                  }else{
+                                        this.setState({
+                                           forgotspinner:false,
+                                           emailnotfound:false,
+                                           emailsended:true,
+                                        });
+                                  }
+                              })
+                              .catch(error=>{
+                                console.log(error);
+                              });
+                       }else{
+                          this.setState({
+                              emailforgotrequired:'hidden',
+                              validforgotemail:'visibile',
+                          });
+                       }
+                }else{
+                    this.setState({
+                        emailforgotrequired:'visibile',
+                        validforgotemail:'hidden',
+                    });
+                }
+        }
         _forgotPassword(){
             return( 
                           <div>
@@ -288,10 +333,10 @@ export default class UserLogin extends Component{
                                     <h5 className="text-center col-md-12 rtl title" >برای بازیابی رمز عبور ایمیل خود را وارد کنید.</h5>
                                     <div className="input-group pull-right col-md-8">
                                          <div className="form-group is-empty">
-                                           <input name="forgot" type="email" className="form-control rtl" placeholder="ایمیل خود را وارد کنید..." onChange={this._handleKeyPress.bind(this)} />
-                                           <span className="material-input"></span>
-                                           <span className="rtl" style={{ color:'#f44336',display: this.state.passwordrequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
-                                           <span className="rtl" style={{ color:'#f44336',display: this.state.passwordLength=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
+                                           <input name="forgot" type="email" className="form-control rtl" placeholder="ایمیل خود را وارد کنید..." onChange={this._handleKeyPress.bind(this)} value={this.state.forgotemail} />
+                                            <span className="rtl" style={{ color:'#f44336',display: this.state.emailforgotrequired=='visibile' ? 'block' : 'none'}}><small>ایمیل خود را وارد کنید.</small></span>
+                                           <span className="rtl" style={{ color:'#f44336',display: this.state.validforgotemail=='visibile' ? 'block' : 'none'}}><small>لطفا ایمیل صحیح وارد کنید.</small></span>
+                                           
                                          </div>
                                         <span className="input-group-addon">
                                             <i className="material-icons">email</i>
@@ -299,9 +344,13 @@ export default class UserLogin extends Component{
                                    </div>
                                    <div className="input-group pull-right col-md-4">
                                          <div className="form-group is-empty">
-                                           <button className="btn btn-primary" onClick={()=>this._handleRegister()}>بازیابی <i className="material-icons">cached</i></button>
+                                           <button className="btn btn-primary" onClick={()=>this._sendforgotemail()} onChange={()=>this._handleKeyPress()}>بازیابی <i className="material-icons">cached</i></button>
                                          </div>
                                    </div>
+                             </div>
+                             <div className="col-md-12">
+                                   {this.state.emailnotfound == true ? this._notConfirm('چنین آدرس ایمیلی ثبت نشده.') : null }
+                                   {this.state.forgotspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.forgotspinner} /></div>:(this.state.emailsended == true ? this._successRegister('ایمیل بازیابی رمز عبور با موفقیت ارسال شد') : null )}
                              </div>
                              <div className="col-md-12 text-center">
                                 <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginform:true,forgotpassword:false})}>قبلا ثبت نام کرده ام</button>
@@ -357,7 +406,6 @@ export default class UserLogin extends Component{
               );
         }
         _notConfirm(message){
-          console.log('Not Confirm');
           return(
                    <div className="alert-danger text-justify mt-10">
                           <div className="container-fluid">
@@ -377,34 +425,56 @@ export default class UserLogin extends Component{
                       const inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;   
                       switch (inputName) {
                           case 'email':
-                          this.setState({
-                                          emailrequired:'hidden',
-                                          login:null
-                          });
-                          const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                             if (valid.test(inputValue)) {
-                                 this.setState({
-                                          validemail:'hidden',
-                                          login:null,
-                                 });
-                             }else{
-                                this.setState({
-                                          validemail:'visibile',
-                                          login:null
-                                });
-                             }
-                             this.setState({
-                                          email:inputValue,
-                                          login:null
-                             });
-                            break;
+                                  this.setState({
+                                                  emailrequired:'hidden',
+                                                  login:null
+                                  });
+                                  const valid =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                                     if (valid.test(inputValue)) {
+                                         this.setState({
+                                                  validemail:'hidden',
+                                                  login:null,
+                                         });
+                                     }else{
+                                        this.setState({
+                                                  validemail:'visibile',
+                                                  login:null
+                                        });
+                                     }
+                                     this.setState({
+                                                  email:inputValue,
+                                                  login:null
+                                     });
+                          break;
+                          case 'forgot':
+                                  this.setState({
+                                                  emailforgotrequired:'hidden',
+                                                  login:null
+                                  });
+                                  const validforgot =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                                     if (validforgot.test(inputValue)) {
+                                         this.setState({
+                                                  validforgotemail:'hidden',
+                                                  login:null,
+                                         });
+                                     }else{
+                                        this.setState({
+                                                  validforgotemail:'visibile',
+                                                  login:null
+                                        });
+                                     }
+                                     this.setState({
+                                                  forgotemail:inputValue,
+                                                  login:null
+                                     });
+                          break;
                           case 'password':
                              this.setState({
                                           passwordrequired:'hidden',
                                           password:inputValue,
                                           login:null
                               });
-                           break;
+                          break;
                           default:
                             console.log('Sorry, the state not found.');
                       }        
@@ -451,7 +521,6 @@ export default class UserLogin extends Component{
                                  }) 
                                  .catch(error=>{
                                       let {status} = error.response;
-                                      console.log(error.response);
                                       if(status==402){
                                           this.setState({
                                                    unauthorized:true,

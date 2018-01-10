@@ -38,6 +38,7 @@ export default class UserDashboard extends Component{
 	}
    
    _logOut(){
+   	  console.log('called');
       let cookie = new Cookie;
       cookie.remove('user_token');
       this.setState({

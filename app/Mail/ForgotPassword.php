@@ -8,10 +8,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 
-class NewUserRegister extends Mailable
+class ForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
-       
+
     /**
      * Create a new message instance.
      *
@@ -29,7 +29,7 @@ class NewUserRegister extends Mailable
      * @return $this
      */
     public function build()
-    {  
-        return $this->markdown('emails.users.newuserswelcome');
+    {
+        return $this->markdown('emails.users.forgotpassword');
     }
 }

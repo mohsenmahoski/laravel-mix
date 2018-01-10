@@ -8,6 +8,8 @@ use App\Post;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ForgotPassword;
 use Validator;
 use Cookie;
 
@@ -95,4 +97,18 @@ class PassportController extends Controller
         return response()->json(['token'=>$token],200);
 
     }
+    public function forgotpassword(Request $request){
+             $email = $request->email;
+             try{
+               $user = User::where('email' , $email )->first();
+               if ($user != '') {
+                 Mail::to($user)->send(new ForgotPassword($user));
+                 return response()->json(['message'=>'Email Sended'],200);
+               }else{
+                  return response()->json(['message'=>'Not Found Email'],201);
+               }
+             } catch (Exception $e) {
+                return $e;
+             }
+   }
 }

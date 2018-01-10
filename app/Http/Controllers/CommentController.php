@@ -70,26 +70,32 @@ class CommentController extends Controller
                       }
                   }
                   if ($check) {
-                          $comment = Comment::find($request->id);
-                          $vote = new UserCommentVote;
-                          $vote->user_id = $user->id;
-                          $vote->comment_id = $comment->id;
-                          $vote->save();
-                          $comment->likes = $comment->likes + 1 ;
-                          $comment->save(); 
-                          return $comment->likes;
+                    $comment = Comment::find($request->id);
+
+                        if ($user->id == $comment->user->id) {
+                          return response()->json(['message' => 'self vote'],203);
+                        }
+                        else{
+                                  
+                              $vote = new UserCommentVote;
+                              $vote->user_id = $user->id;
+                              $vote->comment_id = $comment->id;
+                              $vote->save();
+                              $comment->likes = $comment->likes + 1 ;
+                              $comment->save(); 
+                              return $comment->likes;
+                        }
                   }else{
-                    return 'voted before';
+                    return response()->json(['message' => 'voted before'],201);
                   }
              }
              else{
-                  return 'not login';
-            }
-          
+                  return response()->json(['message' => 'not login'],202);
+            }     
     }
-    public function dislikes(Request $request){
-
-              if (Auth::check()) { 
+   public function dislikes(Request $request){
+       
+           if (Auth::check()) { 
                   $user = Auth::user();
                   $votes = UserCommentVote::where('user_id' , $user->id)->get();
                   $check = true;
@@ -99,21 +105,28 @@ class CommentController extends Controller
                       }
                   }
                   if ($check) {
-                          $comment = Comment::find($request->id);
-                          $vote = new UserCommentVote;
-                          $vote->user_id = $user->id;
-                          $vote->comment_id = $comment->id;
-                          $vote->save();
-                          $comment->dislikes = $comment->dislikes + 1 ;
-                          $comment->save(); 
-                          return $comment->dislikes;
+                    $comment = Comment::find($request->id);
+
+                        if ($user->id == $comment->user->id) {
+                          return response()->json(['message' => 'self vote'],203);
+                        }
+                        else{
+                                  
+                              $vote = new UserCommentVote;
+                              $vote->user_id = $user->id;
+                              $vote->comment_id = $comment->id;
+                              $vote->save();
+                              $comment->dislikes = $comment->dislikes + 1 ;
+                              $comment->save(); 
+                              return $comment->dislikes;
+                        }
                   }else{
-                    return 'voted before';
+                    return response()->json(['message' => 'voted before'],201);
                   }
              }
              else{
-                  return 'not login';
-            }
+                  return response()->json(['message' => 'not login'],202);
+            }     
     }
     /**
      * Display the specified resource.

@@ -61078,6 +61078,13 @@ var UserLogin = function (_Component) {
          validemail: 'hidden',
          passwordrequired: 'hidden',
 
+         forgotemail: '',
+         emailforgotrequired: 'hidden',
+         validforgotemail: 'hidden',
+         emailnotfound: false,
+         emailsended: false,
+         forgotspinner: false,
+
          newEmail: '',
          newusername: '',
          newpassword: '',
@@ -61290,14 +61297,13 @@ var UserLogin = function (_Component) {
                   'div',
                   { className: 'col-md-12', style: { display: 'flex', justifyContent: 'center' } },
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_spinners__["DotLoader"], { color: '#9c27b0', loading: this.state.registerspinner })
-               ) : this.state.registersuccess == true ? this._successRegister() : this._registerButtons()
+               ) : this.state.registersuccess == true ? this._successRegister('حساب شما با موفقیت ایجاد شد.لینک تایید حساب به پست الکترونیکی شما ارسال شد ، با کلیک بر روی لینک حساب شما فعال خواهد شد. ') : this._registerButtons()
             )
          );
       }
    }, {
       key: '_handleRegisterKeyPress',
       value: function _handleRegisterKeyPress(event) {
-
          var inputName = event.target.name;
          var inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
          switch (inputName) {
@@ -61466,7 +61472,7 @@ var UserLogin = function (_Component) {
       }
    }, {
       key: '_successRegister',
-      value: function _successRegister() {
+      value: function _successRegister(message) {
          var _this4 = this;
 
          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -61496,7 +61502,7 @@ var UserLogin = function (_Component) {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                      'p',
                      { className: 'pd-20' },
-                     '\u062D\u0633\u0627\u0628 \u0634\u0645\u0627 \u0628\u0627 \u0645\u0648\u0641\u0642\u06CC\u062A \u0627\u06CC\u062C\u0627\u062F \u0634\u062F.\u0644\u06CC\u0646\u06A9 \u062A\u0627\u06CC\u06CC\u062F \u062D\u0633\u0627\u0628 \u0628\u0647 \u067E\u0633\u062A \u0627\u0644\u06A9\u062A\u0631\u0648\u0646\u06CC\u06A9\u06CC \u0634\u0645\u0627 \u0627\u0631\u0633\u0627\u0644 \u0634\u062F \u060C \u0628\u0627 \u06A9\u0644\u06CC\u06A9 \u0628\u0631 \u0631\u0648\u06CC \u0644\u06CC\u0646\u06A9 \u062D\u0633\u0627\u0628 \u0634\u0645\u0627 \u0641\u0639\u0627\u0644 \u062E\u0648\u0627\u0647\u062F \u0634\u062F. ',
+                     message,
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'i',
                         { className: 'material-icons' },
@@ -61508,9 +61514,52 @@ var UserLogin = function (_Component) {
          );
       }
    }, {
+      key: '_sendforgotemail',
+      value: function _sendforgotemail() {
+         var _this5 = this;
+
+         this.setState({
+            forgotspinner: true
+         });
+         if (this.state.forgotemail != '') {
+            var forgotemail = this.state.forgotemail;
+            var valid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (valid.test(forgotemail)) {
+               __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/forgotpassword/', {
+                  email: forgotemail
+               }).then(function (response) {
+                  if (response.status == 201) {
+                     _this5.setState({
+                        forgotspinner: false,
+                        emailnotfound: true
+                     });
+                  } else {
+                     _this5.setState({
+                        forgotspinner: false,
+                        emailnotfound: false,
+                        emailsended: true
+                     });
+                  }
+               }).catch(function (error) {
+                  console.log(error);
+               });
+            } else {
+               this.setState({
+                  emailforgotrequired: 'hidden',
+                  validforgotemail: 'visibile'
+               });
+            }
+         } else {
+            this.setState({
+               emailforgotrequired: 'visibile',
+               validforgotemail: 'hidden'
+            });
+         }
+      }
+   }, {
       key: '_forgotPassword',
       value: function _forgotPassword() {
-         var _this5 = this;
+         var _this6 = this;
 
          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -61529,11 +61578,10 @@ var UserLogin = function (_Component) {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                      'div',
                      { className: 'form-group is-empty' },
-                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'forgot', type: 'email', className: 'form-control rtl', placeholder: '\u0627\u06CC\u0645\u06CC\u0644 \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F...', onChange: this._handleKeyPress.bind(this) }),
-                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
+                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'forgot', type: 'email', className: 'form-control rtl', placeholder: '\u0627\u06CC\u0645\u06CC\u0644 \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F...', onChange: this._handleKeyPress.bind(this), value: this.state.forgotemail }),
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'span',
-                        { className: 'rtl', style: { color: '#f44336', display: this.state.passwordrequired == 'visibile' ? 'block' : 'none' } },
+                        { className: 'rtl', style: { color: '#f44336', display: this.state.emailforgotrequired == 'visibile' ? 'block' : 'none' } },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                            'small',
                            null,
@@ -61542,7 +61590,7 @@ var UserLogin = function (_Component) {
                      ),
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'span',
-                        { className: 'rtl', style: { color: '#f44336', display: this.state.passwordLength == 'visibile' ? 'block' : 'none' } },
+                        { className: 'rtl', style: { color: '#f44336', display: this.state.validforgotemail == 'visibile' ? 'block' : 'none' } },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                            'small',
                            null,
@@ -61569,7 +61617,9 @@ var UserLogin = function (_Component) {
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'button',
                         { className: 'btn btn-primary', onClick: function onClick() {
-                              return _this5._handleRegister();
+                              return _this6._sendforgotemail();
+                           }, onChange: function onChange() {
+                              return _this6._handleKeyPress();
                            } },
                         '\u0628\u0627\u0632\u06CC\u0627\u0628\u06CC ',
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -61583,11 +61633,21 @@ var UserLogin = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                'div',
+               { className: 'col-md-12' },
+               this.state.emailnotfound == true ? this._notConfirm('چنین آدرس ایمیلی ثبت نشده.') : null,
+               this.state.forgotspinner == true ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'div',
+                  { className: 'col-md-12', style: { display: 'flex', justifyContent: 'center' } },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_spinners__["DotLoader"], { color: '#9c27b0', loading: this.state.forgotspinner })
+               ) : this.state.emailsended == true ? this._successRegister('ایمیل بازیابی رمز عبور با موفقیت ارسال شد') : null
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+               'div',
                { className: 'col-md-12 text-center' },
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'button',
                   { className: 'btn btn-simple btn-info', onClick: function onClick() {
-                        return _this5.setState({ loginform: true, forgotpassword: false });
+                        return _this6.setState({ loginform: true, forgotpassword: false });
                      } },
                   '\u0642\u0628\u0644\u0627 \u062B\u0628\u062A \u0646\u0627\u0645 \u06A9\u0631\u062F\u0647 \u0627\u0645'
                )
@@ -61597,7 +61657,7 @@ var UserLogin = function (_Component) {
    }, {
       key: '_login',
       value: function _login() {
-         var _this6 = this;
+         var _this7 = this;
 
          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -61696,21 +61756,21 @@ var UserLogin = function (_Component) {
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'button',
                   { className: 'btn btn-primary', onClick: function onClick() {
-                        return _this6._handleSubmit(_this6);
+                        return _this7._handleSubmit(_this7);
                      } },
                   '\u0648\u0631\u0648\u062F'
                ),
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'button',
                   { className: 'btn btn-simple btn-info', onClick: function onClick() {
-                        return _this6.setState({ loginform: false });
+                        return _this7.setState({ loginform: false });
                      } },
                   '\u062B\u0628\u062A \u0646\u0627\u0645'
                ),
                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'button',
                   { className: 'btn btn-simple btn-warning pull-right', onClick: function onClick() {
-                        return _this6.setState({ forgotpassword: true });
+                        return _this7.setState({ forgotpassword: true });
                      } },
                   '\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u0631\u0627 \u0641\u0631\u0627\u0645\u0648\u0634 \u06A9\u0631\u062F\u0647 \u0627\u0645'
                ),
@@ -61728,9 +61788,8 @@ var UserLogin = function (_Component) {
    }, {
       key: '_notConfirm',
       value: function _notConfirm(message) {
-         var _this7 = this;
+         var _this8 = this;
 
-         console.log('Not Confirm');
          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'alert-danger text-justify mt-10' },
@@ -61743,7 +61802,7 @@ var UserLogin = function (_Component) {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                      'button',
                      { type: 'button', className: 'close mt-10', 'data-dismiss': 'alert', 'aria-label': 'Close', onClick: function onClick() {
-                           return _this7.setState({ display: 'none' });
+                           return _this8.setState({ display: 'none' });
                         } },
                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'span',
@@ -61797,6 +61856,28 @@ var UserLogin = function (_Component) {
                   login: null
                });
                break;
+            case 'forgot':
+               this.setState({
+                  emailforgotrequired: 'hidden',
+                  login: null
+               });
+               var validforgot = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+               if (validforgot.test(inputValue)) {
+                  this.setState({
+                     validforgotemail: 'hidden',
+                     login: null
+                  });
+               } else {
+                  this.setState({
+                     validforgotemail: 'visibile',
+                     login: null
+                  });
+               }
+               this.setState({
+                  forgotemail: inputValue,
+                  login: null
+               });
+               break;
             case 'password':
                this.setState({
                   passwordrequired: 'hidden',
@@ -61811,7 +61892,7 @@ var UserLogin = function (_Component) {
    }, {
       key: '_handleSubmit',
       value: function _handleSubmit() {
-         var _this8 = this;
+         var _this9 = this;
 
          this.setState({
             notconfirm: false,
@@ -61838,12 +61919,12 @@ var UserLogin = function (_Component) {
                            var token = response.data.success.token;
                            var cookie = new __WEBPACK_IMPORTED_MODULE_4_universal_cookie___default.a();
                            cookie.set('user_token', token, { path: '/' });
-                           _this8.setState({
+                           _this9.setState({
                               loginspinner: false,
                               redirect: true
                            });
                         } else {
-                           _this8.setState({
+                           _this9.setState({
                               loginspinner: false,
                               unauthorized: false,
                               notconfirm: true
@@ -61853,9 +61934,8 @@ var UserLogin = function (_Component) {
                   }).catch(function (error) {
                      var status = error.response.status;
 
-                     console.log(error.response);
                      if (status == 402) {
-                        _this8.setState({
+                        _this9.setState({
                            unauthorized: true,
                            loginspinner: false,
                            notconfirm: false
@@ -68130,7 +68210,7 @@ var SingleBlog = function (_Component) {
 
 						headers: { Authorization: token }
 					}).then(function (response) {
-						console.log(response.data);
+
 						if (response.data == 'message saved') {
 							_this5.setState({
 								message: '',
@@ -68185,14 +68265,22 @@ var SingleBlog = function (_Component) {
 				}, {
 					headers: { Authorization: header }
 				}).then(function (response) {
+					if (response.status == 202) {
 
-					if (response.data == 'not login') {
 						_this6.setState({
 							Failmessage: 'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
 							displayError: 'block',
 							hasError: true
 						});
-					} else if (response.data == 'voted before') {
+					} else if (response.status == 203) {
+
+						_this6.setState({
+							Failmessage: 'نمی توانید به رای خود نظر دهی کنید.',
+							displayError: 'block',
+							hasError: true
+						});
+					} else if (response.status == 201) {
+
 						_this6.setState({
 							Failmessage: 'فقط یک بار می توانید رای دهید.',
 							displayError: 'block',
@@ -68207,7 +68295,7 @@ var SingleBlog = function (_Component) {
 					}
 				}).catch(function (error) {
 					_this6.setState({
-						Failmessage: 'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+						Failmessage: 'مشکلی در نظر دهی به وجود آمده.',
 						displayError: 'block',
 						hasError: true
 					});
@@ -68226,7 +68314,6 @@ var SingleBlog = function (_Component) {
 			var _this7 = this;
 
 			var token = this.state.token;
-
 			if (token != undefined) {
 				var header = 'Bearer ' + token;
 				__WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/comment/dislikes', {
@@ -68234,13 +68321,21 @@ var SingleBlog = function (_Component) {
 				}, {
 					headers: { Authorization: header }
 				}).then(function (response) {
-					if (response.data == 'not login') {
+					if (response.status == 202) {
 						_this7.setState({
 							Failmessage: 'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
 							displayError: 'block',
 							hasError: true
 						});
-					} else if (response.data == 'voted before') {
+					} else if (response.status == 203) {
+
+						_this7.setState({
+							Failmessage: 'نمی توانید به رای خود نظر دهی کنید.',
+							displayError: 'block',
+							hasError: true
+						});
+					} else if (response.status == 201) {
+
 						_this7.setState({
 							Failmessage: 'فقط یک بار می توانید رای دهید.',
 							displayError: 'block',
@@ -68255,7 +68350,7 @@ var SingleBlog = function (_Component) {
 					}
 				}).catch(function (error) {
 					_this7.setState({
-						Failmessage: 'برای نظر دهی ابتدا باید در حساب کاربری خود وارد شوید.',
+						Failmessage: 'مشکلی در نظر دهی به وجود آمده.',
 						displayError: 'block',
 						hasError: true
 					});
@@ -68891,7 +68986,7 @@ var FailMessage = function (_Component) {
 				{ className: 'alert alert-danger', style: { display: this.state.display } },
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'div',
-					{ className: 'container-fluid' },
+					{ className: 'container-fluid rtl' },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',
 						{ className: 'alert-icon' },
@@ -69066,267 +69161,268 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var UserDashboard = function (_Component) {
-	_inherits(UserDashboard, _Component);
+		_inherits(UserDashboard, _Component);
 
-	function UserDashboard(props) {
-		_classCallCheck(this, UserDashboard);
+		function UserDashboard(props) {
+				_classCallCheck(this, UserDashboard);
 
-		var _this = _possibleConstructorReturn(this, (UserDashboard.__proto__ || Object.getPrototypeOf(UserDashboard)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (UserDashboard.__proto__ || Object.getPrototypeOf(UserDashboard)).call(this, props));
 
-		_this.state = {
-			username: '',
-			useremail: '',
-			redirect: false,
-			comments: []
-		};
-		return _this;
-	}
-
-	_createClass(UserDashboard, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			var _this2 = this;
-
-			var cookie = new __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default.a();
-			var token = 'Bearer ' + cookie.get('user_token');
-
-			__WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/get_userprofile', null, {
-				headers: { Authorization: token }
-			}).then(function (response) {
-				var _response$data = response.data,
-				    user = _response$data.user,
-				    comments = _response$data.comments;
-
-				_this2.setState({
-					username: user.name,
-					useremail: user.email,
-					comments: comments
-				});
-			}).catch(function (error) {
-				console.log(error);
-			});
+				_this.state = {
+						username: '',
+						useremail: '',
+						redirect: false,
+						comments: []
+				};
+				return _this;
 		}
-	}, {
-		key: '_logOut',
-		value: function _logOut() {
-			var cookie = new __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default.a();
-			cookie.remove('user_token');
-			this.setState({
-				redirect: true
-			});
-		}
-	}, {
-		key: '_showComments',
-		value: function _showComments(item, index) {
-			var comment = item[0];
-			var post = item[1];
-			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'div',
-				{ className: 'col-md-12 mb-10', key: index },
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'div',
-					{ key: index, className: 'card' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'div',
-						{ className: 'col-md-12 rtl text-right' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'h5',
-							null,
-							'\u062F\u0631 \u0645\u0648\u0631\u062F :',
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Link */],
-								{ to: '/blog/' + post.id },
-								post.title
-							),
-							' '
-						),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'p',
-							null,
-							comment.comment
-						)
-					)
-				)
-			);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this3 = this;
 
-			var _state = this.state,
-			    useremail = _state.useremail,
-			    username = _state.username;
+		_createClass(UserDashboard, [{
+				key: 'componentWillMount',
+				value: function componentWillMount() {
+						var _this2 = this;
 
-			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'div',
-				null,
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__partials_Header__["a" /* default */], null),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'div',
-					{ className: 'header header-filter' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'div',
-						{ className: 'container' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'div',
-							{ className: 'row' },
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						var cookie = new __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default.a();
+						var token = 'Bearer ' + cookie.get('user_token');
+
+						__WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/get_userprofile', null, {
+								headers: { Authorization: token }
+						}).then(function (response) {
+								var _response$data = response.data,
+								    user = _response$data.user,
+								    comments = _response$data.comments;
+
+								_this2.setState({
+										username: user.name,
+										useremail: user.email,
+										comments: comments
+								});
+						}).catch(function (error) {
+								console.log(error);
+						});
+				}
+		}, {
+				key: '_logOut',
+				value: function _logOut() {
+						console.log('called');
+						var cookie = new __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default.a();
+						cookie.remove('user_token');
+						this.setState({
+								redirect: true
+						});
+				}
+		}, {
+				key: '_showComments',
+				value: function _showComments(item, index) {
+						var comment = item[0];
+						var post = item[1];
+						return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 								'div',
-								{ className: 'col-md-8 col-md-offset-2' },
+								{ className: 'col-md-12 mb-10', key: index },
 								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									'div',
-									{ className: 'brand' },
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										'h1',
-										{ className: 'title white' },
-										'\u0648\u0628\u06CC \u062A\u06A9'
-									),
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 										'div',
-										{ className: 'separator separator-danger' },
-										'\u273B'
-									),
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										'h3',
-										{ className: 'text-center' },
-										'\u0645\u0627 \u0641\u0642\u0637 \u06CC\u06A9 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0637\u0631\u0627\u062D\u06CC \u0646\u0645\u06CC\u06A9\u0646\u06CC\u0645\u060C\u0645\u0627 \u0622\u0646\u0686\u0647 \u062F\u0631 \u0630\u0647\u0646 \u0648\u0631\u0648\u06CC\u0627\u06CC \u0634\u0645\u0627\u0633\u062A \u0628\u0647 \u0648\u0627\u0642\u0639\u06CC\u062A \u062A\u0628\u062F\u06CC\u0644 \u0645\u06CC\u06A9\u0646\u06CC\u0645'
-									)
-								)
-							)
-						)
-					)
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'div',
-					{ className: 'main main-raised' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'nav',
-						{ className: 'navbar navbar-default' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'div',
-							{ className: 'container-fluid' },
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'collapse navbar-collapse menu', id: 'example-navbar' })
-						)
-					),
-					this.state.redirect === true ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' }) : null,
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'div',
-						{ className: 'container' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'div',
-							{ className: 'row' },
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'div',
-								{ className: 'col-md-8 col-md-offset-2' },
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									'div',
-									{ className: 'panel panel-default' },
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										'div',
-										{ className: 'panel-heading rtl title' },
+										{ key: index, className: 'card' },
 										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-											'div',
-											{ className: 'row' },
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												'button',
-												{ className: 'btn btn-info btn-fab btn-fab-mini btn-round mr-10' },
-												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-													'i',
-													{ className: 'material-icons' },
-													'settings'
-												)
-											),
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												'button',
-												{ className: 'btn btn-success btn-fab btn-fab-mini btn-round mrl-10' },
-												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-													'i',
-													{ className: 'material-icons' },
-													'forum'
-												)
-											),
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												'button',
-												{ className: 'btn btn-warning btn-fab btn-fab-mini btn-round' },
-												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-													'i',
-													{ className: 'material-icons' },
-													'favorite_border'
-												)
-											),
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												'button',
-												{ className: 'btn btn-primary pull-left mrl-10', onClick: function onClick() {
-														return _this3._logOut();
-													} },
-												'\u062E\u0631\u0648\u062C'
-											)
-										)
-									),
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										'div',
-										{ className: 'panel-body' },
-										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-											'div',
-											{ className: 'col-md-12 rtl text-right' },
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '../images/theme/avatar.jpg', alt: 'Circle Image', className: 'pull-left img-rounded img-responsive img-raised', style: { height: '85px', width: '85px' } }),
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												'label',
-												null,
-												' \u0646\u0627\u0645 \u06A9\u0627\u0631\u0628\u0631\u06CC: '
-											),
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												'h5',
-												null,
-												username
-											)
-										),
-										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-											'div',
-											{ className: 'col-md-12 rtl text-right' },
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												'label',
-												null,
-												' \u0622\u062F\u0631\u0633 \u0627\u0644\u06A9\u062A\u0631\u0648\u0646\u06CC\u06A9\u06CC: '
-											),
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												'h5',
-												null,
-												useremail
-											)
-										),
-										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-12' }),
-										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-											'div',
-											{ className: 'row' },
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												'div',
-												{ className: 'col-md-12' },
+												{ className: 'col-md-12 rtl text-right' },
 												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-													'label',
-													{ className: 'pull-right' },
-													__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 														'h5',
-														{ className: 'col-md-12 rtl' },
-														'\u0646\u0638\u0631\u0627\u062A \u06A9\u0627\u0631\u0628\u0631'
-													)
+														null,
+														'\u062F\u0631 \u0645\u0648\u0631\u062F :',
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Link */],
+																{ to: '/blog/' + post.id },
+																post.title
+														),
+														' '
+												),
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														'p',
+														null,
+														comment.comment
 												)
-											),
-											this.state.comments.map(this._showComments.bind(this))
 										)
-									)
 								)
-							)
-						)
-					)
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__partials_Footer__["a" /* default */], null)
-			);
-		}
-	}]);
+						);
+				}
+		}, {
+				key: 'render',
+				value: function render() {
+						var _this3 = this;
 
-	return UserDashboard;
+						var _state = this.state,
+						    useremail = _state.useremail,
+						    username = _state.username;
+
+						return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'div',
+								null,
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__partials_Header__["a" /* default */], null),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'div',
+										{ className: 'header header-filter' },
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'div',
+												{ className: 'container' },
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														'div',
+														{ className: 'row' },
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																'div',
+																{ className: 'col-md-8 col-md-offset-2' },
+																__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																		'div',
+																		{ className: 'brand' },
+																		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																				'h1',
+																				{ className: 'title white' },
+																				'\u0648\u0628\u06CC \u062A\u06A9'
+																		),
+																		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																				'div',
+																				{ className: 'separator separator-danger' },
+																				'\u273B'
+																		),
+																		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																				'h3',
+																				{ className: 'text-center' },
+																				'\u0645\u0627 \u0641\u0642\u0637 \u06CC\u06A9 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0637\u0631\u0627\u062D\u06CC \u0646\u0645\u06CC\u06A9\u0646\u06CC\u0645\u060C\u0645\u0627 \u0622\u0646\u0686\u0647 \u062F\u0631 \u0630\u0647\u0646 \u0648\u0631\u0648\u06CC\u0627\u06CC \u0634\u0645\u0627\u0633\u062A \u0628\u0647 \u0648\u0627\u0642\u0639\u06CC\u062A \u062A\u0628\u062F\u06CC\u0644 \u0645\u06CC\u06A9\u0646\u06CC\u0645'
+																		)
+																)
+														)
+												)
+										)
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'div',
+										{ className: 'main main-raised' },
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'nav',
+												{ className: 'navbar navbar-default' },
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														'div',
+														{ className: 'container-fluid' },
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'collapse navbar-collapse menu', id: 'example-navbar' })
+												)
+										),
+										this.state.redirect === true ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' }) : null,
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'div',
+												{ className: 'container' },
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														'div',
+														{ className: 'row' },
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																'div',
+																{ className: 'col-md-8 col-md-offset-2' },
+																__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																		'div',
+																		{ className: 'panel panel-default' },
+																		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																				'div',
+																				{ className: 'panel-heading rtl title' },
+																				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																						'div',
+																						{ className: 'row' },
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'button',
+																								{ className: 'btn btn-info btn-fab btn-fab-mini btn-round mr-10' },
+																								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																										'i',
+																										{ className: 'material-icons' },
+																										'settings'
+																								)
+																						),
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'button',
+																								{ className: 'btn btn-success btn-fab btn-fab-mini btn-round mrl-10' },
+																								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																										'i',
+																										{ className: 'material-icons' },
+																										'forum'
+																								)
+																						),
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'button',
+																								{ className: 'btn btn-warning btn-fab btn-fab-mini btn-round' },
+																								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																										'i',
+																										{ className: 'material-icons' },
+																										'favorite_border'
+																								)
+																						),
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'button',
+																								{ className: 'btn btn-primary pull-left mrl-10', onClick: function onClick() {
+																												return _this3._logOut();
+																										} },
+																								'\u062E\u0631\u0648\u062C'
+																						)
+																				)
+																		),
+																		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																				'div',
+																				{ className: 'panel-body' },
+																				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																						'div',
+																						{ className: 'col-md-12 rtl text-right' },
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '../images/theme/avatar.jpg', alt: 'Circle Image', className: 'pull-left img-rounded img-responsive img-raised', style: { height: '85px', width: '85px' } }),
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'label',
+																								null,
+																								' \u0646\u0627\u0645 \u06A9\u0627\u0631\u0628\u0631\u06CC: '
+																						),
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'h5',
+																								null,
+																								username
+																						)
+																				),
+																				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																						'div',
+																						{ className: 'col-md-12 rtl text-right' },
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'label',
+																								null,
+																								' \u0622\u062F\u0631\u0633 \u0627\u0644\u06A9\u062A\u0631\u0648\u0646\u06CC\u06A9\u06CC: '
+																						),
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'h5',
+																								null,
+																								useremail
+																						)
+																				),
+																				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-12' }),
+																				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																						'div',
+																						{ className: 'row' },
+																						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																								'div',
+																								{ className: 'col-md-12' },
+																								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																										'label',
+																										{ className: 'pull-right' },
+																										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																												'h5',
+																												{ className: 'col-md-12 rtl' },
+																												'\u0646\u0638\u0631\u0627\u062A \u06A9\u0627\u0631\u0628\u0631'
+																										)
+																								)
+																						),
+																						this.state.comments.map(this._showComments.bind(this))
+																				)
+																		)
+																)
+														)
+												)
+										)
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__partials_Footer__["a" /* default */], null)
+						);
+				}
+		}]);
+
+		return UserDashboard;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (UserDashboard);

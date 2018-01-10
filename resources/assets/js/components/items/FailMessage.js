@@ -27,7 +27,7 @@ export default class FailMessage extends Component{
 
 		return(
 				<div className="alert alert-danger" style={{ display:this.state.display }}>
-	                 <div className="container-fluid">
+	                 <div className="container-fluid rtl">
 	                     <div className="alert-icon">
 	                        <i className="material-icons">error_outline</i>
 	                    </div>

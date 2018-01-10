@@ -35,3 +35,5 @@ Route::group(['middleware'=>'auth:api'],function(){
 Route::post('/search/','SearchController@index')->name('search');
 
 Route::post('/contact',['uses' => 'PagesController@send_message', 'as' => 'contact']);
+
+Route::post('/forgotpassword','API\PassportController@forgotpassword')->name('forgotpassword');
