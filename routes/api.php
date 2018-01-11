@@ -37,3 +37,5 @@ Route::post('/search/','SearchController@index')->name('search');
 Route::post('/contact',['uses' => 'PagesController@send_message', 'as' => 'contact']);
 
 Route::post('/forgotpassword','API\PassportController@forgotpassword')->name('forgotpassword');
+Route::post('/find_user_key','API\PassportController@find_user_key')->name('find_user_key');
+Route::post('/reset_password','API\PassportController@reset_password')->name('reset_password');

@@ -9,6 +9,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 use App\Mail\ForgotPassword;
 use Validator;
 use Cookie;
@@ -110,5 +111,23 @@ class PassportController extends Controller
              } catch (Exception $e) {
                 return $e;
              }
+   }
+   public function find_user_key(Request $request){
+
+          $user = User::where('user_key' , $request->user_key)->first();
+          if ($user != null ) {
+              return response()->json(['user'=>$user ] , 200);
+          }
+          return response()->json(['message'=>'Not Found User'] , 201);
+   }
+   public function reset_password(Request $request){
+            $key =$request->user_key;
+            $password = $request->password;
+            $password = Hash::make($password);
+            $user = User::where('user_key' , $key )->first();
+            $user->password = $password;
+            $user->user_key = $this->generateRandomString();
+            $user->save();
+            return response()->json(['message'=>'User Updated Successfully'] , 200);
    }
 }

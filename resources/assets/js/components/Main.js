@@ -9,6 +9,7 @@ import SingleBlog from './pages/SingleBlog';
 import AboutUs from './pages/AboutUs';
 import UserDashboard from './pages/UserDashboard';
 import ConfirmUser from './pages/ConfirmUser';
+import ResetPassword from './pages/ResetPassword';
 
 
 
@@ -30,6 +31,7 @@ class Main extends Component{
 								     <Route exact path="/about" component={AboutUs} />
 								     <Route exact path="/dashboard" component={UserDashboard} />
 								     <Route exact path="/confirm/:user_key" component={ConfirmUser} />
+								     <Route exact path="/reset_password/:user_key" component={ResetPassword} />
 								    
 		                 
 					  </div>

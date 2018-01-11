@@ -4205,10 +4205,6 @@ h2.title {
 .card-form-horizontal .btn {
     margin: 0;
 }
-@media (max-width: 768px) {
-  .navbar.navbar-transparent {
-    background-color:#9c27b0;
-  }
   .navbar-fixed-top{position:absolute;top:0;}
   .navbar-collapse.in{overflow:visible;}
 
@@ -4221,11 +4217,12 @@ h2.title {
     right: 0;
     position: relative;
 }
-.dropdown-submenu .submenu{display:block !important; display:block;
-    top: 0 !important;
+.dropdown-submenu .submenu{
+    top:40px !important;
     right: 0 !important;
     opacity:1 !important;
-    position: relative !important;}
+    position: absolute !important;
+  }
     .dropdown-menu ul li a{
       display: block;
       padding: 10px 20px;
@@ -4235,5 +4232,16 @@ h2.title {
       color: #333;
       white-space: nowrap;
     }
+}
+@media (max-width: 768px) {
+  .navbar.navbar-transparent {
+    background-color:#9c27b0;
+  }
+}
+@media (min-width:1200px) {
+   .main-raised{
+    max-width:1145px;
+    margin:-50px auto;
+   }
 }
 /*# sourceMappingURL=material-kit.css.map */

@@ -36,14 +36,18 @@ export default class UserDashboard extends Component{
                	console.log(error);
                });
 	}
-   
    _logOut(){
    	  console.log('called');
-      let cookie = new Cookie;
+      let cookie = new Cookie; 
       cookie.remove('user_token');
-      this.setState({
-      	 redirect:true
-      });
+      let token = cookie.get('user_token');
+       if (token === undefined){
+			this.setState({
+							redirect:true
+		    });
+       }else{
+           console.log('erorr',token);
+       }
    }
    _showComments(item , index){
    	    const comment = item[0];
