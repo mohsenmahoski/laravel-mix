@@ -209,12 +209,14 @@ class Contact extends Component {
                                                                                 <label htmlFor="email" className="control-label">ایمیل</label>
                                                                                  <input  value={this.state.email}  onChange={this.handleKeyPress.bind(this)} className="form-control"   name="email" type="email" /><span className="rtl" style={{ color:'#f44336',display: this.state.validEmail=='visibile' ? 'block' : 'none'}}>لطفا ایمیل صحیح وارد کنید!</span><span className="rtl" style={{ color:'#f44336',display: this.state.EmailRequired =='visibile' ? 'block' : 'none'}}>لطفا ایمیل خود را وارد کنید!</span>   
                                                                                 <span className="material-input"></span>
-                                                                           <span className="material-input"></span></div>
+                                                                                <span className="material-input"></span>
+                                                                           </div>
                                                                            <div className="text-right form-group label-floating is-empty">
                                                                                  <label htmlFor="message" className="control-label">متن پیام</label>
                                                                                  <textarea className="form-control" value={this.state.message} onChange={this.handleKeyPress.bind(this)}  name="message" cols="50" rows="10" ></textarea> <span className="rtl" style={{ color:'#f44336',display: this.state.MessageRequired=='visibile' ? 'block' : 'none'}}>لطفا پیام خود را وارد کنید!!</span><span className="rtl" style={{ color:'#f44336',display: this.state.MessageLength=='visibile' ? 'block' : 'none'}}>لطفا پیام طولانی تری وارد کنید!!</span>   
                                                                                 <span className="material-input"></span>
-                                                                           <span className="material-input"></span></div>
+                                                                                <span className="material-input"></span>
+                                                                           </div>
                                                                            <div className="row">
                                                                              <div className="col-md-6 pt-10 text-center">
                                                                                 <div className="checkbox">

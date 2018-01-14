@@ -3,24 +3,36 @@ import  NavItem  from '../items/NavItem';
 import Menu from '../items/Menu';
 import axios from 'axios';
 import UserLogin from '../pages/UserLogin';
+import AuthorLogin from '../pages/AuthorLogin';
 import Cookie from 'universal-cookie';
 
 class Header extends Component{
     constructor(props){
       super(props);
       this.state={
-        display:'none',
+        displayuser:'none',
+        displyauthor:'none',
         username:'',
         useremail:'',
       }
     }
     _userlogin(){
-      if (this.state.display != 'block' ){
+      if (this.state.displayuser != 'block' ){
         this.setState({
-          display:'block'
+          displayuser:'block',
+          displyauthor:'none',
         });
       }
        
+    }
+    _authorlogin(){
+        if (this.state.displyauthor != 'block' ){
+        this.setState({
+          displayuser:'none',
+          displyauthor:'block',
+        });
+      }
+      console.log('called');
     }
     componentWillMount(){
          let cookie = new Cookie;
@@ -46,7 +58,8 @@ class Header extends Component{
     render() {
         return (
     <nav className="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
-         <UserLogin display={this.state.display}></UserLogin>
+         <UserLogin display={this.state.displayuser}></UserLogin>
+         <AuthorLogin display={this.state.displyauthor} ></AuthorLogin>
          <div className="container">
             <div className="navbar-header">
                 <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -175,7 +188,7 @@ class Header extends Component{
                     <NavItem className="nav-link" dataOriginalTitle="با ما در تماس باشید" to="/contact">
                        تماس با ما<i className="material-icons">perm_phone_msg</i>
                     </NavItem>
-                    {this.state.username == '' ? <Menu title="ورود" data={[{title:'کاربر' , to:'#' , onClicking:()=>{this._userlogin()}},{title:'فروشنده' , to:'/seller/login'},{title:'نویسنده' , to:'/author/login'}]} /> : <NavItem className="nav-link" dataOriginalTitle="با ما در تماس باشید" to="/dashboard">{this.state.username}<i className="material-icons">perm_phone_msg</i></NavItem>}
+                    {this.state.username == '' ? <Menu title="ورود" data={[{title:'کاربر' , to:'#' , onClicking:()=>{this._userlogin()}},{title:'نویسنده' , to:'#' , onClicking:()=>{this._authorlogin()}}]} /> : <NavItem className="nav-link" dataOriginalTitle="با ما در تماس باشید" to="/dashboard">{this.state.username}<i className="material-icons">perm_phone_msg</i></NavItem>}
                 </ul>
                 <div className="float-block">
                                                       

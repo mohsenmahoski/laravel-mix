@@ -39,3 +39,14 @@ Route::post('/contact',['uses' => 'PagesController@send_message', 'as' => 'conta
 Route::post('/forgotpassword','API\PassportController@forgotpassword')->name('forgotpassword');
 Route::post('/find_user_key','API\PassportController@find_user_key')->name('find_user_key');
 Route::post('/reset_password','API\PassportController@reset_password')->name('reset_password');
+
+
+//author
+Route::post('/author/login','API\AuthorPassport@login')->name('api.author.login');
+Route::group(['middleware'=>'auth:author-api' , 'prefix'=>'/author'],function(){
+	Route::post('/get_details','API\AuthorPassport@get_details')->name('api.authordetails');
+	Route::post('/get_authorprofile','API\AuthorPassport@get_authorprofile')->name('api.authordetails');
+});
+
+
+Route::post('/upload','API\PassportController@imageupload')->name('api.imageupload');

@@ -18,6 +18,7 @@ class AuthorTable extends Migration
             $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('image')->default('../images/theme/avatar.jpg');
             $table->boolean('active')->default(false);
             $table->rememberToken();
             $table->timestamps();

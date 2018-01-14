@@ -2,28 +2,23 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Seller;
-use App\User;
-use App\Post;
-use Image;
 use Auth;
+use Cookie;
+use Post;
+use Validator;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
-use App\Mail\ForgotPassword;
-use Validator;
-use Cookie;
+use App\Http\Controllers\Controller;
 
-class PassportController extends Controller
+class AuthorPassport extends Controller
 {
-    
-    public function login(Request $request){
-         if (Auth::attempt(['email' => $request->email , 'password' => $request->password])) {
-                     $user = Auth::user();
+        public function login(Request $request){
+         if (Auth::guard('author')->attempt(['email' => $request->email , 'password' => $request->password])) {
+                     $user = Auth::guard('author')->user();
                      $success['token'] = $user->createToken('Laravel APP')->accessToken;
                      
-                     return response()->json(['success' => $success , 'confirm'=>$user['confirm']],200);       
+                     return response()->json(['success' => $success , 'confirm'=>$user['active']],200);       
          }
          else{
          	return response()->json(['error'=>'Unauthorised'],402);
@@ -63,15 +58,19 @@ class PassportController extends Controller
         $user = Auth::user();
         return $user;   
     }
-      public function get_userprofile(){
-        $user = Auth::user();
-        $usercomments = $user->comments;
-        $comments = [] ;
-        foreach ($usercomments as $comment) {
-          $post = Post::find($comment->post_id);
-          array_push($comments,[$comment , $post]);
+      public function get_authorprofile(){
+        $author = Auth::guard('author-api')->user();
+        $posts = $author->posts;
+        $comments = null;
+        $result = [];
+        foreach ($posts as $post) {
+             $comments = $post->comments;
+             foreach ($comments as $comment) {
+                 $comment['user'] = $comment->user;
+             }
+             array_push($result,[$post , $comments]);
         }
-        return response()->json(['user'=>$user , 'comments'=>$comments]);   
+        return response()->json(['author'=>$author , 'posts' => $result]);
     }
     public function email_check(Request $request){
 
@@ -130,13 +129,5 @@ class PassportController extends Controller
             $user->user_key = $this->generateRandomString();
             $user->save();
             return response()->json(['message'=>'User Updated Successfully'] , 200);
-   }
-   public function imageupload(Request $request){
-            $file = $request->file('file');
-            $imageName = time().'.'.$file->getClientOriginalExtension();
-            $location = public_path('images/'.$imageName);
-            Image::make($file)->resize(736,256)->save($location);
-            
-            return $request->author_id;
    }
 }

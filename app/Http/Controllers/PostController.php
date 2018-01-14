@@ -8,7 +8,7 @@ use Session;
 use App\Category;
 use App\Tag;
 use Purifier;
-use Image;
+use image;
 use Storage;
 use File;
 

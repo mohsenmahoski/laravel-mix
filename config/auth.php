@@ -66,7 +66,7 @@ return [
             'provider' => 'authors',
         ],
          'author-api' => [
-            'driver' => 'session',
+            'driver' => 'passport',
             'provider' => 'authors',
         ],
     ],
