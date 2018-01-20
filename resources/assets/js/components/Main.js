@@ -12,7 +12,7 @@ import ConfirmUser from './pages/ConfirmUser';
 import ResetPassword from './pages/ResetPassword';
 import UserDashboard from './pages/UserDashboard';
 import AuthorDashboard from './pages/AuthorDashboard';
-
+import Test from './items/Test';
 
 
 
@@ -36,6 +36,7 @@ class Main extends Component{
 								     <Route exact path="/author/dashboard" component={AuthorDashboard} />
 								     <Route exact path="/confirm/:user_key" component={ConfirmUser} />
 								     <Route exact path="/reset_password/:user_key" component={ResetPassword} />
+								     <Route exact path="/test" component={Test} />
 								    
 		                 
 					  </div>

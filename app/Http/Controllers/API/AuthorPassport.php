@@ -130,4 +130,12 @@ class AuthorPassport extends Controller
             $user->save();
             return response()->json(['message'=>'User Updated Successfully'] , 200);
    }
+   public function create_post(Request $request){
+            $file = $request->file('file');
+            $imageName = time().'.'.$file->getClientOriginalExtension();
+            $location = public_path('images/'.$imageName);
+            Image::make($file)->resize(736,256)->save($location);
+            
+            return $request;
+   }
 }

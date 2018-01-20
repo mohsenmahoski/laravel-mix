@@ -6,8 +6,8 @@ import { Redirect } from 'react-router-dom';
 import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
 import ImageUploader from 'react-images-upload';
-import CKEditor from "react-ckeditor-component";
 import Select from 'react-select';
+import TinyMCE from 'react-tinymce';
 import 'react-select/dist/react-select.css';
 
 
@@ -36,6 +36,10 @@ export default class AuthorDashboard extends Component{
             catRequired:false,
             tagRequired:false,
             contentRequired:false,
+
+            errors:0,
+            cats:[],
+            tags:[],
 	    }
 	    
 	}
@@ -60,6 +64,7 @@ export default class AuthorDashboard extends Component{
                .catch(error=>{
                	console.log(error);
                });
+       this._get_cateory_tags();
 	}
    _logOut(){
       let cookie = new Cookie; 
@@ -99,70 +104,70 @@ export default class AuthorDashboard extends Component{
                           	 	if(this.state.cat_id != null){
                           	 		if (this.state.tag_value != ''){
                           	 			if (this.state.content != ''){
-                          	 				const{author,file} = this.state;
+                          	 				const{author,file,content,tag_value,cat_id,slug,title} = this.state;
 										    const formData = new FormData();
 										    formData.append('file',file);
 										    formData.append('author_id',author.id);
+										    formData.append('content',content);
+										    let str = JSON.stringify(tag_value);
+										    formData.append('tag_value',str);
+										    formData.append('cat_id',cat_id);
+										    formData.append('slug',slug);
+										    formData.append('title',title);
 
 										    const config = {
 										        headers: {
 										            'content-type': 'multipart/form-data'
 										        }
 										    }
-										    axios.post('/api/upload', formData,config)
+										    axios.post('/api/author_post', formData,config)
 										    .then(response=>{console.log(response.data)})
 										    .catch(error=>{console.log(error)});
                           	 			} else{
                           	 				this.setState({
-								             	contentRequired:true
+								             	contentRequired:true,
+								             	errors:1,
 								             });
                           	 			}
                           	 		}else{
                                         this.setState({
-							             	tagRequired:true
+							             	tagRequired:true,
+							             	errors:1
 							             });
                           	 		}
                           	 	}else{
                                      this.setState({
-						             	catRequired:true
+						             	catRequired:true,
+						             	errors:1
 						             });
                           	 	}
                           }else{
                           	this.setState({
-				             	slugRequired:true
+				             	slugRequired:true,
+				             	errors:1
 				             });
                           }
                 }else{
                      this.setState({
-		             	titleRequired:true
+		             	titleRequired:true,
+		             	errors:1
 		             });
                 }
 		  	}else{
 	             this.setState({
-	             	fileRequired:true
+	             	fileRequired:true,
+	             	errors:1
 	             });
 		  	}
   }
    
     
-    _onChange(evt){
-	      console.log("onChange fired with event info: ", evt);
-	      var newContent = evt.editor.getData();
-	      this.setState({
-	        content: newContent,
-	        contentRequired:false
-	      });
-    }
-    
-    _onBlur(evt){
-	      console.log("onBlur event called with event info: ");
-	      
-    }
-    
-    _afterPaste(evt){
-		      console.log("afterPaste event called with event info: ");
-		     
-    }
+  handleEditorChange(e) {
+    const content = e.target.getContent();
+    this.setState({
+    	content
+    });
+  }
    _string_to_slug (str) {
 		    str = str.replace(/^\s+|\s+$/g, ''); // trim
 		    str = str.toLowerCase();
@@ -283,6 +288,20 @@ export default class AuthorDashboard extends Component{
              </div>
    	   	);  
     }
+    _get_cateory_tags(){
+    	axios.get('/api/author_post')
+    	.then(response=>{
+    		if (response.status==200){
+    			const {cats,tags} = response.data;
+    			this.setState({
+                     cats,
+                     tags:tags.data
+    			},()=>console.log(this.state.tags));
+    		}
+    	}).catch(error=>{
+    		console.log(response.error);
+    	});
+    }
 	_createpost(){
    	  return(
 		        <div className="panel-body">
@@ -315,10 +334,7 @@ export default class AuthorDashboard extends Component{
                                   <label htmlFor="category_id" className="control-label">دسته بندی مطلب</label>
                                   <select name="category_id" className="form-control" onChange={(evt)=>this._select(evt)}>
                                         <option value="4"></option>
-						                <option value="4">دمو</option>
-						                <option value="5">sports</option>
-						                <option value="6">new</option>
-						                <option value="7">خبرها</option>
+						               {this.state.cats !== [] ? this.state.cats.map((item,index)=><option key={index} value={item.id}>{item.name}</option>):null}
 						          </select>
 						          <span className="error rtl" style={{ display:this.state.catRequired == true ? 'block' :'none' }}> دسته بندی مطلب را مشخص کنید . </span>
                            </div>
@@ -330,27 +346,24 @@ export default class AuthorDashboard extends Component{
 										 value={this.state.tag_value}
 										 onChange={this.handleSelectChange.bind(this)}
 										 multi
-										 options={[
-													{ value: 'one', label: 'One' },
-													{ value: 'two', label: 'Two'},
-												 ]}
+										 options={this.state.tags==[] ? [] : this.state.tags}
 									/>
 									<span className="error rtl" style={{ display:this.state.tagRequired == true ? 'block' :'none' }}> تگ های مربوط به مطلب را تایین کنید . </span>	         
                            </div>
 					        <div className="col-md-12">
-                               <CKEditor 
-					              activeClass="p10" 
-					              content={this.state.content} 
-					              events={{
-					                "blur": this._onBlur.bind(this),
-					                "afterPaste": this._afterPaste.bind(this),
-					                "change": this._onChange.bind(this)
-					              }}
-			             	    />
+                              <TinyMCE
+						        content="<p>This is the initial content of the editor</p>"
+						        config={{
+						          plugins: 'autolink link image lists print preview',
+						          toolbar: 'undo redo | bold italic | alignleft aligncenter alignright'
+						        }}
+						        onChange={this.handleEditorChange.bind(this)}
+						      />
 					        </div>
 					        <span className="error rtl" style={{ display:this.state.contentRequired == true ? 'block' :'none' }}> متن مربوطه را وارد نکرده اید . </span>
 			                <div className="col-md-12">
                                   <button className="btn btn-primary" onClick={()=>{this._submitInputs()}}>ارسال</button>
+                                  <span className="error rtl" style={{ display:this.state.errors===0 ? 'none' : 'block'  }}>اطلاعات ورودی به درستی وارد نشده است.</span>
 			                </div>
 		             </div>
 		        </div>
