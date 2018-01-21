@@ -12,7 +12,7 @@ export default class CardBlog extends Component{
              <div className="col-md-4 mb-10">
                <div className="card">
                            <Link to={'/blog/'+id} >
-                                <div className="image" style={{ backgroundImage: `url( ${image} )` ,  backgroundPosition:'center center' , backgroundSize:'cover' }}>
+                                <div className="image" style={{ backgroundImage: `url( images/posts/${image} )` ,  backgroundPosition:'center center' , backgroundSize:'cover' }}>
                                                
                                                 <div className="filter filter-white">
                                                     <button type="button" className="blogs btn btn-sm btn-primary btn-round btn-fill">

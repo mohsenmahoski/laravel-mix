@@ -40,7 +40,7 @@ export default class UserDashboard extends Component{
    	  console.log('called');
       let cookie = new Cookie; 
       cookie.remove('user_token');
-      let token = cookie.get('user_token');
+      let token = cookie.get('user_token',{ path: '/' });
        if (token === undefined){
 			this.setState({
 							redirect:true

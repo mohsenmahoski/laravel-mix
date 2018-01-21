@@ -506,7 +506,7 @@ export default class AuthorLogin extends Component{
                                            if (response.data.confirm){
                                               let token = response.data.success.token;
                                               let cookie = new Cookie;
-                                              cookie.set('author_token' , token , {path : '/'});
+                                              cookie.set('authortoken' , token , {path : '/'});
                                               this.setState({
                                                  loginspinner:false,
                                                  redirect:true,

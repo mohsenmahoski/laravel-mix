@@ -9,6 +9,7 @@ import ImageUploader from 'react-images-upload';
 import Select from 'react-select';
 import TinyMCE from 'react-tinymce';
 import 'react-select/dist/react-select.css';
+import { DotLoader } from 'react-spinners';
 
 
 export default class AuthorDashboard extends Component{
@@ -23,11 +24,12 @@ export default class AuthorDashboard extends Component{
             author:null,
             posts:[],
             file:null,
-            content: '',
+            content: '<p style="text-align: right;direction:rtl">متن...</p>',
             tag_value:'',
-            cat_id:null,
+            cat_id:0,
             slug:'',
             title:'',
+            spinner:false,
 
 
             fileRequired:false,
@@ -40,42 +42,50 @@ export default class AuthorDashboard extends Component{
             errors:0,
             cats:[],
             tags:[],
+
+            success:false,
 	    }
 	    
 	}
 	
 	componentWillMount(){
-	   let cookie = new Cookie;
-       let token = 'Bearer '+cookie.get('author_token');
+	     let cookie = new Cookie;
+       if (cookie.get('authortoken') === undefined ){
+            this.setState({
+               redirect:true
+            });
+       }else{
+         let token = 'Bearer '+cookie.get('authortoken');
 
-       axios.post('/api/author/get_authorprofile',null,{
-      		headers:{Authorization:token}
-      	})
-             .then(response=>{
-             	
-             	const {author , posts} = response.data;
-             	 this.setState({
-             	 	username:author.name,
-             	 	useremail:author.email,
-             	 	author,
-             	 	posts
-             	 });
-             }) 
-               .catch(error=>{
-               	console.log(error);
-               });
-       this._get_cateory_tags();
+         axios.post('/api/author/get_authorprofile',null,{
+            headers:{Authorization:token}
+          })
+               .then(response=>{
+                
+                const {author , posts} = response.data;
+                 this.setState({
+                  username:author.name,
+                  useremail:author.email,
+                  author,
+                  posts
+                 });
+               }) 
+                 .catch(error=>{
+                  console.log(error);
+                 });
+         this._get_cateory_tags();
+       }
 	}
    _logOut(){
       let cookie = new Cookie; 
-      cookie.remove('author_token');
-      let token = cookie.get('author_token');
+      cookie.remove('authortoken',{ path: '/' });
+      let token = cookie.get('authortoken');
        if (token === undefined){
-			this.setState({
-							redirect:true
-		    });
+        this.setState({
+              redirect:true
+        });
        }else{
-           console.log('erorr');
+           console.log('erorr',token);
        }
    }
    _posts(){
@@ -98,60 +108,78 @@ export default class AuthorDashboard extends Component{
    }
   _submitInputs(){
     
-		  	if (this.state.file != null){
-                if (this.state.title != '' ){
-                          if (this.state.slug != ''){
-                          	 	if(this.state.cat_id != null){
-                          	 		if (this.state.tag_value != ''){
-                          	 			if (this.state.content != ''){
-                          	 				const{author,file,content,tag_value,cat_id,slug,title} = this.state;
-										    const formData = new FormData();
-										    formData.append('file',file);
-										    formData.append('author_id',author.id);
-										    formData.append('content',content);
-										    let str = JSON.stringify(tag_value);
-										    formData.append('tag_value',str);
-										    formData.append('cat_id',cat_id);
-										    formData.append('slug',slug);
-										    formData.append('title',title);
+		  	if (this.state.file !== null){
+                if (this.state.title !== '' ){
+                          if (this.state.slug !== ''){
+                          	 	if(this.state.cat_id !== null){
+                          	 		if (this.state.tag_value !== ''){
+                          	 			if (this.state.content !== '<p style="text-align: right;direction:rtl">متن...</p>'){
+                                        this.setState({
+                                          spinner:true
+                                        });
+                              	 				const{author,file,content,tag_value,cat_id,slug,title} = this.state;
+                										    const formData = new FormData();
+                										    formData.append('file',file);
+                										    formData.append('author_id',author.id);
+                										    formData.append('content',content);
+                										    let str = JSON.stringify(tag_value);
+                										    formData.append('tag_value',str);
+                										    formData.append('cat_id',cat_id);
+                										    formData.append('slug',slug);
+                										    formData.append('title',title);
 
-										    const config = {
-										        headers: {
-										            'content-type': 'multipart/form-data'
-										        }
-										    }
-										    axios.post('/api/author_post', formData,config)
-										    .then(response=>{console.log(response.data)})
-										    .catch(error=>{console.log(error)});
-                          	 			} else{
-                          	 				this.setState({
-								             	contentRequired:true,
-								             	errors:1,
-								             });
+                										    const config = {
+                										        headers: {
+                										            'content-type': 'multipart/form-data'
+                										        }
+                										    }
+                										    axios.post('/api/author_post', formData,config)
+                										    .then(response=>{
+                                          if (response.status ==200){
+                                            this.setState({
+                                              file:null,
+                                              title:'',
+                                              slug:'',
+                                              cat_id:0,
+                                              tag_value:'',
+                                              content:'<p style="text-align: right;direction:rtl">متن...</p>',
+                                              spinner:false,
+                                              success:true,
+
+                                            });
+
+                                          }
+                                        })
+                										    .catch(error=>{console.log(error)});
+                                  }else{
+                                      	 				this.setState({
+                    								             	contentRequired:true,
+                    								             	errors:1,
+                    								             });
                           	 			}
                           	 		}else{
                                         this.setState({
-							             	tagRequired:true,
-							             	errors:1
-							             });
+              							             	tagRequired:true,
+              							             	errors:1
+              							             });
                           	 		}
                           	 	}else{
                                      this.setState({
-						             	catRequired:true,
-						             	errors:1
-						             });
+            						             	catRequired:true,
+            						             	errors:1
+            						             });
                           	 	}
                           }else{
                           	this.setState({
-				             	slugRequired:true,
-				             	errors:1
-				             });
+        				             	slugRequired:true,
+        				             	errors:1
+        				             });
                           }
                 }else{
                      this.setState({
-		             	titleRequired:true,
-		             	errors:1
-		             });
+    		             	titleRequired:true,
+    		             	errors:1
+    		             });
                 }
 		  	}else{
 	             this.setState({
@@ -246,7 +274,7 @@ export default class AuthorDashboard extends Component{
 				                    <div className="col-md-4 mb-10">
 									        <div className="card" style={{borderRadius:'5px'}}>
 									          
-									                <div className="image" style={{borderRadius:'5px', backgroundImage: `url(${item[0].image})`, backgroundPosition: 'center center' , backgroundSize: 'cover'}}>
+									                <div className="image" style={{borderRadius:'5px', backgroundImage: `url(/images/posts/${item[0].image})`, backgroundPosition: 'center center' , backgroundSize: 'cover'}}>
 										                 <div className="filter filter-white">
 										                    <button type="button" className="blogs btn btn-sm btn-primary btn-round btn-fill">
 										                         <i className="material-icons">keyboard_backspace</i> ادامه مطلب
@@ -270,20 +298,20 @@ export default class AuthorDashboard extends Component{
    	   const {useremail , username } = this.state;
    	   return (
              <div>
-             	   {this.state.redirect === true ? <Redirect to="/"/> : null}
-				  <div className="panel-body">
-					  <div className="col-md-12 rtl text-right">
-								<img src="../images/theme/avatar.jpg" alt="Circle Image" className="pull-left img-rounded img-responsive img-raised" style={{ height:'85px',width:'85px' }} />
-								<label> نام کاربری: </label>
-										<h5>{username}</h5>
-					  </div>
-					  <div className="col-md-12 rtl text-right">
-							<label> آدرس الکترونیکی: </label>
-							<h5>{useremail}</h5>
-					  </div>
-					  <div className="col-md-12">
-					  </div>
-				  </div>
+             	  
+      				  <div className="panel-body">
+      					  <div className="col-md-12 rtl text-right">
+      								<img src="../images/theme/avatar.jpg" alt="Circle Image" className="pull-left img-rounded img-responsive img-raised" style={{ height:'85px',width:'85px' }} />
+      								<label> نام کاربری: </label>
+      										<h5>{username}</h5>
+      					  </div>
+      					  <div className="col-md-12 rtl text-right">
+      							<label> آدرس الکترونیکی: </label>
+      							<h5>{useremail}</h5>
+      					  </div>
+      					  <div className="col-md-12">
+      					  </div>
+      				  </div>
 																             
              </div>
    	   	);  
@@ -296,7 +324,7 @@ export default class AuthorDashboard extends Component{
     			this.setState({
                      cats,
                      tags:tags.data
-    			},()=>console.log(this.state.tags));
+    			});
     		}
     	}).catch(error=>{
     		console.log(response.error);
@@ -305,70 +333,87 @@ export default class AuthorDashboard extends Component{
 	_createpost(){
    	  return(
 		        <div className="panel-body">
+              {this.state.redirect === true ? <Redirect to="/"/> : null}
 		             <div className="col-md-12">
 				           <div className="col-md-12">
                                     <div className="form-group drop-zone mb-10">
-				             		   <input style={{ cursor: 'pointer' }} className="form-control" type="file" onChange={(e)=>this.setState({file:e.target.files[0],fileRequired:false})} />
-				             		   <span className="col-md-12 text-center">{this.state.file != null ? this.state.file.name: null}</span>
-				                  </div>
-				                   <span className="error rtl" style={{ display:this.state.fileRequired == true ? 'block' :'none' }}>باید تصویری برای مطلب انتخاب کنید . </span>
+          				             		   <input style={{ cursor: 'pointer' }} className="form-control" type="file" onChange={(e)=>this.setState({file:e.target.files[0],fileRequired:false})} />
+          				             		   <span className="col-md-12 text-center">{this.state.file != null ? this.state.file.name: null}</span>
+          				                  </div>
+				                            <span className="error rtl" style={{ display:this.state.fileRequired == true ? 'block' :'none' }}>باید تصویری برای مطلب انتخاب کنید . </span>
 				           </div>
 					       <div className="col-md-12">
                                  <div className="text-right form-group label-floating is-empty">
 	                                 <label htmlFor="title" className="control-label">عنوان مطلب</label>
 	                                 <input   className="form-control"   name="title" type="text" onChange={(evt)=>this._handleKeyPress(evt)} value={this.state.title}  onBlur={(evt)=>this._handleOnBlur(evt)}/>
-		                             <span className="error rtl" style={{ display:this.state.titleRequired == true ? 'block' :'none' }}>باید عنوانی برای مطلب انتخاب کنید . </span>
-		                             <span className="material-input"></span>
+  		                             <span className="error rtl" style={{ display:this.state.titleRequired == true ? 'block' :'none' }}>باید عنوانی برای مطلب انتخاب کنید . </span>
+  		                             <span className="material-input"></span>
                                  </div>
 					       </div>
                            <div className="col-md-12">
                                  <div className="text-right form-group label-floating is-empty">
-                                 <label htmlFor="slug" className="control-label">آدرس مسیر</label>
-                                 <input   className="form-control"   name="slug" type="text" onChange={(evt)=>this._handleKeyPress(evt)} onBlur={(evt)=>this._handleOnBlur(evt)} value={this.state.slug} />
-	                             <span className="error rtl" style={{ display:this.state.slugRequired == true ? 'block' :'none' }}> باید مسیر نمایش پست را تایین کنید . </span>
-	                             <span className="material-input"></span>
-                           </div>
+                                       <label htmlFor="slug" className="control-label">آدرس مسیر</label>
+                                       <input   className="form-control"   name="slug" type="text" onChange={(evt)=>this._handleKeyPress(evt)} onBlur={(evt)=>this._handleOnBlur(evt)} value={this.state.slug} />
+        	                             <span className="error rtl" style={{ display:this.state.slugRequired == true ? 'block' :'none' }}> باید مسیر نمایش پست را تایین کنید . </span>
+        	                             <span className="material-input"></span>
+                                 </div>
                            </div>
                            <div className="col-md-12">
-                                  <div className="text-right form-group label-floating is-empty">
-                                  <label htmlFor="category_id" className="control-label">دسته بندی مطلب</label>
-                                  <select name="category_id" className="form-control" onChange={(evt)=>this._select(evt)}>
-                                        <option value="4"></option>
-						               {this.state.cats !== [] ? this.state.cats.map((item,index)=><option key={index} value={item.id}>{item.name}</option>):null}
-						          </select>
-						          <span className="error rtl" style={{ display:this.state.catRequired == true ? 'block' :'none' }}> دسته بندی مطلب را مشخص کنید . </span>
-                           </div>
+                              <div className="text-right form-group label-floating is-empty">
+                                    <label htmlFor="category_id" className="control-label">دسته بندی مطلب</label>
+                                    <select name="category_id" className="form-control" onChange={(evt)=>this._select(evt)} value={this.state.cat_id}>
+                                          <option value="0"></option>
+  						                            {this.state.cats !== [] ? this.state.cats.map((item,index)=><option key={index} value={item.id}>{item.name}</option>):null}
+  						                     </select>
+  						                     <span className="error rtl" style={{ display:this.state.catRequired == true ? 'block' :'none' }}> دسته بندی مطلب را مشخص کنید . </span>
+                             </div>
                            </div>
                            <div className="col-md-12 mb-10">
 		                           <Select
 		                                 style={{ textAlign:'right' , paddingRight:'10px' }}
-										 name="form-field-name"
-										 value={this.state.tag_value}
-										 onChange={this.handleSelectChange.bind(this)}
-										 multi
-										 options={this.state.tags==[] ? [] : this.state.tags}
-									/>
-									<span className="error rtl" style={{ display:this.state.tagRequired == true ? 'block' :'none' }}> تگ های مربوط به مطلب را تایین کنید . </span>	         
+            										 name="form-field-name"
+            										 value={this.state.tag_value}
+            										 onChange={this.handleSelectChange.bind(this)}
+            										 multi
+            										 options={this.state.tags==[] ? [] : this.state.tags}
+            									/>
+									             <span className="error rtl" style={{ display:this.state.tagRequired == true ? 'block' :'none' }}> تگ های مربوط به مطلب را تایین کنید . </span>	         
                            </div>
-					        <div className="col-md-12">
-                              <TinyMCE
-						        content="<p>This is the initial content of the editor</p>"
-						        config={{
-						          plugins: 'autolink link image lists print preview',
-						          toolbar: 'undo redo | bold italic | alignleft aligncenter alignright'
-						        }}
-						        onChange={this.handleEditorChange.bind(this)}
-						      />
-					        </div>
-					        <span className="error rtl" style={{ display:this.state.contentRequired == true ? 'block' :'none' }}> متن مربوطه را وارد نکرده اید . </span>
-			                <div className="col-md-12">
-                                  <button className="btn btn-primary" onClick={()=>{this._submitInputs()}}>ارسال</button>
-                                  <span className="error rtl" style={{ display:this.state.errors===0 ? 'none' : 'block'  }}>اطلاعات ورودی به درستی وارد نشده است.</span>
-			                </div>
+        					        <div className="col-md-12">
+                                      <TinyMCE
+                    						        content={this.state.content}
+                    						        config={{
+                    						          plugins: 'autolink link image lists print preview',
+                    						          toolbar: 'undo redo | bold italic | alignleft aligncenter alignright'
+                    						        }}
+                    						        onChange={this.handleEditorChange.bind(this)}
+                    						      />
+        					        </div>
+					                <span className="error rtl" style={{ display:this.state.contentRequired == true ? 'block' :'none' }}> متن مربوطه را وارد نکرده اید . </span>
+    			                <div className="col-md-12">
+                                      {this.state.spinner===true?<div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.registerspinner} /></div>:<button className="btn btn-primary" onClick={()=>{this._submitInputs()}}>ارسال</button>}
+                                      <span className="error rtl" style={{ display:this.state.errors===0 ? 'none' : 'block'  }}>اطلاعات ورودی به درستی وارد نشده است.</span>
+                                      {this.state.success==true?this._success('مطلب با موفقیت ایجاد شد. مطلب شما پس از باز بینی انتشار خواهد یافت.'):null}
+    			                </div>
 		             </div>
 		        </div>
    	  	 );
     }
+    _success(message){
+          return(
+                       <div className="alert-success text-justify">
+                          <div className="container-fluid">
+                              <div className="col-md-12">
+                                  <button type="button" className="close mt-10" data-dismiss="alert" aria-label="Close" onClick={()=>this.setState({display:'none'})}>
+                                       <span aria-hidden="true" onClick={()=>this.setState({success:false})}><i className="material-icons">clear</i></span>
+                                  </button>
+                             
+                                  <p className="pd-20">{message}<i className="material-icons">check</i></p>
+                              </div>
+                          </div>
+                      </div>
+                );
+        }
 	render(){
 		return(
 			     <div>

@@ -64,11 +64,13 @@ class AuthorPassport extends Controller
         $comments = null;
         $result = [];
         foreach ($posts as $post) {
-             $comments = $post->comments;
-             foreach ($comments as $comment) {
-                 $comment['user'] = $comment->user;
-             }
-             array_push($result,[$post , $comments]);
+            
+                 $comments = $post->comments;
+                 foreach ($comments as $comment) {
+                     $comment['user'] = $comment->user;
+                 }
+                 array_push($result,[$post , $comments]);
+             
         }
         return response()->json(['author'=>$author , 'posts' => $result]);
     }

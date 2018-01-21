@@ -14,7 +14,7 @@ class apiPost extends Resource
      */
     public function toArray($request)
     {
-        
+     
         return [
             "id"    => $this->id,
             "title" => $this->title,
@@ -25,12 +25,8 @@ class apiPost extends Resource
             "category_name" => $this->category->name,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
-            "comments" => $this->comments
+            "comments" => $this->comments,
          ];
     }
-    public function with($request){
-        return [
-           'Mohsen' => 'Mahoski'
-        ];
-    }
+    
 }

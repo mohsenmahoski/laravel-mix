@@ -53,9 +53,8 @@ export default class SingleBlog extends Component{
 			    id: id
 			  })
 			  .then((response) => {
-			  	 
-			  	 const {comments} = response.data.data;
-
+			  	  console.log(response.data);
+                  const {comments} = response.data.data;
 			     this.setState({
 			     	data:response.data.data,
 			     	comments
@@ -72,7 +71,6 @@ export default class SingleBlog extends Component{
 			  .then((response) => {
 			  	 
 			  	 const {comments} = response.data.data;
-
 			     this.setState({
 			     	data:response.data.data,
 			     	comments
@@ -125,6 +123,7 @@ export default class SingleBlog extends Component{
 	   }
    }
    _handleKeyPress(evnt){
+   	      this.setState({hasError:false});
           const inputValue = evnt.target.type === 'checkbox' ? evnt.target.checked : evnt.target.value; 
           const inputName =  evnt.target.name;
           switch (inputName) {
@@ -169,9 +168,10 @@ export default class SingleBlog extends Component{
         e.preventDefault();
         const message = this.state.message;
                         if (message !== '' && message.length > 10) {
-                        	 let token = 'Bearer '+ this.state.token;
+                        	 let token = this.state.token;
                         	 console.log(token);
 			                 if (token != undefined) {
+			                 	        token = 'Bearer '+ token;
 		                                axios.post('/comment/',{
 											comment : message,
 											id : this.props.match.params.id,
@@ -339,13 +339,14 @@ export default class SingleBlog extends Component{
    }
    _comments(item , index){
   	    const id = item.id;
+  	    console.log(item);
 		return (
               <div className="blogcard mt-20 container-fluid" key={index} >
                  <div className="content">
                     <div className="tab-content text-center">
                         <div className="col-md-2 pull-right">
                                 <img src="../images/theme/avatar.jpg" alt="Circle Image" className="blogavatar img-circle img-responsive" />
-                                <small className="col-md-12 text-center" >{item.name}</small>
+                                <small className="col-md-12 text-center" >{item.username}</small>
                         </div>
                         <div className="tab-pane active col-md-10" >
 	                             <p className="text-justify"> {item.comment} </p>
@@ -513,7 +514,7 @@ export default class SingleBlog extends Component{
 													                    </div>
 													     </div>
 														 <div className="col-md-8 ">
-															     <img src={image} className="responsive-image blog-banner" />
+															     <img src={'/images/posts/'+image} className="responsive-image blog-banner" />
 															 	 <h3 className="well">{ title }</h3>
 															 	
 															 	 <div className="col-md-12" dangerouslySetInnerHTML={{__html: body}} />

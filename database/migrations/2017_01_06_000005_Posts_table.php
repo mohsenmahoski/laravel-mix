@@ -19,6 +19,7 @@ class PostsTable extends Migration
             $table->text('body');
             $table->string('slug')->unique();
             $table->integer('category_id')->nullable()->unsigned();
+            $table->boolean('approved')->default(false);
             $table->integer('author_id')->nullable()->unsigned();
             $table->string('image')->nullable();
             $table->timestamps();

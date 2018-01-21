@@ -64,7 +64,7 @@ class Author_Post_Controller extends Controller
              }else{
                  $file = $request->file('file');
                  $imageName = time().'.'.$file->getClientOriginalExtension();
-                 $location = public_path('images/'.$imageName);
+                 $location = public_path('images/posts/'.$imageName);
                  Image::make($file)->resize(736,256)->save($location);
 
 
@@ -87,7 +87,7 @@ class Author_Post_Controller extends Controller
                  
                 
                
-                return 'Ok';
+                return response()->json(['message'=>'Successfully Created Message'],200);
              }
         
     }
