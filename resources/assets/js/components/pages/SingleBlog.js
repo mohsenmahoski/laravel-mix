@@ -7,6 +7,7 @@ import { Link , Route  } from 'react-router-dom';
 import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
 import Cookie from 'universal-cookie';
+import { Redirect } from 'react-router-dom';
 
 export default class SingleBlog extends Component{
    constructor(props){
@@ -35,7 +36,7 @@ export default class SingleBlog extends Component{
 			      searchIcon:'search',
 			      searchResult:[],
 			      searchInput:'',
-			      
+			      redirect:false,
 			} 	
    }
    componentDidMount(){
@@ -53,8 +54,12 @@ export default class SingleBlog extends Component{
 			    id: id
 			  })
 			  .then((response) => {
-			  	  console.log(response.data);
-                  const {comments} = response.data.data;
+			  	 console.log(response.data);
+                  
+                  if (response.status == 203){
+                  	this.setState({redirect:true});
+                  }
+                 const {comments} = response.data.data;
 			     this.setState({
 			     	data:response.data.data,
 			     	comments
@@ -346,10 +351,10 @@ export default class SingleBlog extends Component{
                     <div className="tab-content text-center">
                         <div className="col-md-2 pull-right">
                                 <img src="../images/theme/avatar.jpg" alt="Circle Image" className="blogavatar img-circle img-responsive" />
-                                <small className="col-md-12 text-center" >{item.username}</small>
+                                <small className="col-md-12 text-center" >{item.user.name}</small>
                         </div>
-                        <div className="tab-pane active col-md-10" >
-	                             <p className="text-justify"> {item.comment} </p>
+                        <div className="tab-pane active col-md-10" style={{border:'1px solid #e8e8e8',borderRadius:'5px' }} >
+	                             <p className="text-justify" style={{ display:'flex',minHeight:'65px',justifyContent:'end',alignItems:'center' }}> {item.comment} </p>
 	                             <div className="col-md-12">
                                                  <div  className="pull-left text-center" style={{ display : 'flex',flexDirection:'column' }}>
 							                            <button onClick={()=>this._handleDisLike(item.id , item.likes)} style={{ padding:'10px 5px' }} className="btn btn-simple btn-primary btn-xs  hvr-icon-bounce">
@@ -433,6 +438,7 @@ export default class SingleBlog extends Component{
 		return(
             <div>
             <Header />
+                    {this.state.redirect === true ? <Redirect to="/blog"/> : null}
 	                { this.state.hasError == true ? this._renderMessage('failed') : null }
                     { this.state.hasSuccess == true ? this._renderMessage('success') : null }
 		                     	<div className="header header-filter">

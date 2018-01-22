@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','user_key'
+        'name', 'email',
     ];
 
     protected $dispatchesEvents = [
@@ -33,6 +33,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','user_key','created_at','updated_at'
     ];
 }

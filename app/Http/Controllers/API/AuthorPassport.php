@@ -58,14 +58,14 @@ class AuthorPassport extends Controller
         $user = Auth::user();
         return $user;   
     }
-      public function get_authorprofile(){
+    public function get_authorprofile(){
         $author = Auth::guard('author-api')->user();
-        $posts = $author->posts;
+        $posts = $author->posts->where('approved',true);
         $comments = null;
         $result = [];
         foreach ($posts as $post) {
             
-                 $comments = $post->comments;
+                 $comments = $post->comments->where('approved',true);
                  foreach ($comments as $comment) {
                      $comment['user'] = $comment->user;
                  }

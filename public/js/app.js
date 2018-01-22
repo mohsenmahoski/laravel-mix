@@ -71070,6 +71070,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var SingleBlog = function (_Component) {
 	_inherits(SingleBlog, _Component);
 
@@ -71100,8 +71101,8 @@ var SingleBlog = function (_Component) {
 			comments: null,
 			searchIcon: 'search',
 			searchResult: [],
-			searchInput: ''
-
+			searchInput: '',
+			redirect: false
 		};
 		return _this;
 	}
@@ -71127,6 +71128,10 @@ var SingleBlog = function (_Component) {
 				id: id
 			}).then(function (response) {
 				console.log(response.data);
+
+				if (response.status == 203) {
+					_this2.setState({ redirect: true });
+				}
 				var comments = response.data.data.comments;
 
 				_this2.setState({
@@ -71434,15 +71439,15 @@ var SingleBlog = function (_Component) {
 							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 								'small',
 								{ className: 'col-md-12 text-center' },
-								item.username
+								item.user.name
 							)
 						),
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'div',
-							{ className: 'tab-pane active col-md-10' },
+							{ className: 'tab-pane active col-md-10', style: { border: '1px solid #e8e8e8', borderRadius: '5px' } },
 							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 								'p',
-								{ className: 'text-justify' },
+								{ className: 'text-justify', style: { display: 'flex', minHeight: '65px', justifyContent: 'end', alignItems: 'center' } },
 								' ',
 								item.comment,
 								' '
@@ -71584,6 +71589,7 @@ var SingleBlog = function (_Component) {
 				'div',
 				null,
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__partials_Header__["a" /* default */], null),
+				this.state.redirect === true ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["c" /* Redirect */], { to: '/blog' }) : null,
 				this.state.hasError == true ? this._renderMessage('failed') : null,
 				this.state.hasSuccess == true ? this._renderMessage('success') : null,
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -73208,6 +73214,7 @@ var AuthorDashboard = function (_Component) {
     _this.state = {
       username: '',
       useremail: '',
+      description: '',
       redirect: false,
       setting: true,
       comments: false,
@@ -73254,6 +73261,7 @@ var AuthorDashboard = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/api/author/get_authorprofile', null, {
           headers: { Authorization: token }
         }).then(function (response) {
+          console.log(response.data);
           var _response$data = response.data,
               author = _response$data.author,
               posts = _response$data.posts;
@@ -73261,6 +73269,7 @@ var AuthorDashboard = function (_Component) {
           _this2.setState({
             username: author.name,
             useremail: author.email,
+            description: author.description,
             author: author,
             posts: posts
           });
@@ -73317,7 +73326,7 @@ var AuthorDashboard = function (_Component) {
     value: function _comments(item, index) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: 'well', key: index },
+        { className: 'well', key: index, style: { display: 'inline-block', width: '100%' } },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'small',
           null,
@@ -73336,6 +73345,32 @@ var AuthorDashboard = function (_Component) {
           null,
           '\u0646\u0638\u0631 : ',
           item.comment
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'col-md-12' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            { className: 'pull-right', style: { display: 'flex', flexDirection: 'column', textAlign: 'center', paddingLeft: '5px' } },
+            ' ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'i',
+              { className: 'material-icons', style: { top: 3, fontSize: '14px' } },
+              'thumb_up'
+            ),
+            item.likes
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            { className: 'pull-right', style: { display: 'flex', flexDirection: 'column', paddingTop: '3px', textAlign: 'center' } },
+            ' ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'i',
+              { className: 'material-icons', style: { height: '11px', top: 3, fontSize: '14px' } },
+              'thumb_down'
+            ),
+            item.dislikes
+          )
         )
       );
     }
@@ -73432,8 +73467,8 @@ var AuthorDashboard = function (_Component) {
       }
     }
   }, {
-    key: 'handleEditorChange',
-    value: function handleEditorChange(e) {
+    key: '_handleEditorChange',
+    value: function _handleEditorChange(e) {
       var content = e.target.getContent();
       this.setState({
         content: content
@@ -73577,7 +73612,8 @@ var AuthorDashboard = function (_Component) {
     value: function _profile() {
       var _state2 = this.state,
           useremail = _state2.useremail,
-          username = _state2.username;
+          username = _state2.username,
+          description = _state2.description;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -73614,7 +73650,20 @@ var AuthorDashboard = function (_Component) {
               useremail
             )
           ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-12' })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-md-12 rtl text-right' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'label',
+              null,
+              '\u062F\u0631\u0628\u0627\u0631\u0647 \u0646\u0648\u06CC\u0633\u0646\u062F\u0647: '
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h5',
+              null,
+              description
+            )
+          )
         )
       );
     }
@@ -73756,10 +73805,11 @@ var AuthorDashboard = function (_Component) {
             { className: 'col-md-12 mb-10' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_select__["a" /* default */], {
               style: { textAlign: 'right', paddingRight: '10px' },
-              name: 'form-field-name',
+              name: 'tags',
               value: this.state.tag_value,
               onChange: this.handleSelectChange.bind(this),
               multi: true,
+              placeholder: '...\u0627\u0646\u062A\u062E\u0627\u0628 \u062A\u06AF \u0647\u0627\u06CC \u0645\u0631\u0628\u0648\u0637\u0647',
               options: this.state.tags == [] ? [] : this.state.tags
             }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -73777,7 +73827,7 @@ var AuthorDashboard = function (_Component) {
                 plugins: 'autolink link image lists print preview',
                 toolbar: 'undo redo | bold italic | alignleft aligncenter alignright'
               },
-              onChange: this.handleEditorChange.bind(this)
+              onChange: this._handleEditorChange.bind(this)
             })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

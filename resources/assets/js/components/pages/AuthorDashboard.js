@@ -18,6 +18,7 @@ export default class AuthorDashboard extends Component{
 	    this.state={
             username:'',
             useremail:'',
+            description:'',
             redirect:false,
             setting:true,
             comments:false,
@@ -61,11 +62,12 @@ export default class AuthorDashboard extends Component{
             headers:{Authorization:token}
           })
                .then(response=>{
-                
+                console.log(response.data);
                 const {author , posts} = response.data;
                  this.setState({
                   username:author.name,
                   useremail:author.email,
+                  description:author.description,
                   author,
                   posts
                  });
@@ -101,8 +103,12 @@ export default class AuthorDashboard extends Component{
    }
    _comments(item , index){
    	  return(
-              <div className="well" key={index}>
+              <div className="well" key={index} style={{ display:'inline-block',width:'100%' }}>
                    <small>نام کاربر : {item.user.name}</small> ، <small>ایمیل : {item.user.email}</small><p>نظر : {item.comment}</p>
+                   <div className="col-md-12">
+                     <p className="pull-right" style={{display:'flex',flexDirection:'column',textAlign:'center',paddingLeft:'5px'}}> <i className="material-icons" style={{ top:3,fontSize:'14px', }}>thumb_up</i>{item.likes}</p>
+                     <p className="pull-right" style={{display:'flex',flexDirection:'column',paddingTop:'3px',textAlign:'center'}}> <i className="material-icons" style={{height:'11px',top:3,fontSize:'14px' }}>thumb_down</i>{item.dislikes}</p>
+                   </div>
               </div>
    	  	);
    }
@@ -188,14 +194,12 @@ export default class AuthorDashboard extends Component{
 	             });
 		  	}
   }
-   
-    
-  handleEditorChange(e) {
-    const content = e.target.getContent();
-    this.setState({
-    	content
-    });
-  }
+   _handleEditorChange(e) {
+      const content = e.target.getContent();
+      this.setState({
+      	content
+      });
+   }
    _string_to_slug (str) {
 		    str = str.replace(/^\s+|\s+$/g, ''); // trim
 		    str = str.toLowerCase();
@@ -295,7 +299,7 @@ export default class AuthorDashboard extends Component{
            	     );
    }
 	_profile(){
-   	   const {useremail , username } = this.state;
+   	   const {useremail , username , description } = this.state;
    	   return (
              <div>
              	  
@@ -309,8 +313,10 @@ export default class AuthorDashboard extends Component{
       							<label> آدرس الکترونیکی: </label>
       							<h5>{useremail}</h5>
       					  </div>
-      					  <div className="col-md-12">
-      					  </div>
+      					  <div className="col-md-12 rtl text-right">
+                    <label>درباره نویسنده: </label>
+                    <h5>{description}</h5>
+                  </div>
       				  </div>
 																             
              </div>
@@ -370,11 +376,12 @@ export default class AuthorDashboard extends Component{
                            </div>
                            <div className="col-md-12 mb-10">
 		                           <Select
-		                                 style={{ textAlign:'right' , paddingRight:'10px' }}
-            										 name="form-field-name"
+		                             style={{ textAlign:'right' , paddingRight:'10px' }}
+            										 name="tags"
             										 value={this.state.tag_value}
             										 onChange={this.handleSelectChange.bind(this)}
             										 multi
+                                 placeholder='...انتخاب تگ های مربوطه'
             										 options={this.state.tags==[] ? [] : this.state.tags}
             									/>
 									             <span className="error rtl" style={{ display:this.state.tagRequired == true ? 'block' :'none' }}> تگ های مربوط به مطلب را تایین کنید . </span>	         
@@ -386,7 +393,7 @@ export default class AuthorDashboard extends Component{
                     						          plugins: 'autolink link image lists print preview',
                     						          toolbar: 'undo redo | bold italic | alignleft aligncenter alignright'
                     						        }}
-                    						        onChange={this.handleEditorChange.bind(this)}
+                    						        onChange={this._handleEditorChange.bind(this)}
                     						      />
         					        </div>
 					                <span className="error rtl" style={{ display:this.state.contentRequired == true ? 'block' :'none' }}> متن مربوطه را وارد نکرده اید . </span>
