@@ -4,7 +4,7 @@ import React ,{Component} from 'react';
 export default class Tabs extends Component{
 	render(){
 		return(
-			<div>
+			<div className="col-md-12">
 	            <h3 className="text-center black-title"><b>قالب کار خود را انتخاب کنید</b></h3>
 	            <p className="rtl text-center"><b>شما می توانید از بین قالب های متنوع قالب مناسب برای کسب و کار خود را انتخاب کنید.</b></p>
 			    <div className="card card-nav-tabs">

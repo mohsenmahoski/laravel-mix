@@ -9,6 +9,7 @@
         <link href="{{mix('css/app.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('css/material-kit.css')}}" rel="stylesheet" type="text/css">
+         <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />

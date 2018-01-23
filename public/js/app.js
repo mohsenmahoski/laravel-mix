@@ -2584,6 +2584,64 @@ module.exports = ReactComponentTreeHook;
 
 /***/ }),
 /* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(297);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(299);
+/* unused harmony reexport HashRouter */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(138);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(301);
+/* unused harmony reexport MemoryRouter */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(304);
+/* unused harmony reexport NavLink */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(307);
+/* unused harmony reexport Prompt */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(309);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(139);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(83);
+/* unused harmony reexport Router */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(315);
+/* unused harmony reexport StaticRouter */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(317);
+/* unused harmony reexport Switch */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(319);
+/* unused harmony reexport matchPath */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(320);
+/* unused harmony reexport withRouter */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2893,7 +2951,7 @@ module.exports = {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2918,64 +2976,6 @@ if (true) {
 }
 
 module.exports = { debugTool: debugTool };
-
-/***/ }),
-/* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(297);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(299);
-/* unused harmony reexport HashRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(138);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(301);
-/* unused harmony reexport MemoryRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(304);
-/* unused harmony reexport NavLink */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(307);
-/* unused harmony reexport Prompt */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(309);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(139);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(83);
-/* unused harmony reexport Router */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(315);
-/* unused harmony reexport StaticRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(317);
-/* unused harmony reexport Switch */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(319);
-/* unused harmony reexport matchPath */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(320);
-/* unused harmony reexport withRouter */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***/ }),
 /* 15 */
@@ -4034,154 +4034,219 @@ var Footer = function (_Component) {
                     { className: "container" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "div",
-                        { className: "col-md-8" },
+                        { className: "row" },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "nav",
-                            { className: "col-md-4 pull-left" },
+                            "div",
+                            { className: "text-right col-md-2 col-md-offset-1 col-sm-3" },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "ul",
-                                null,
+                                "div",
+                                { className: "info" },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://www.creative-tim.com" },
-                                        "Creative Tim"
-                                    )
+                                    "h5",
+                                    { className: "title text-right" },
+                                    "\u0647\u0645\u0631\u0627\u0647 \u0645\u0627 \u0628\u0627\u0634\u06CC\u062F"
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
+                                    "nav",
                                     null,
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://presentation.creative-tim.com" },
-                                        "About Us"
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://blog.creative-tim.com" },
-                                        "Blog"
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://www.creative-tim.com/license" },
-                                        "Licenses"
+                                        "ul",
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#", className: "btn btn-social btn-facebook btn-simple" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-facebook-square" }),
+                                                " Facebook"
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#", className: "btn btn-social btn-dribbble btn-simple" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-dribbble" }),
+                                                " Dribbble"
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#", className: "btn btn-social btn-twitter btn-simple" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-twitter" }),
+                                                " Twitter"
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#", className: "btn btn-social btn-reddit btn-simple" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-google-plus-square" }),
+                                                " Google+"
+                                            )
+                                        )
                                     )
                                 )
                             )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "nav",
-                            { className: "col-md-4 pull-left" },
+                            "div",
+                            { className: "text-right col-md-3 col-sm-3" },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "ul",
-                                null,
+                                "div",
+                                { className: "info" },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://www.creative-tim.com" },
-                                        "Creative Tim"
-                                    )
+                                    "h5",
+                                    { className: "title text-right" },
+                                    "\u0622\u062E\u0631\u06CC\u0646 \u062E\u0628\u0631\u0647\u0627"
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
+                                    "nav",
                                     null,
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://presentation.creative-tim.com" },
-                                        "About Us"
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://blog.creative-tim.com" },
-                                        "Blog"
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://www.creative-tim.com/license" },
-                                        "Licenses"
+                                        "ul",
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u0637\u0631\u0627\u062D\u06CC \u0641\u0631\u0648\u0634\u06AF\u0627\u0647\u06CC \u062D\u0631\u0641\u0647 \u0627\u06CC \u0628\u0627 \u0645\u062C\u0646\u062A\u0648 \u06CC\u06A9\u06CC \u0627\u0632 \u0631\u0627\u0647 \u06A9\u0627\u0631\u0647\u0627\u06CC \u0645\u0648\u062B\u0631 \u062F\u0631 \u0627\u0641\u0632\u0627\u06CC\u0634 \u0648 \u0631\u0648\u0646\u0642 \u06A9\u0633\u0628 \u0648 \u06A9\u0627\u0631 \u0634\u0645\u0627 \u062E\u0648\u0627\u0647\u062F \u0628\u0648\u062F ...",
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("hr", { className: "hr-small on-dark" })
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u0637\u0631\u0627\u062D\u06CC \u0633\u0627\u06CC\u062A \u0628\u0627 \u0648\u0631\u062F \u067E\u0631\u0633 \u0627\u06CC\u0646 \u0627\u0645\u06A9\u0627\u0646 \u0631\u0627 \u0628\u0647 \u0634\u0645\u0627 \u0645\u06CC \u062F\u0647\u062F \u062A\u0627 \u062F\u0631 \u06A9\u0645\u062A\u0631\u06CC\u0646 \u0632\u0645\u0627\u0646 \u0645\u0645\u06A9\u0646 \u0628\u0647 \u062A\u062C\u0627\u0631\u062A \u062E\u0648\u062F \u062D\u0631\u06A9\u062A \u062F\u0647\u06CC\u062F..."
+                                            )
+                                        )
                                     )
                                 )
                             )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "nav",
-                            { className: "col-md-4 pull-left" },
+                            "div",
+                            { className: "text-right col-md-2  col-sm-2" },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "ul",
-                                null,
+                                "div",
+                                { className: "info" },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://www.creative-tim.com" },
-                                        "Creative Tim"
-                                    )
+                                    "h5",
+                                    { className: "title text-right" },
+                                    "\u067E\u0634\u062A\u06CC\u0628\u0627\u0646\u06CC"
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
+                                    "nav",
                                     null,
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://presentation.creative-tim.com" },
-                                        "About Us"
+                                        "ul",
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u0646\u062D\u0648\u0647 \u0627\u0646\u062C\u0627\u0645 \u06A9\u0627\u0631"
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u0642\u0648\u0627\u0646\u06CC\u0646 \u0648 \u0645\u0642\u0631\u0631\u0627\u062A"
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u0628\u0627\u0632\u06AF\u0634\u062A \u0648\u062C\u0647"
+                                            )
+                                        )
                                     )
+                                )
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "div",
+                            { className: "text-right col-md-2 col-sm-3" },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "div",
+                                { className: "info" },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "h5",
+                                    { className: "title text-right" },
+                                    "\u0634\u0631\u06A9\u062A"
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
+                                    "nav",
                                     null,
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://blog.creative-tim.com" },
-                                        "Blog"
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "li",
-                                    null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "a",
-                                        { href: "http://www.creative-tim.com/license" },
-                                        "Licenses"
+                                        "ul",
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC"
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u062F\u0631\u0628\u0627\u0631\u0647 \u0645\u0627"
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u0646\u0645\u0627\u06CC\u0634 \u067E\u0631\u0648\u0698\u0647 \u0647\u0627"
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "li",
+                                            null,
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "a",
+                                                { href: "#" },
+                                                "\u062A\u0645\u0627\u0633 \u0628\u0627 \u0645\u0627"
+                                            )
+                                        )
                                     )
                                 )
                             )
                         )
                     ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("hr", { className: "on-dark" }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "div",
-                        { className: "col-md-4" },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "div",
-                            { className: "copyright pull-right col-md-" },
-                            "\xA9 2016, made with ",
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "i",
-                                { className: "material-icons" },
-                                "favorite"
-                            ),
-                            " by Creative Tim for a better web."
-                        )
+                        { className: "copyright text-center" },
+                        "\xA9  \u062A\u0645\u0627\u0645\u06CC \u062D\u0642\u0648\u0642 \u0628\u0631\u0627\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u0648\u0628\u06CC \u062A\u06A9 \u0645\u062D\u0641\u0648\u0638 \u0627\u0633\u062A"
                     )
                 )
             );
@@ -5399,7 +5464,7 @@ module.exports = __webpack_require__(212);
 
 
 var ReactRef = __webpack_require__(220);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 
 var warning = __webpack_require__(2);
 
@@ -8205,7 +8270,7 @@ module.exports = g;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 var normalizeHeaderName = __webpack_require__(183);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -8841,7 +8906,7 @@ module.exports = getEventModifierState;
 var DOMLazyTree = __webpack_require__(33);
 var Danger = __webpack_require__(231);
 var ReactDOMComponentTree = __webpack_require__(6);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(73);
 var setInnerHTML = __webpack_require__(49);
@@ -9424,7 +9489,7 @@ var _prodInvariant = __webpack_require__(4);
 
 var ReactCurrentOwner = __webpack_require__(18);
 var ReactInstanceMap = __webpack_require__(39);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 var ReactUpdates = __webpack_require__(19);
 
 var invariant = __webpack_require__(1);
@@ -10543,7 +10608,7 @@ var createTransitionManager = function createTransitionManager() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(12);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10913,7 +10978,7 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 var settle = __webpack_require__(184);
 var buildURL = __webpack_require__(186);
 var parseHeaders = __webpack_require__(187);
@@ -13963,7 +14028,7 @@ module.exports = CSSProperty;
 
 var DOMProperty = __webpack_require__(24);
 var ReactDOMComponentTree = __webpack_require__(6);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 
 var quoteAttributeValueForBrowser = __webpack_require__(245);
 var warning = __webpack_require__(2);
@@ -15140,7 +15205,7 @@ var ReactDOMContainerInfo = __webpack_require__(287);
 var ReactDOMFeatureFlags = __webpack_require__(288);
 var ReactFeatureFlags = __webpack_require__(115);
 var ReactInstanceMap = __webpack_require__(39);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 var ReactMarkupChecksum = __webpack_require__(289);
 var ReactReconciler = __webpack_require__(32);
 var ReactUpdateQueue = __webpack_require__(78);
@@ -47578,7 +47643,7 @@ if (typeof jQuery === 'undefined') {
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 var bind = __webpack_require__(96);
 var Axios = __webpack_require__(182);
 var defaults = __webpack_require__(64);
@@ -47665,7 +47730,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(64);
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 var InterceptorManager = __webpack_require__(191);
 var dispatchRequest = __webpack_require__(192);
 
@@ -47750,7 +47815,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -47830,7 +47895,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -47905,7 +47970,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -47965,7 +48030,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -48083,7 +48148,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -48143,7 +48208,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -48202,7 +48267,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 var transformData = __webpack_require__(193);
 var isCancel = __webpack_require__(99);
 var defaults = __webpack_require__(64);
@@ -48295,7 +48360,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(12);
+var utils = __webpack_require__(13);
 
 /**
  * Transform the data for a request or a response
@@ -48464,7 +48529,7 @@ module.exports = function spread(callback) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Home__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Blog__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_AboutUs__ = __webpack_require__(361);
@@ -49684,7 +49749,7 @@ if (true) {
 }
 
 if (true) {
-  var ReactInstrumentation = __webpack_require__(13);
+  var ReactInstrumentation = __webpack_require__(14);
   var ReactDOMUnknownPropertyHook = __webpack_require__(294);
   var ReactDOMNullInputValuePropHook = __webpack_require__(295);
   var ReactDOMInvalidARIAHook = __webpack_require__(296);
@@ -52269,7 +52334,7 @@ var ReactDOMInput = __webpack_require__(248);
 var ReactDOMOption = __webpack_require__(249);
 var ReactDOMSelect = __webpack_require__(124);
 var ReactDOMTextarea = __webpack_require__(250);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 var ReactMultiChild = __webpack_require__(251);
 var ReactServerRenderingTransaction = __webpack_require__(260);
 
@@ -53295,7 +53360,7 @@ module.exports = AutoFocusUtils;
 
 var CSSProperty = __webpack_require__(121);
 var ExecutionEnvironment = __webpack_require__(9);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 
 var camelizeStyleName = __webpack_require__(239);
 var dangerousStyleValue = __webpack_require__(241);
@@ -54532,7 +54597,7 @@ var _prodInvariant = __webpack_require__(4);
 
 var ReactComponentEnvironment = __webpack_require__(75);
 var ReactInstanceMap = __webpack_require__(39);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 
 var ReactCurrentOwner = __webpack_require__(18);
 var ReactReconciler = __webpack_require__(32);
@@ -55142,7 +55207,7 @@ var ReactComponentEnvironment = __webpack_require__(75);
 var ReactCurrentOwner = __webpack_require__(18);
 var ReactErrorUtils = __webpack_require__(67);
 var ReactInstanceMap = __webpack_require__(39);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 var ReactNodeTypes = __webpack_require__(126);
 var ReactReconciler = __webpack_require__(32);
 
@@ -56331,7 +56396,7 @@ var _assign = __webpack_require__(5);
 
 var PooledClass = __webpack_require__(27);
 var Transaction = __webpack_require__(47);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 var ReactServerUpdateQueue = __webpack_require__(261);
 
 /**
@@ -57243,7 +57308,7 @@ var CallbackQueue = __webpack_require__(114);
 var PooledClass = __webpack_require__(27);
 var ReactBrowserEventEmitter = __webpack_require__(51);
 var ReactInputSelection = __webpack_require__(131);
-var ReactInstrumentation = __webpack_require__(13);
+var ReactInstrumentation = __webpack_require__(14);
 var Transaction = __webpack_require__(47);
 var ReactUpdateQueue = __webpack_require__(78);
 
@@ -62512,6 +62577,8 @@ var withRouter = function withRouter(Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__partials_Footer__ = __webpack_require__(21);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -62527,13 +62594,151 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Home = function (_Component) {
     _inherits(Home, _Component);
 
-    function Home() {
+    function Home(props) {
+        var _this$state;
+
         _classCallCheck(this, Home);
 
-        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+
+        _this.state = (_this$state = {
+            left: 0,
+            front: null,
+            back: null,
+            left2: 80,
+            front2: null,
+            back2: null,
+            left3: 200,
+            front4: null,
+            back3: null,
+            left4: 150
+        }, _defineProperty(_this$state, 'front4', null), _defineProperty(_this$state, 'back4', null), _this$state);
+        return _this;
     }
 
     _createClass(Home, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.setState({
+                front: setInterval(this._front.bind(this), 65),
+                front2: setInterval(this._front2.bind(this), 55),
+                front3: setInterval(this._front3.bind(this), 60),
+                front4: setInterval(this._front4.bind(this), 60)
+            });
+        }
+    }, {
+        key: '_front',
+        value: function _front() {
+            var _state = this.state,
+                left = _state.left,
+                front = _state.front;
+
+            if (left < 10) {
+                this.setState({ left: left + 1 });
+            } else {
+                clearInterval(front);
+                this.setState({ back: setInterval(this._back.bind(this), 65) });
+            }
+        }
+    }, {
+        key: '_back',
+        value: function _back() {
+            var _state2 = this.state,
+                left = _state2.left,
+                back = _state2.back;
+
+            if (left > 0) {
+                this.setState({ left: left - 1 });
+            } else {
+                clearInterval(back);
+                this.setState({ front: setInterval(this._front.bind(this), 65) });
+            }
+        }
+    }, {
+        key: '_front2',
+        value: function _front2() {
+            var _state3 = this.state,
+                left2 = _state3.left2,
+                front2 = _state3.front2;
+
+            if (left2 < 200) {
+                this.setState({ left2: left2 + 1 });
+            } else {
+                clearInterval(front2);
+                this.setState({ back2: setInterval(this._back2.bind(this), 55) });
+            }
+        }
+    }, {
+        key: '_back2',
+        value: function _back2() {
+            var _state4 = this.state,
+                left2 = _state4.left2,
+                back2 = _state4.back2;
+
+            if (left2 > 80) {
+                this.setState({ left2: left2 - 1 });
+            } else {
+                clearInterval(back2);
+                this.setState({ front2: setInterval(this._front2.bind(this), 55) });
+            }
+        }
+    }, {
+        key: '_front3',
+        value: function _front3() {
+            var _state5 = this.state,
+                left3 = _state5.left3,
+                front3 = _state5.front3;
+
+            if (left3 < 300) {
+                this.setState({ left3: left3 + 1 });
+            } else {
+                clearInterval(front3);
+                this.setState({ back3: setInterval(this._back3.bind(this), 60) });
+            }
+        }
+    }, {
+        key: '_back3',
+        value: function _back3() {
+            var _state6 = this.state,
+                left3 = _state6.left3,
+                back3 = _state6.back3;
+
+            if (left3 > 200) {
+                this.setState({ left3: left3 - 1 });
+            } else {
+                clearInterval(back3);
+                this.setState({ front3: setInterval(this._front3.bind(this), 60) });
+            }
+        }
+    }, {
+        key: '_front4',
+        value: function _front4() {
+            var _state7 = this.state,
+                left4 = _state7.left4,
+                front4 = _state7.front4;
+
+            if (left4 < 350) {
+                this.setState({ left4: left4 + 1 });
+            } else {
+                clearInterval(front4);
+                this.setState({ back4: setInterval(this._back4.bind(this), 60) });
+            }
+        }
+    }, {
+        key: '_back4',
+        value: function _back4() {
+            var _state8 = this.state,
+                left4 = _state8.left4,
+                back4 = _state8.back4;
+
+            if (left4 > 150) {
+                this.setState({ left4: left4 - 1 });
+            } else {
+                clearInterval(back4);
+                this.setState({ front4: setInterval(this._front4.bind(this), 60) });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -62552,25 +62757,11 @@ var Home = function (_Component) {
                             { className: 'row' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'col-md-8 col-md-offset-2' },
+                                { className: 'container' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'div',
                                     { className: 'brand' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'h1',
-                                        { className: 'title white' },
-                                        '\u0648\u0628\u06CC \u062A\u06A9'
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'div',
-                                        { className: 'separator separator-danger' },
-                                        '\u273B'
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'h3',
-                                        { className: 'text-center' },
-                                        '\u0645\u0627 \u0641\u0642\u0637 \u06CC\u06A9 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0637\u0631\u0627\u062D\u06CC \u0646\u0645\u06CC\u06A9\u0646\u06CC\u0645\u060C\u0645\u0627 \u0622\u0646\u0686\u0647 \u062F\u0631 \u0630\u0647\u0646 \u0648\u0631\u0648\u06CC\u0627\u06CC \u0634\u0645\u0627\u0633\u062A \u0628\u0647 \u0648\u0627\u0642\u0639\u06CC\u062A \u062A\u0628\u062F\u06CC\u0644 \u0645\u06CC\u06A9\u0646\u06CC\u0645'
-                                    )
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__items_Carousel__["a" /* default */], null)
                                 )
                             )
                         )
@@ -62585,11 +62776,633 @@ var Home = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'container-fluid' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'collapse navbar-collapse menu', id: 'example-navbar' })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'collapse navbar-collapse menu', id: 'example-navbar' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'social pull-left' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { className: 'cyrcle-icon', href: '#' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-facebook', 'aria-hidden': 'true' })
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { className: 'cyrcle-icon', href: '#' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-instagram', 'aria-hidden': 'true' })
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { className: 'cyrcle-icon', href: '#' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-twitter', 'aria-hidden': 'true' })
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { className: 'cyrcle-icon', href: '#' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-google-plus', 'aria-hidden': 'true' })
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { className: 'cyrcle-icon', href: '#' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-linkedin', 'aria-hidden': 'true' })
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'path pull-right' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { href: '/', className: 'pull-right' },
+                                        '\u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC',
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'ripple-container' })
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'a',
+                                        { href: '/', className: 'pull-right' },
+                                        '\u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC',
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'ripple-container' })
+                                    )
+                                )
+                            )
                         )
                     ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__items_Carousel__["a" /* default */], null),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__items_Tabs__["a" /* default */], null)
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'h3',
+                            { className: 'text-center black-title' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'b',
+                                null,
+                                '\u0642\u0627\u0644\u0628 \u06A9\u0627\u0631 \u062E\u0648\u062F \u0631\u0627 \u0627\u0646\u062A\u062E\u0627\u0628 \u06A9\u0646\u06CC\u062F'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            { className: 'rtl text-center' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'b',
+                                null,
+                                '\u0634\u0645\u0627 \u0645\u06CC \u062A\u0648\u0627\u0646\u06CC\u062F \u0627\u0632 \u0628\u06CC\u0646 \u0642\u0627\u0644\u0628 \u0647\u0627\u06CC \u0645\u062A\u0646\u0648\u0639 \u0642\u0627\u0644\u0628 \u0645\u0646\u0627\u0633\u0628 \u0628\u0631\u0627\u06CC \u06A9\u0633\u0628 \u0648 \u06A9\u0627\u0631 \u062E\u0648\u062F \u0631\u0627 \u0627\u0646\u062A\u062E\u0627\u0628 \u06A9\u0646\u06CC\u062F.'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'container-fluid flex-center' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '', className: 'mask item-banner' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/theme/banner1.jpg', alt: 'Rounded Image', className: 'banner  img-responsive' }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'fade-caption' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h5',
+                                        { className: 'caption-title text-right' },
+                                        '\u06CC\u06A9 \u0641\u0631\u0648\u0634\u06AF\u0627\u0647 \u0627\u06CC\u0646\u062A\u0631\u0646\u062A\u06CC \u0645\u0648\u0641\u0642 \u0686\u0647 \u0627\u0645\u06A9\u0627\u0646\u0627\u062A\u06CC \u062F\u0627\u0631\u062F\u061F'
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'p',
+                                        { className: 'text-right' },
+                                        '\u06CC\u06A9 \u0641\u0631\u0648\u0634\u06AF\u0627\u0647 \u0627\u06CC\u0646\u062A\u0631\u0646\u062A\u06CC \u0628\u0631\u0627 \u06CC \u0645\u0648\u0641\u0642\u06CC\u062A \u0646\u06CC\u0627\u0632 \u0628\u0647 \u0641\u0627\u06A9\u062A\u0648\u0631 \u0647\u0627\u06CC\u06CC \u062E\u0627\u0635  \u0646\u0638\u06CC\u0631 \u0633\u0631\u0639\u062A \u0627\u062C\u0631\u0627\u06CC\u06CC \u0628\u0627\u0644\u0627 \u060C \u0638\u0627\u0647\u0631\u06CC \u0632\u06CC\u0628\u0627 \u0648 \u06A9\u0627\u0631\u0628\u0631 \u067E\u0633\u0646\u062F \u0648..'
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '', className: 'mask item-banner' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/theme/banner2.jpg', alt: 'Rounded Image', className: 'banner  img-responsive' }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'fade-caption' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h5',
+                                        { className: 'caption-title mb-20 text-right' },
+                                        '\u0686\u0637\u0648\u0631 \u06A9\u0627\u0631 \u0648\u062A\u062E\u0635\u0635 \u062E\u0648\u062F \u0631\u0627 \u0628\u0647 \u062F\u06CC\u06AF\u0631\u0627\u0646 \u0645\u0639\u0631\u0641\u06CC \u06A9\u0646\u06CC\u0645\u061F'
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'p',
+                                        { className: 'text-right' },
+                                        '\u0628\u0627 \u062F\u0627\u0634\u062A\u0646 \u0648\u0628 \u0633\u0627\u06CC\u062A\u06CC \u062D\u0631\u0641\u0647 \u0627\u06CC \u0645\u0648\u0641\u0642\u06CC\u062A \u06A9\u0627\u0631 \u062E\u0648\u062F \u0631\u0627 \u062A\u0636\u0645\u06CC\u0646 \u06A9\u0646\u06CC\u062F...'
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '', className: 'mask item-banner' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/theme/banner2.jpg', alt: 'Rounded Image', className: 'banner  img-responsive' }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'fade-caption' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h5',
+                                        { className: 'caption-title mb-20 text-right' },
+                                        '\u0686\u0637\u0648\u0631 \u06A9\u0627\u0631 \u0648\u062A\u062E\u0635\u0635 \u062E\u0648\u062F \u0631\u0627 \u0628\u0647 \u062F\u06CC\u06AF\u0631\u0627\u0646 \u0645\u0639\u0631\u0641\u06CC \u06A9\u0646\u06CC\u0645\u061F'
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'p',
+                                        { className: 'text-right' },
+                                        '\u0628\u0627 \u062F\u0627\u0634\u062A\u0646 \u0648\u0628 \u0633\u0627\u06CC\u062A\u06CC \u062D\u0631\u0641\u0647 \u0627\u06CC \u0645\u0648\u0641\u0642\u06CC\u062A \u06A9\u0627\u0631 \u062E\u0648\u062F \u0631\u0627 \u062A\u0636\u0645\u06CC\u0646 \u06A9\u0646\u06CC\u062F...'
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '', className: 'mask item-banner' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'images/theme/banner2.jpg', alt: 'Rounded Image', className: 'banner  img-responsive' }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'fade-caption' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h5',
+                                        { className: 'caption-title mb-20 text-right' },
+                                        '\u0686\u0637\u0648\u0631 \u06A9\u0627\u0631 \u0648\u062A\u062E\u0635\u0635 \u062E\u0648\u062F \u0631\u0627 \u0628\u0647 \u062F\u06CC\u06AF\u0631\u0627\u0646 \u0645\u0639\u0631\u0641\u06CC \u06A9\u0646\u06CC\u0645\u061F'
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'p',
+                                        { className: 'text-right' },
+                                        '\u0628\u0627 \u062F\u0627\u0634\u062A\u0646 \u0648\u0628 \u0633\u0627\u06CC\u062A\u06CC \u062D\u0631\u0641\u0647 \u0627\u06CC \u0645\u0648\u0641\u0642\u06CC\u062A \u06A9\u0627\u0631 \u062E\u0648\u062F \u0631\u0627 \u062A\u0636\u0645\u06CC\u0646 \u06A9\u0646\u06CC\u062F...'
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__items_Tabs__["a" /* default */], null),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'section' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'container-fluid' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'row' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-md-8 col-md-offset-2 text-center' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'h2',
+                                            { className: 'title title-black ' },
+                                            '\u0686\u0631\u0627 \u0648\u0628\u06CC \u062A\u06A9 \u061F'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'h5',
+                                            { className: 'description' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'b',
+                                                null,
+                                                '\u0648\u0628\u06CC \u062A\u06A9'
+                                            ),
+                                            ' \u0628\u0627 \u0633\u0627\u0644 \u0647\u0627 \u062A\u062C\u0631\u0628\u0647 \u062F\u0631 \u062D\u0648\u0632\u0647 \u0637\u0631\u0627\u062D\u06CC \u0633\u0627\u06CC\u062A \u060C \u0627\u0632 \u062A\u0627\u062B\u06CC\u0631 \u06CC\u06A9 \u0633\u0627\u06CC\u062A \u062D\u0631\u0641\u0647 \u0627\u06CC \u062F\u0631 \u0645\u0639\u0631\u0641\u06CC \u06A9\u0633\u0628 \u0648 \u06A9\u0627\u0631 \u0634\u0631\u06A9\u062A \u0647\u0627 \u0622\u06AF\u0627\u0647 \u0627\u0633\u062A . \u062F\u0631 \u0647\u0645\u06CC\u0646 \u0631\u0627\u0633\u062A\u0627 \u0627\u06CC\u0646 \u0634\u0631\u06A9\u062A \u0628\u0627 \u062F\u0631 \u0627\u062E\u062A\u06CC\u0627\u0631 \u062F\u0627\u0634\u062A\u0646 \u062A\u06CC\u0645\u06CC \u062D\u0631\u0641\u0647 \u0627\u06CC \u0648 \u0645\u0637\u0627\u0628\u0642 \u0628\u0627 \u0622\u062E\u0631\u06CC\u0646 \u062A\u06A9\u0646\u0648\u0644\u0648\u0698\u06CC \u0647\u0627\u06CC \u0631\u0648\u0632 \u062F\u0646\u06CC\u0627 \u060C \u062A\u062E\u0635\u0635 \u0648 \u062E\u0644\u0627\u0642\u06CC\u062A \u0631\u0627 \u062F\u0631 \u06A9\u0646\u0627\u0631 \u0647\u0645 \u0642\u0631\u0627\u0631 \u062F\u0627\u062F\u0647 \u062A\u0627 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0634\u0645\u0627 \u0639\u0644\u0627\u0648\u0647 \u0628\u0631 \u062F\u0627\u0634\u062A\u0646 \u0638\u0627\u0647\u0631\u06CC \u0632\u06CC\u0627 \u0648 \u0645\u062A\u0641\u0627\u0648\u062A \u060C \u062A\u0628\u062F\u06CC\u0644 \u0628\u0647 \u0627\u0628\u0632\u0627\u0631\u06CC \u0642\u062F\u0631\u062A\u0645\u0646\u062F \u0628\u0631\u0627\u06CC \u0646\u0645\u0627\u06CC\u0634 \u0634\u062E\u0635\u06CC\u062A \u06A9\u0627\u0631\u06CC\u062A\u0627\u0646 \u0648 \u0627\u0641\u0632\u0627\u06CC\u0634 \u0641\u0631\u0648\u0634 \u0634\u0645\u0627 \u06AF\u0631\u062F\u062F . '
+                                        )
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-md-12 flex-center' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card note-card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'col-md-12 text-center mb-10' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'link-none font-icon' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'i',
+                                                    { className: 'bordered material-icons mb-10 ', 'aria-hidden': 'true' },
+                                                    'account_balance'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'clearfix' }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'strong',
+                                                    null,
+                                                    '\u0637\u0631\u0627\u062D\u06CC \u0641\u0631\u0648\u0634\u06AF\u0627\u0647 \u0627\u06CC\u0646\u062A\u0631\u0646\u062A\u06CC'
+                                                )
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'p',
+                                            { className: 'text-justify' },
+                                            '\u0637\u0631\u0627\u062D\u06CC \u0641\u0631\u0648\u0634\u06AF\u0627\u0647\u06CC \u06CC\u06A9\u06CC \u062F\u06CC\u06AF\u0631 \u0627\u0632 \u062E\u062F\u0645\u0627\u062A \u0634\u0631\u06A9\u062A \u0637\u0631\u0627\u062D\u06CC \u0648\u0628\u0633\u0627\u06CC\u062A \u0645\u062F\u0631\u0646 \u062A\u06A9 \u0627\u0633\u062A\u060C \u0637\u0631\u0627\u062D\u06CC \u0641\u0631\u0648\u0634\u06AF\u0627\u0647 \u0647\u0627\u06CC \u0627\u06CC\u0646\u062A\u0631\u0646\u062A\u06CC \u06A9\u0647 \u0628\u0631\u0627\u06CC \u0627\u06CC\u062C\u0627\u062F \u06A9\u0633\u0628 \u0648 \u06A9\u0627\u0631 \u0622\u0646\u0644\u0627\u06CC\u0646 \u0645\u0646\u0627\u0633\u0628 \u0647\u0633\u062A\u0646\u062F\u060C \u0645\u0627 \u0628\u0627 \u0686\u0646\u062F\u06CC\u0646 \u0633\u0627\u0644 \u062A\u062C\u0631\u0628\u0647 \u062F\u0631 \u0632\u0645\u06CC\u0646\u0647 \u0637\u0631\u0627\u062D\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u0641\u0631\u0648\u0634\u06AF\u0627\u0647\u06CC \u06CC\u06A9 \u06AF\u0632\u06CC\u0646\u0647 \u0639\u0627\u0644\u06CC \u0628\u0631\u0627\u06CC \u0637\u0631\u0627\u062D\u06CC \u0648\u0628\u0633\u0627\u06CC\u062A \u0641\u0631\u0648\u0634\u06AF\u0627\u0647\u06CC \u0627\u0633\u062A'
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card note-card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'col-md-12 text-center mb-10' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'link-none font-icon' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'i',
+                                                    { className: 'material-icons mb-10  bordered', 'aria-hidden': 'true' },
+                                                    'update'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'clearfix' }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'strong',
+                                                    null,
+                                                    '\u0636\u0645\u0627\u0646\u062A \u0648 \u067E\u0634\u062A\u06CC\u06CC\u0628\u0627\u0646\u06CC \u0633\u0627\u06CC\u062A'
+                                                )
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'p',
+                                            { className: 'text-justify' },
+                                            '\u0645\u0627 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0634\u0645\u0627 \u0631\u0627 \u0628\u0647 \u0637\u0648\u0631 24 \u0633\u0627\u0639\u062A\u0647 \u062A\u0648\u0633\u0637 \u062A\u06CC\u0645\u06CC \u0645\u062C\u0631\u0628 \u067E\u0634\u062A\u06CC\u0628\u0627\u0646\u06CC \u06A9\u0631\u062F\u0647 \u0648 \u062F\u0631 \u0635\u0648\u0631\u062A \u0639\u062F\u0645 \u0631\u0636\u0627\u06CC\u062A \u0648\u062C\u0647 \u0634\u0645\u0627 \u0631\u0627 \u0628\u0627\u0632 \u067E\u0633 \u0645\u06CC\u06AF\u0631\u062F\u0627\u0646\u06CC\u0645'
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card note-card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'col-md-12 text-center mb-10' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'link-none font-icon' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'i',
+                                                    { className: 'material-icons mb-10  bordered', 'aria-hidden': 'true' },
+                                                    'assignment'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'clearfix' }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'strong',
+                                                    null,
+                                                    '\u0637\u0631\u0627\u062D\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u0634\u062E\u0635\u06CC'
+                                                )
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'p',
+                                            { className: 'text-justify' },
+                                            '\u062F\u0627\u0634\u062A\u0646 \u06CC\u06A9 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0645\u0627\u0646\u0646\u062F \u0627\u06CC\u0646 \u0645\u06CC\u0628\u0627\u0634\u062F \u06A9\u0647 \u0634\u0645\u0627 \u0631\u0632\u0648\u0645\u0647 \u062E\u0648\u062F \u0631\u0627 \u0628\u0631\u0627\u06CC \u0647\u0631 \u06A9\u0633\u06CC \u0627\u0631\u0633\u0627\u0644 \u06CC\u0627 \u0647\u0645\u0627\u0646 \u067E\u0633\u062A \u0645\u06CC\u0646\u0645\u0627\u06CC\u06CC\u062F \u0648 \u0634\u0645\u0627 \u0632\u0645\u0627\u0646\u06CC \u06A9\u0647 \u0647\u0631 \u0647\u0641\u062A\u0647 \u0628\u0627 \u0686\u0646\u062F\u06CC\u0646 \u0641\u0631\u0635\u062A \u0634\u063A\u0644\u06CC \u06A9\u0647 \u0628\u0647 \u0634\u0645\u0627 \u067E\u06CC\u0634\u0646\u0647\u0627\u062F \u062F\u0627\u062F\u0647 \u0645\u06CC\u0634\u0648\u062F \u0645\u0648\u0627\u062C\u0647 \u062E\u0648\u0627\u0647\u06CC\u062F \u0634\u062F.'
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card note-card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'col-md-12 text-center mb-10' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'link-none font-icon' },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'i',
+                                                    { className: 'material-icons mb-10  bordered', 'aria-hidden': 'true' },
+                                                    'verified_user'
+                                                ),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'clearfix' }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'strong',
+                                                    null,
+                                                    '\u0637\u0631\u0627\u062D\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u0633\u0627\u0632\u0645\u0627\u0646\u06CC'
+                                                )
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'p',
+                                            { className: 'text-justify' },
+                                            ' \u0627\u0645\u0631\u0648\u0632\u0647 \u0628\u0627 \u062A\u0648\u062C\u0647 \u0628\u0647 \u0627\u06CC\u0646\u06A9\u0647 \u062F\u0631 \u062F\u0633\u062A\u0648\u0631 \u06A9\u0627\u0631 \u0627\u06A9\u062B\u0631 \u0633\u0627\u0632\u0645\u0627\u0646 \u0647\u0627\u06CC \u0628\u0632\u0631\u06AF \u062E\u0635\u0648\u0635\u06CC \u0648 \u062F\u0648\u0644\u062A\u06CC \u0633\u0631\u0639\u062A \u0628\u062E\u0634\u06CC\u062F\u0646 \u0628\u0647 \u0627\u0631\u0627\u0626\u0647 \u062E\u062F\u0645\u0627\u062A \u0628\u0631\u0627\u06CC \u0627\u0631\u0628\u0627\u0628 \u0631\u062C\u0648\u0639 \u0627\u0632 \u0627\u0648\u0644\u0648\u06CC\u062A \u0647\u0627\u06CC \u06A9\u0627\u0631\u06CC \u0645\u06CC \u0628\u0627\u0634\u062F \u062F\u0627\u0634\u062A\u0646 \u06CC\u06A9 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0633\u0627\u0632\u0645\u0627\u0646\u06CC \u0645\u0633\u0626\u0644\u0647 \u0627\u06CC \u0645\u0647\u0645 \u062E\u0648\u0627\u0647\u062F \u0628\u0648\u062F.'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'section section-bg news' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'col-12 text-center' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'blockquote',
+                                { className: 'blockquote text-center' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h1',
+                                    { className: 'title mb-0' },
+                                    '\u0622\u062E\u0631\u06CC\u0646 \u0645\u0637\u0627\u0644\u0628 \u0648 \u062E\u0628\u0631 \u0647\u0627'
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'footer',
+                                    { className: 'blockquote-footer' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'small',
+                                        null,
+                                        '\u062E\u0628\u0631\u0647\u0627\u06CC \u062F\u0646\u06CC\u0627\u06CC \u0641\u0646\u0627\u0648\u0631\u06CC \u0627\u0637\u0644\u0627\u0639\u0627\u062A'
+                                    )
+                                )
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'container ' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-md-12 flex-center rtl' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'card-img-top', src: './images/blog1.jpg', alt: 'Card image cap' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'card-body' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'p',
+                                                { className: 'rtl' },
+                                                '\u0628\u0631\u06AF\u0632\u0627\u0631\u06CC \u06A9\u0627\u0631\u06AF\u0627\u0647 \u0622\u0645\u0648\u0632\u0634\u06CC \u0627\u0633\u062A\u0627\u0646\u062F\u0627\u0631\u062F\u0647\u0627\u06CC \u0645\u0628\u0627\u0646\u06CC \u06A9\u06CC\u0641\u06CC\u062A \u0646\u0631\u0645 \u0627\u0641\u0632\u0627\u0631'
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'btn btn-outline-secondary' },
+                                                '\u0627\u062F\u0627\u0645\u0647 \u062E\u0628\u0631'
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'card-img-top', src: './images/blog2.jpg', alt: 'Card image cap' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'card-body' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'p',
+                                                { className: 'rtl' },
+                                                '\u06A9\u0627\u0631\u06AF\u0627\u0647 \u0622\u0645\u0648\u0632\u0634\u06CC \u0633\u0631\u0648\u06CC\u0633 \u0647\u0627\u06CC \u0627\u0628\u0631\u06CC \u062F\u0631\u0648\u0646 \u0633\u0627\u0632\u0645\u0627\u0646\u06CC \u062F\u0631 \u0633\u0627\u0644\u0646 \u0627\u0645\u0627\u0645 \u062C\u0648\u0627\u062F (\u0639) \u0628\u0631\u06AF\u0632\u0627\u0631 \u0634\u062F.'
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'btn btn-outline-secondary' },
+                                                '\u0627\u062F\u0627\u0645\u0647 \u062E\u0628\u0631'
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'card-img-top', src: './images/blog3.jpg', alt: 'Card image cap' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'card-body' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'p',
+                                                { className: 'rtl' },
+                                                '\u0628\u0631\u06AF\u0632\u0627\u0631\u06CC \u06A9\u0627\u0631\u06AF\u0627\u0647 \u0622\u0645\u0648\u0632\u0634\u06CC \u062F\u0631 \u0633\u062A\u0627\u062F \u0648\u0632\u0627\u0631\u062A \u062E\u0627\u0646\u0647 \u0628\u0647 \u0645\u0646\u0638\u0648\u0631 \u0628\u0647 \u0645\u0646\u0638\u0648\u0631 \u0622\u0634\u0646\u0627\u06CC\u06CC \u06A9\u0627\u0631\u06A9\u0646\u0627\u0646 \u0628\u0627 \u0627\u0645\u06A9\u0627\u0646\u0627\u062A \u062C\u062F\u06CC\u062F mail server \u062C\u062F\u06CC\u062F'
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'btn btn-outline-secondary' },
+                                                '\u0627\u062F\u0627\u0645\u0647 \u062E\u0628\u0631'
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'card-img-top', src: './images/blog4.jpg', alt: 'Card image cap' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'card-body' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'p',
+                                                { className: 'rtl' },
+                                                '\u0628\u0631\u06AF\u0632\u0627\u0631\u06CC \u0646\u0634\u0633\u062A \u062A\u0642\u062F\u06CC\u0631 \u0648 \u062A\u0634\u06A9\u0631 \u0627\u0632 \u0645\u0634\u0627\u0631\u06A9\u062A \u0641\u0639\u0627\u0644 \u0627\u0639\u0636\u0627\u06CC \u06A9\u0645\u06CC\u062A\u0647 \u0645\u0644\u06CC \u0648 \u0627\u0631\u0632\u06CC\u0627\u0628\u06CC \u0639\u0645\u0644\u06A9\u0631\u062F \u062D\u0648\u0632\u0647 \u0641\u0646\u0627\u0648\u0631\u06CC \u0627\u0637\u0644\u0627\u0639\u0627\u062A \u062F\u0627\u0646\u0634\u06AF\u0627\u0647 \u0647\u0627'
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'btn btn-outline-secondary' },
+                                                '\u0627\u062F\u0627\u0645\u0647 \u062E\u0628\u0631'
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'card-img-top', src: './images/blog5.jpg', alt: 'Card image cap' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'card-body' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'p',
+                                                { className: 'rtl' },
+                                                '\u06AF\u0633\u062A\u0631\u0634 \u062E\u062F\u0645\u0627\u062A \u0646\u0648\u06CC\u0646 \u0627\u0644\u06A9\u062A\u0631\u0648\u0646\u06CC\u06A9 \u0633\u0627\u0632\u0645\u0627\u0646\u06CC \u0648\u0632\u0627\u0631\u062A \u0628\u0647\u062F\u0627\u0634\u062A\u060C \u062F\u0631\u0645\u0627\u0646 \u0648\u0622\u0645\u0648\u0632\u0634 \u067E\u0632\u0634\u06A9\u06CC'
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'btn btn-outline-secondary' },
+                                                '\u0627\u062F\u0627\u0645\u0647 \u062E\u0628\u0631'
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'card-img-top', src: './images/blog6.jpg', alt: 'Card image cap' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'card-body' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'p',
+                                                { className: 'rtl' },
+                                                '\u0634\u0634\u0645\u06CC\u0646 \u0647\u0645\u0627\u06CC\u0634 \u0645\u062F\u06CC\u0631\u0627\u0646 \u0622\u0645\u0627\u0631 \u0648 \u0641\u0646\u0627\u0648\u0631\u06CC \u0627\u0637\u0644\u0627\u0639\u0627\u062A \u0633\u0627\u0644 1396'
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '#', className: 'btn btn-outline-secondary' },
+                                                '\u0627\u062F\u0627\u0645\u0647 \u062E\u0628\u0631'
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'parallex navigation-example custom-filter', style: { backgroundImage: "url('../images/theme/developer.jpg')" } },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'section' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'row' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'container' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-md-12 text-center' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'h4',
+                                            { className: 'withe' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'b',
+                                                null,
+                                                '\u0646\u06CC\u0627\u0632\u0645\u0646\u062F \u0686\u0647 \u062A\u06A9\u0646\u0648\u0644\u0648\u0698\u06CC \u0647\u0633\u062A\u06CC\u062F\u061F'
+                                            )
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'clearfix' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'h6',
+                                            { className: 'withe pb-20' },
+                                            '\u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 \u062A\u06A9\u0646\u0648\u0644\u0648\u0698\u06CC \u0647\u0627\u06CC \u0645\u062A\u0646\u0648\u0639 \u062F\u0631 \u0637\u0631\u0627\u062D\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A'
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-md-12 text-center ' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '/images/tech/bootstrap.png', className: 'responsive ' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '/images/tech/laravel.png', className: ' responsive' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '/images/tech/nodejs.png', className: ' responsive' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '/images/tech/magento-logo.png', className: 'responsive ' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '/images/tech/react.png', className: 'responsive ' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '/images/tech/wordpress-logo-vector-01.png', className: 'responsive ' })
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'section section-components section-dark' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'col-md-12 col-lg-12 col-sm-12 col-xs-12' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-md-6 col-lg-6 col-sm-12 col-xs-12' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-md-12 col-lg-12 col-sm-12 col-xs-12' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { id: 'floatimages', className: 'components-macbook', src: '/images/theme/laptop-basic.png', alt: '' }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'table1', src: '/images/theme/table.jpg', alt: '', style: { left: this.state.left4 } }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'share-btn-img', src: '/images/theme/share-btn.png', alt: '', style: { left: this.state.left3 } }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'coloured-card-btn-img', src: '/images/theme/coloured-card-with-btn.png', alt: '', style: { left: this.state.left2 } }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'coloured-card-img', src: '/images/theme/coloured-card.png', alt: '', style: { left: this.state.left } })
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-md-6 col-lg-6 col-sm-12 col-xs-12' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'container-fluid basic-container' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'h3',
+                                            { className: 'title' },
+                                            '\u0637\u0631\u0627\u062D\u06CC \u0627\u0644\u0645\u0627\u0646 \u0647\u0627\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'h6',
+                                            { className: 'category text-right withe' },
+                                            '\u0637\u0631\u0627\u062D\u06CC \u0627\u062C\u0632\u0627\u06CC \u062A\u0634\u06A9\u06CC\u0644 \u062F\u0647\u0646\u062F\u0647 \u0648\u0628 \u0633\u0627\u06CC\u062A \u0628\u0627 \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 Bootstrap 4'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'h5',
+                                            { className: 'description text-justify' },
+                                            '\u0628\u0631\u0627\u06CC \u062F\u0627\u0634\u062A\u0646 \u0648\u0628 \u0633\u0627\u06CC\u062A\u06CC \u0645\u0646\u062D\u0635\u0631 \u0628\u0647 \u0641\u0631\u062F \u0628\u0627 \u062F\u06CC\u0632\u0627\u06CC\u0646 \u062E\u0627\u0635 \u0628\u0627\u06CC\u062F \u0627\u0644\u0645\u0627\u0646 \u0647\u0627\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u0645\u0627\u0646\u0646\u062F \u062F\u06A9\u0645\u0647 \u0647\u0627\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u060C \u0645\u0646\u0648 \u0648 ... \u0637\u0631\u0627\u062D\u06CC \u0634\u0648\u0646\u062F.\u0647\u0645\u0648\u0627\u0631\u0647 \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 Bootstrap \u062F\u0631 \u0637\u0631\u0627\u062D\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u0628\u0627\u0639\u062B \u0645\u06CC \u0634\u0648\u062F \u0637\u0631\u0627\u062D\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u0627\u0633\u062A\u0627\u0646\u062F\u0627\u0631\u062F \u0648 \u0686\u0634\u0645 \u0646\u0648\u0627\u0632 \u0634\u0648\u062F.\u0645\u0627 \u0628\u0627 \u062A\u063A\u06CC\u06CC\u0631 \u0648 \u0634\u062E\u0635\u06CC \u0633\u0627\u0632\u06CC Bootstrap \u062F\u06CC\u0632\u0627\u06CC\u0646 \u0648 \u0637\u0631\u0627\u062D\u06CC \u062E\u0627\u0635 \u0628\u0631\u0627\u06CC \u0648\u0628 \u0633\u0627\u06CC\u062A \u0634\u0645\u0627 \u0641\u0631\u0627\u0647\u0645 \u0645\u06CC \u06A9\u0646\u06CC\u0645 .'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'subscribe-line subscribe-line-image custom-filter', 'data-parallax': 'true', style: { backgroundImage: "url('/images/theme/office.jpg')" } },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'container' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'row' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'col-md-6 col-md-offset-3' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'text-center' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'h3',
+                                            { className: 'title withe' },
+                                            '\u062B\u0628\u062A \u0646\u0627\u0645 \u062F\u0631 \u0627\u0634\u062A\u0631\u0627\u06A9 \u062E\u0628\u0631\u0646\u0627\u0645\u0647'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'p',
+                                            { className: 'card-description withe' },
+                                            '\u0628\u0627\u062B\u0628\u062A \u0646\u0627\u0645 \u062F\u0631 \u062E\u0628\u0631\u0646\u0627\u0645\u0647 \u0645\u062F\u0631\u0646 \u062A\u06A9 \u0627\u0632 \u062C\u062F\u06CC\u062F\u062A\u0631\u06CC\u0646 \u062E\u0628\u0631\u0647\u0627\u06CC \u062F\u0646\u06CC\u0627\u06CC \u0641\u0646\u0627\u0627\u0648\u0631\u06CC \u0627\u0637\u0644\u0627\u0639\u0627\u062A \u0645\u0637\u0644\u0639 \u0634\u0648\u06CC\u062F \u0648 \u0627\u0648\u0644\u06CC\u0646 \u0641\u0631\u062F\u06CC \u0628\u0627\u0634\u06CC\u062F \u0645\u062D\u0635\u0648\u0644\u0627\u062A \u062C\u062F\u06CC\u062F \u0648\u0628\u06CC \u062A\u06A9 \u062F\u06CC\u062F\u0646 \u0645\u06CC \u06A9\u0646\u062F'
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'card card-raised card-form-horizontal' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'card-content' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'form',
+                                                null,
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: '_token', type: 'hidden' }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    'div',
+                                                    { className: 'row' },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'div',
+                                                        { className: 'col-sm-4' },
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'btn-primary btn btn-rose btn-block', type: 'submit', value: '\u062B\u0628\u062A \u0646\u0627\u0645' })
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        'div',
+                                                        { className: 'col-sm-8' },
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                            'div',
+                                                            { className: 'input-group' },
+                                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                                'div',
+                                                                { className: 'form-group is-empty' },
+                                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'text-right form-control', name: 'email', type: 'email' }),
+                                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
+                                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' }),
+                                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'material-input' })
+                                                            ),
+                                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                                'span',
+                                                                { className: 'input-group-addon' },
+                                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                                    'i',
+                                                                    { className: 'material-icons' },
+                                                                    'mail'
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__partials_Footer__["a" /* default */], null)
             );
@@ -62642,7 +63455,7 @@ var Carsoul = function (_Component) {
 						{ className: "row" },
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							"div",
-							{ className: "col-md-8" },
+							{ className: "container-fluid pd-0" },
 							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 								"div",
 								{ className: "card card-raised card-carousel mb-15" },
@@ -62665,79 +63478,34 @@ var Carsoul = function (_Component) {
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												"div",
 												{ className: "item active" },
-												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/slider/1.jpg", alt: "Awesome Image" })
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/slider/1.jpg", alt: "Awesome Image" }),
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+													"p",
+													{ className: "ease-in caption" },
+													"\u062E\u0644\u0642 \u0627\u06CC\u062F\u0647 \u0647\u0627\u06CC \u0646\u0648\u06CC\u0646  \u0648\u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 \u0627\u0641\u0631\u0627\u062F \u0628\u0627 \u062A\u062C\u0631\u0628\u0647"
+												)
 											),
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												"div",
 												{ className: "item" },
-												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/slider/2.jpg", alt: "Awesome Image" })
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/slider/2.jpg", alt: "Awesome Image" }),
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+													"p",
+													{ className: "ease-in caption" },
+													"\u0637\u0631\u0627\u062D\u06CC \u0648\u0627\u06A9\u0646\u0634 \u06AF\u0631\u0627 \u0648 \u0628\u0647\u06CC\u0646\u0647 \u0635\u0641\u062D\u0627\u062A"
+												)
 											),
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												"div",
 												{ className: "item" },
-												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/slider/3.png", alt: "Awesome Image" })
-											)
-										),
-										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-											"a",
-											{ className: "left carousel-control", href: "#carousel-example-generic", "data-slide": "prev" },
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												"i",
-												{ className: "material-icons" },
-												"keyboard_arrow_left"
-											)
-										),
-										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-											"a",
-											{ className: "right carousel-control", href: "#carousel-example-generic", "data-slide": "next" },
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-												"i",
-												{ className: "material-icons" },
-												"keyboard_arrow_right"
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/slider/3.jpg", alt: "Awesome Image" }),
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+													"p",
+													{ className: "ease-in caption" },
+													"\u067E\u0634\u062A\u06CC\u0628\u0627\u0646\u06CC \u060C \u0639\u06CC\u0628 \u06CC\u0627\u0628\u06CC \u0648 \u0628\u0647\u0628\u0648\u062F \u0631\u0646\u06A9 \u0648\u0628 \u0633\u0627\u06CC\u062A"
+												)
 											)
 										)
-									)
-								)
-							)
-						),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							"div",
-							{ className: "col-md-4 col-xs-12" },
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								"a",
-								{ href: "", className: "mask item-banner mb-20" },
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/theme/banner1.jpg", alt: "Rounded Image", className: "banner  img-responsive" }),
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									"div",
-									{ className: "fade-caption" },
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										"h5",
-										{ className: "caption-title text-right" },
-										"\u06CC\u06A9 \u0641\u0631\u0648\u0634\u06AF\u0627\u0647 \u0627\u06CC\u0646\u062A\u0631\u0646\u062A\u06CC \u0645\u0648\u0641\u0642 \u0686\u0647 \u0627\u0645\u06A9\u0627\u0646\u0627\u062A\u06CC \u062F\u0627\u0631\u062F\u061F"
-									),
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										"p",
-										{ className: "text-right" },
-										"\u06CC\u06A9 \u0641\u0631\u0648\u0634\u06AF\u0627\u0647 \u0627\u06CC\u0646\u062A\u0631\u0646\u062A\u06CC \u0628\u0631\u0627 \u06CC \u0645\u0648\u0641\u0642\u06CC\u062A \u0646\u06CC\u0627\u0632 \u0628\u0647 \u0641\u0627\u06A9\u062A\u0648\u0631 \u0647\u0627\u06CC\u06CC \u062E\u0627\u0635  \u0646\u0638\u06CC\u0631 \u0633\u0631\u0639\u062A \u0627\u062C\u0631\u0627\u06CC\u06CC \u0628\u0627\u0644\u0627 \u060C \u0638\u0627\u0647\u0631\u06CC \u0632\u06CC\u0628\u0627 \u0648 \u06A9\u0627\u0631\u0628\u0631 \u067E\u0633\u0646\u062F \u0648.."
-									)
-								)
-							),
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								"a",
-								{ href: "", className: "mask item-banner" },
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "images/theme/banner2.jpg", alt: "Rounded Image", className: "banner  img-responsive" }),
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									"div",
-									{ className: "fade-caption" },
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										"h5",
-										{ className: "caption-title mb-20 text-right" },
-										"\u0686\u0637\u0648\u0631 \u06A9\u0627\u0631 \u0648\u062A\u062E\u0635\u0635 \u062E\u0648\u062F \u0631\u0627 \u0628\u0647 \u062F\u06CC\u06AF\u0631\u0627\u0646 \u0645\u0639\u0631\u0641\u06CC \u06A9\u0646\u06CC\u0645\u061F"
-									),
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										"p",
-										{ className: "text-right" },
-										"\u0628\u0627 \u062F\u0627\u0634\u062A\u0646 \u0648\u0628 \u0633\u0627\u06CC\u062A\u06CC \u062D\u0631\u0641\u0647 \u0627\u06CC \u0645\u0648\u0641\u0642\u06CC\u062A \u06A9\u0627\u0631 \u062E\u0648\u062F \u0631\u0627 \u062A\u0636\u0645\u06CC\u0646 \u06A9\u0646\u06CC\u062F..."
 									)
 								)
 							)
@@ -62784,7 +63552,7 @@ var Tabs = function (_Component) {
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
-                null,
+                { className: "col-md-12" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "h3",
                     { className: "text-center black-title" },
@@ -63526,7 +64294,7 @@ var Menu = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__items_Modal__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_universal_cookie__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_spinners__ = __webpack_require__(42);
@@ -68922,7 +69690,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__items_Modal__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_universal_cookie__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_spinners__ = __webpack_require__(42);
@@ -70045,7 +70813,7 @@ var Blog = function (_Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(12);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71047,7 +71815,7 @@ var Contact = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__items_SuccessMessage__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__items_FailMessage__ = __webpack_require__(365);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__items_NavItem__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_router_dom__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_Header__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_Footer__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_universal_cookie__ = __webpack_require__(25);
@@ -72086,7 +72854,7 @@ var FailMessage = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_Header__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_Footer__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_universal_cookie__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(15);
@@ -72315,7 +73083,7 @@ var ConfirmUser = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_Header__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_Footer__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_universal_cookie__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(15);
@@ -72869,7 +73637,7 @@ var ConfirmUser = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_universal_cookie__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__partials_Header__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__partials_Footer__ = __webpack_require__(21);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -73171,7 +73939,7 @@ var UserDashboard = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_universal_cookie__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__partials_Header__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__partials_Footer__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_images_upload__ = __webpack_require__(370);
