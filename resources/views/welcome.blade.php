@@ -26,11 +26,9 @@
         </div>       
          <script src="{{mix('js/app.js')}}" ></script> 
         <script src="{{asset('js/jquery.min.js')}}" ></script>
+        <script src="{{asset('js/Popper.js')}}" ></script>
         <script src="{{asset('js/theme/bootstarp.min.js')}}" ></script>
-       
-
         <script src="{{asset('js/material.min.js')}}" ></script>
         <script src="{{asset('js/theme/bootstrap-datepicker.js')}}" ></script>
-        <script src="{{asset('js/theme/material-kit.js')}}" ></script>
     </body>
 </html>

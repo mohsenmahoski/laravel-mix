@@ -3,6 +3,7 @@ import Carousel from '../items/Carousel';
 import Tabs from '../items/Tabs';
 import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
+import LatestBlogs from '../items/LatestBlogs';
 
 class Home extends Component {
     constructor(props){
@@ -103,13 +104,24 @@ class Home extends Component {
             this.setState({front4 : setInterval(this._front4.bind(this),60)}); 
         }
     }
+    componentWillUnmount(){
+        const{front,front2,front3,front4,back,back2,back3,back4} = this.state;
+        clearInterval(front);
+         clearInterval(front2);
+          clearInterval(front3);
+           clearInterval(front4);
+               clearInterval(back);
+                 clearInterval(back2);
+                  clearInterval(back3);
+                   clearInterval(back4);
+
+    }
     render() {
     	
         return (
         	<div>
-             <Header />
+             <Header redirect={this.props.location} />
                       <div className="header header-filter">
-                        <div className="container">
                             <div className="row">
                                 <div className="container">
                                     <div className="brand">
@@ -117,9 +129,10 @@ class Home extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
                       </div>
-                     <div className="main main-raised">
+                      <div className="row">
+                       <div className="container">
+                        <div className="main main-raised">
                                 <nav className="navbar navbar-default">
                                         <div className="container-fluid">
                                              <div className="collapse navbar-collapse menu" id="example-navbar">
@@ -139,8 +152,10 @@ class Home extends Component {
                                 </nav>
                                  
 						          <div className="row"> 
-                                       <h3 className="text-center black-title"><b>قالب کار خود را انتخاب کنید</b></h3>
-                                       <p className="rtl text-center"><b>شما می توانید از بین قالب های متنوع قالب مناسب برای کسب و کار خود را انتخاب کنید.</b></p>
+                                       <div className="col-12 text-center">
+                                            <h3 className="text-center black-title"><b>قالب کار خود را انتخاب کنید</b></h3>
+                                            <p className="rtl text-center"><b>شما می توانید از بین قالب های متنوع قالب مناسب برای کسب و کار خود را انتخاب کنید.</b></p>
+                                       </div>
                                        <div className="container-fluid flex-center">
                                                 <a href=""  className="mask item-banner">
                                                     <img  src="images/theme/banner1.jpg" alt="Rounded Image" className="banner  img-responsive" />
@@ -176,15 +191,11 @@ class Home extends Component {
 						      <Tabs />
                               <div className="section">
                                    <div className="row">
-                                         <div className="container-fluid">
-                                            <div className="row"> 
-                                                  <div className="col-md-8 col-md-offset-2 text-center">
-                                                    <h2 className="title title-black ">چرا وبی تک ؟</h2>
-                                                    <h5 className="description"><b>وبی تک</b> با سال ها تجربه در حوزه طراحی سایت ، از تاثیر یک سایت حرفه ای در معرفی کسب و کار شرکت ها آگاه است . در همین راستا این شرکت با در اختیار داشتن تیمی حرفه ای و مطابق با آخرین تکنولوژی های روز دنیا ، تخصص و خلاقیت را در کنار هم قرار داده تا وب سایت شما علاوه بر داشتن ظاهری زیا و متفاوت ، تبدیل به ابزاری قدرتمند برای نمایش شخصیت کاریتان و افزایش فروش شما گردد . </h5>
-                                                  </div>
-                                            </div>
-
-                                          <div className="col-md-12 flex-center">
+                                      <div className="container-fluid">
+                                         <div className="col-12 text-center">
+                                                <h2 className="title title-black ">چرا وبی تک ؟</h2>
+                                                <h5 className="description"><b>وبی تک</b> با سال ها تجربه در حوزه طراحی سایت ، از تاثیر یک سایت حرفه ای در معرفی کسب و کار شرکت ها آگاه است . در همین راستا این شرکت با در اختیار داشتن تیمی حرفه ای و مطابق با آخرین تکنولوژی های روز دنیا ، تخصص و خلاقیت را در کنار هم قرار داده تا وب سایت شما علاوه بر داشتن ظاهری زیا و متفاوت ، تبدیل به ابزاری قدرتمند برای نمایش شخصیت کاریتان و افزایش فروش شما گردد . </h5>
+                                                <div className="col-md-12 flex-center">
                                                 <div className="card note-card">
                                                         <div className="col-md-12 text-center mb-10">
                                                             <a href="#" className="link-none font-icon">
@@ -238,67 +249,10 @@ class Home extends Component {
                                                 </div>
                                              </div>
                                          </div>
+                                      </div>
                                    </div>
                               </div>
-                              <div className="section section-bg news">
-                                                <div className="col-12 text-center">
-                                                        <blockquote className="blockquote text-center">
-                                                          <h1 className="title mb-0">آخرین مطالب و خبر ها</h1>
-                                                          <footer className="blockquote-footer"><small>خبرهای دنیای فناوری اطلاعات</small></footer>
-                                                        </blockquote>
-                                                </div>
-                                                <div className="row">
-                                                     <div className="container ">
-                                                              <div className="col-md-12 flex-center rtl">
-                                                                        
-                                                                            <div className="card">
-                                                                              <img className="card-img-top" src="./images/blog1.jpg" alt="Card image cap" />
-                                                                              <div className="card-body">
-                                                                                <p className="rtl">برگزاری کارگاه آموزشی استانداردهای مبانی کیفیت نرم افزار</p>
-                                                                                <a href="#" className="btn btn-outline-secondary">ادامه خبر</a>
-                                                                              </div>
-                                                                            </div>
-                                                                            <div className="card">
-                                                                              <img className="card-img-top" src="./images/blog2.jpg" alt="Card image cap" />
-                                                                              <div className="card-body">
-                                                                                <p className="rtl">کارگاه آموزشی سرویس های ابری درون سازمانی در سالن امام جواد (ع) برگزار شد.</p>
-                                                                                <a href="#" className="btn btn-outline-secondary">ادامه خبر</a>
-                                                                              </div>
-                                                                            </div>
-                                                                            <div className="card">
-                                                                              <img className="card-img-top" src="./images/blog3.jpg" alt="Card image cap" />
-                                                                              <div className="card-body">
-                                                                                <p className="rtl">برگزاری کارگاه آموزشی در ستاد وزارت خانه به منظور به منظور آشنایی کارکنان با امکانات جدید mail server جدید</p>
-                                                                                <a href="#" className="btn btn-outline-secondary">ادامه خبر</a>
-                                                                              </div>
-                                                                            </div>
-                                                                            <div className="card">
-                                                                              <img className="card-img-top" src="./images/blog4.jpg" alt="Card image cap" />
-                                                                              <div className="card-body">
-                                                                                <p className="rtl">برگزاری نشست تقدیر و تشکر از مشارکت فعال اعضای کمیته ملی و ارزیابی عملکرد حوزه فناوری اطلاعات دانشگاه ها</p>
-                                                                                <a href="#" className="btn btn-outline-secondary">ادامه خبر</a>
-                                                                              </div>
-                                                                            </div>
-                                                                            <div className="card">
-                                                                              <img className="card-img-top" src="./images/blog5.jpg" alt="Card image cap" />
-                                                                              <div className="card-body">
-                                                                                <p className="rtl">گسترش خدمات نوین الکترونیک سازمانی وزارت بهداشت، درمان وآموزش پزشکی</p>
-                                                                                <a href="#" className="btn btn-outline-secondary">ادامه خبر</a>
-                                                                              </div>
-                                                                            </div>
-                                                                            <div className="card">
-                                                                              <img className="card-img-top" src="./images/blog6.jpg" alt="Card image cap" />
-                                                                              <div className="card-body">
-                                                                                <p className="rtl">ششمین همایش مدیران آمار و فناوری اطلاعات سال 1396</p>
-                                                                                <a href="#" className="btn btn-outline-secondary">ادامه خبر</a>
-                                                                              </div>
-                                                                            </div>
-                                                                        
-                                                              </div>
-                                                     </div>
-                                                </div>
-                                               
-                              </div>
+                              <LatestBlogs />
                               <div className="parallex navigation-example custom-filter" style={{backgroundImage: "url('../images/theme/developer.jpg')"}}>
                                       <div className="section">
                                            <div className="row">
@@ -316,30 +270,30 @@ class Home extends Component {
                                                              <img src="/images/tech/magento-logo.png" className="responsive "/>
                                                              <img src="/images/tech/react.png" className="responsive "/>
                                                              <img src="/images/tech/wordpress-logo-vector-01.png" className="responsive "/>
-                                                       </div>
-                                                        
-                                                                
+                                                       </div> 
                                                  </div>  
                                            </div>
                                       </div>
                               </div>
                               <div className="section section-components section-dark">
                                     <div className="row">
-                                      <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                        <div className="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                                            <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                                <img id="floatimages" className="components-macbook" src="/images/theme/laptop-basic.png" alt=""/>
-                                                <img className="table1" src="/images/theme/table.jpg" alt="" style={{ left:this.state.left4 }}/>
-                                                <img className="share-btn-img" src="/images/theme/share-btn.png" alt="" style={{ left:this.state.left3 }}/>
-                                                <img className="coloured-card-btn-img" src="/images/theme/coloured-card-with-btn.png" alt="" style={{ left:this.state.left2 }}/>
-                                                <img className="coloured-card-img" src="/images/theme/coloured-card.png" alt="" style={{ left:this.state.left }} />
+                                      <div className="container-fluid">
+                                        <div className="flex-center">
+                                            <div className="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                                <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                                    <img id="floatimages" className="components-macbook" src="/images/theme/laptop-basic.png" alt=""/>
+                                                    <img className="table1" src="/images/theme/table.jpg" alt="" style={{ left:this.state.left4 }}/>
+                                                    <img className="share-btn-img" src="/images/theme/share-btn.png" alt="" style={{ left:this.state.left3 }}/>
+                                                    <img className="coloured-card-btn-img" src="/images/theme/coloured-card-with-btn.png" alt="" style={{ left:this.state.left2 }}/>
+                                                    <img className="coloured-card-img" src="/images/theme/coloured-card.png" alt="" style={{ left:this.state.left }} />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                                            <div className="container-fluid basic-container">
-                                                <h3 className="title">طراحی المان های وب سایت</h3>
-                                                <h6 className="category text-right withe">طراحی اجزای تشکیل دهنده وب سایت با استفاده از Bootstrap 4</h6>
-                                                <h5 className="description text-justify">برای داشتن وب سایتی منحصر به فرد با دیزاین خاص باید المان های وب سایت مانند دکمه های وب سایت ، منو و ... طراحی شوند.همواره استفاده از Bootstrap در طراحی وب سایت باعث می شود طراحی وب سایت استاندارد و چشم نواز شود.ما با تغییر و شخصی سازی Bootstrap دیزاین و طراحی خاص برای وب سایت شما فراهم می کنیم .</h5>
+                                            <div className="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                                <div className="container-fluid basic-container">
+                                                    <h3 className="title text-center">طراحی المان های وب سایت</h3>
+                                                    <h6 className="category text-right withe">طراحی اجزای تشکیل دهنده وب سایت با استفاده از Bootstrap 4</h6>
+                                                    <h5 className="description text-justify">برای داشتن وب سایتی منحصر به فرد با دیزاین خاص باید المان های وب سایت مانند دکمه های وب سایت ، منو و ... طراحی شوند.همواره استفاده از Bootstrap در طراحی وب سایت باعث می شود طراحی وب سایت استاندارد و چشم نواز شود.ما با تغییر و شخصی سازی Bootstrap دیزاین و طراحی خاص برای وب سایت شما فراهم می کنیم .</h5>
+                                                </div>
                                             </div>
                                         </div>
                                       </div>
@@ -347,47 +301,49 @@ class Home extends Component {
                               </div>
                               
                               <div className="subscribe-line subscribe-line-image custom-filter" data-parallax="true" style={{ backgroundImage: "url('/images/theme/office.jpg')" }}>
-                                    <div className="container">
-                                        <div className="row">
-                                            <div className="col-md-6 col-md-offset-3">
-                                                <div className="text-center">
-                                                    <h3 className="title withe">ثبت نام در اشتراک خبرنامه</h3>
-                                                    <p className="card-description withe">
-                                                        باثبت نام در خبرنامه مدرن تک از جدیدترین خبرهای دنیای فنااوری اطلاعات مطلع شوید و اولین فردی باشید محصولات جدید وبی تک دیدن می کند
-                                                    </p>
+                                     <div className="row">
+                                        <div className="container">
+                                            <div className="flex-center">
+                                                <div className="col-md-6">
+                                                        <div className="text-center">
+                                                                <h3 className="title withe">ثبت نام در اشتراک خبرنامه</h3>
+                                                                <p className="card-description withe">
+                                                                    باثبت نام در خبرنامه مدرن تک از جدیدترین خبرهای دنیای فنااوری اطلاعات مطلع شوید و اولین فردی باشید محصولات جدید وبی تک دیدن می کند
+                                                                </p>
+                                                        </div>
+                                                        <div className="card card-raised card-form-horizontal">
+                                                                <div className="card-content">
+                                                                    <form>
+                                                                      <input name="_token" type="hidden"/>
+                                                                       <div className="row">
+                                                                           <div className="col-sm-4">
+                                                                               <input className="btn-primary btn btn-rose btn-block" type="submit" value="ثبت نام" />
+                                                                           </div>
+                                                                      
+                                                                           <div className="col-sm-8">
+                                                                                <div className="input-group">
+                                                                                    <div className="form-group is-empty">
+                                                                                     <input className="text-right form-control" name="email" type="email" />
+                                                                                       <span className="material-input"></span>
+                                                                                       <span className="material-input"></span>
+                                                                                    <span className="material-input"></span></div>
+                                                                                    <span className="input-group-addon">
+                                                                                        <i className="material-icons">mail</i>
+                                                                                    </span>
+                                                                                </div>
+                                                                           </div>
+                                                                       </div>
+                                                                    </form>
+                                                                </div>
+                                                        </div>
                                                 </div>
-
-                                                <div className="card card-raised card-form-horizontal">
-                                                    <div className="card-content">
-                                                        <form>
-                                                          <input name="_token" type="hidden"/>
-                                                           <div className="row">
-                                                               <div className="col-sm-4">
-                                                                   <input className="btn-primary btn btn-rose btn-block" type="submit" value="ثبت نام" />
-                                                               </div>
-                                                          
-                                                               <div className="col-sm-8">
-                                                                    <div className="input-group">
-                                                                        <div className="form-group is-empty">
-                                                                         <input className="text-right form-control" name="email" type="email" />
-                                                                           <span className="material-input"></span>
-                                                                           <span className="material-input"></span>
-                                                                        <span className="material-input"></span></div>
-                                                                        <span className="input-group-addon">
-                                                                            <i className="material-icons">mail</i>
-                                                                        </span>
-                                                                    </div>
-                                                               </div>
-                                                           </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </div>
                                     </div>
                               </div>
-                    </div>
+                        </div>
+                       </div>
+                     </div>
                     <Footer />
             </div>
         );

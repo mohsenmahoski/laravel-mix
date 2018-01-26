@@ -37,7 +37,7 @@ export default class Blog extends Component{
 	    const articles = this.state.article;
 		return(
                     <div>
-                    <Header />
+                    <Header redirect={this.props.location} />
 		                       	<div className="header header-filter">
 							        <div className="container">
 							            <div className="row">

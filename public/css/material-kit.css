@@ -702,7 +702,7 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 
 
 
-
+.tab-pane .card{width:175px;}
 
 
 
@@ -2075,7 +2075,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   font-size: 30px;
   padding:0 0 15px 0;
 }
-.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+.nav-pills > li > a.active, .nav-pills > li > a.active:focus, .nav-pills > li > a.active:hover {
   background-color: #9c27b0;
   color: #FFFFFF;
   box-shadow: 0 16px 26px -10px rgba(156, 39, 176, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2);
@@ -2219,6 +2219,8 @@ legend {
 .navbar .navbar-form {
   border-top: none;
   box-shadow: none;
+  justify-content: flex-end;
+  padding-right:60px;
 }
 .navbar .navbar-nav > .open > a, .navbar .navbar-nav > .open > a:hover, .navbar .navbar-nav > .open > a:focus {
   background-color: transparent;
@@ -2989,16 +2991,20 @@ h2.title {
   background:url("../images/theme/arrow-right.png"), url("../images/theme/arrow-right.cur") !important;
   background-repeat:no-repeat !important;
 }
-.carousel .carousel-indicators {
-  bottom: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.brand .carousel-indicators {
+    bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    margin: 0 25px;
+    top: 0;
 }
 .carousel .carousel-indicators li,
 .carousel .carousel-indicators .active {
   margin: 11px 10px;
+  cursor:pointer;
 }
 .carousel .carousel-indicators li {
   background: #FFFFFF;
@@ -3006,13 +3012,14 @@ h2.title {
   border-radius: 2px;
 }
 .carousel .carousel-indicators .active {
-  margin-top: 10px;
-  -webkit-transform: scale(1.5);
-  -moz-transform: scale(1.5);
-  -o-transform: scale(1.5);
-  -ms-transform: scale(1.5);
-  transform: scale(1.5);
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      margin-top: 10px;
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+    box-shadow: 0 4px 5px 0 #9c27b06e, 0 1px 10px 0 #9c27b087, 0 2px 4px -1px #9c27b09e;
+    background: #9c27b0;
 }
 .carousel .carousel-caption {
   padding-bottom: 10px;
@@ -3235,7 +3242,7 @@ h2.title {
 }
 
 .modal .modal-dialog {
-  margin-top: 100px;
+  margin-top: 190px;
 }
 .modal .modal-header .close {
   color: #555555;
@@ -4106,11 +4113,6 @@ h2.title {
     padding-top: 10px;
     border-radius: 0;
   }
-
-  .main-raised {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
 }
 /*pro css*/
 .card-contact .header{
@@ -4135,6 +4137,8 @@ h2.title {
 .section, .section-image {
     background-position: center center;
     background-size: cover;
+    display:inline-block;
+    width: 100%;
 }
 .section-image {
     position: relative;
@@ -4235,9 +4239,6 @@ h2.title {
   }
 }
 @media (min-width:1200px) {
-   .main-raised{
-    max-width:1145px;
-    margin:-50px auto 20px auto;
-   }
+  
 }
 /*# sourceMappingURL=material-kit.css.map */
