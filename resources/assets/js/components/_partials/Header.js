@@ -40,20 +40,14 @@ class Header extends Component{
     componentDidMount(){
       setTimeout(()=>{this.setState({width:0})},700);
     }
-    componentWillReceiveProps(nextProps){
-       if (nextProps.redirect !== undefined){
-          this.setState({
-           redirect:nextProps.redirect.pathname
-          });
-       }
-    }
     _pagechange(path){
-       this.setState({
-          width:150
-       });
-       console.log(path,this.state.redirect);
-       if (path !== this.state.redirect ){
-             setTimeout(()=>{ this.setState({path}) },700);
+       if (this.props.redirect != undefined){
+            if (path !== this.props.redirect.pathname ){
+              this.setState({
+                  width:150
+               });
+               setTimeout(()=>{ this.setState({path}) },700);
+             }
        }
     }
     componentWillMount(){
@@ -77,7 +71,8 @@ class Header extends Component{
                      });
          }
     }
-    render() {
+    render() { 
+
         return (
                <div className="row">
                {this.state.path !== null ? <Redirect to={this.state.path} /> : null}
@@ -89,24 +84,29 @@ class Header extends Component{
                       <UserLogin display={this.state.displayuser}></UserLogin>
                       <AuthorLogin display={this.state.displyauthor} ></AuthorLogin>
                       <NavItem activeOnlyWhenExact={false} className="nav-link" to="/">
-                        <img src="../images/theme/logo.png" alt="modern tech" rel="tooltip" title="" data-placement="bottom" data-html="true" data-original-title="<b>WEBI TECH</b></br>گروهی مستعد وپویا در زمینه طراحی و دیزاین وب سایت</b>" />      
+                        <img src="../images/theme/logo.png" alt="modern tech" title=""  />      
                       </NavItem>
                       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                       </button>
                       <div className="collapse navbar-collapse" id="navbarCollapse">
                         <ul className="navbar-nav">
-                           <NavItem activeOnlyWhenExact={true} dataOriginalTitle="صفحه اصلی" className="active text-right nav-link" to="/">صفحه اصلی</NavItem>
-                                      
-                                      
-                                     
-                                         
-                                      <NavItem activeOnlyWhenExact={false} dataOriginalTitle="آخرین خبرها" className="nav-link" to="/blog">
-                                              بلاگ<i className="material-icons">dashboard</i>
-                                      </NavItem>
                                       <li className="nav-item">
-                                                <a className="nav-link pull-right" rel="tooltip" data-placement="bottom" data-original-title="صفحه اصلی" onClick={()=>{this._pagechange('/blog')}}>بلاگ</a>
+                                                <a className="nav-link pull-right"   onClick={()=>{this._pagechange('/')}}>
+                                                   صفحه اصلی<i className="material-icons">home</i>
+                                                </a>
+                                      </li> 
+                                      <li className="nav-item">
+                                                <a className="nav-link pull-right"   onClick={()=>{this._pagechange('/blog')}}>
+                                                    بلاگ<i className="material-icons">dashboard</i>
+                                                </a>
                                       </li>
+                                      <li className="nav-item">
+                                                <a className="nav-link pull-right"   onClick={()=>{this._pagechange('/about')}}>
+                                                  درباره ما<i className="material-icons">speaker_notes</i>
+                                                </a>
+                                      </li>
+                                     
                                       <li className="text-right">
                                            <ul className="nav navbar-nav prl-0">
                                                     <li className="dropdown text-right" id="categories">
@@ -192,15 +192,11 @@ class Header extends Component{
 
                                            </ul>
                                       </li>
-                                     
-                                           
-                                      <NavItem className="nav-link" dataOriginalTitle="با وبی تک بیشتر آشنا شوید." to="/about">
-                                         درباره ما<i className="material-icons">speaker_notes</i>
-                                      </NavItem>
-                                    
-                                      <NavItem className="nav-link" dataOriginalTitle="با ما در تماس باشید" to="/contact">
-                                         تماس با ما<i className="material-icons">perm_phone_msg</i>
-                                      </NavItem>
+                                      <li className="nav-item">
+                                                <a className="nav-link pull-right"   onClick={()=>{this._pagechange('/contact')}}>
+                                                        تماس با ما<i className="material-icons">perm_phone_msg</i>
+                                                </a>
+                                      </li>
                                       {this.state.username == '' ? <Menu title="ورود" data={[{title:'کاربر' , to:'#' , onClicking:()=>{this._userlogin()}},{title:'نویسنده' , to:'#' , onClicking:()=>{this._authorlogin()}}]} /> : <NavItem className="nav-link" dataOriginalTitle="با ما در تماس باشید" to="/dashboard">{this.state.username}<i className="material-icons">perm_phone_msg</i></NavItem>}
                         </ul>
                       </div>

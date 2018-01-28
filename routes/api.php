@@ -51,3 +51,5 @@ Route::group(['middleware'=>'auth:author-api' , 'prefix'=>'/author'],function(){
 
 Route::post('/upload','API\AuthorPassport@create_post')->name('api.create_post');
 Route::resource('/author_post','API\Author_Post_Controller');
+
+Route::get('/home' , 'HomeController@index')->name('homepage');

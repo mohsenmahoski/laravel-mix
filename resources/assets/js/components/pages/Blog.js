@@ -4,6 +4,7 @@ import CardBlog from '../items/CardBlog';
 import InfiniteScroll from 'react-infinite-scroller';
 import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
+import Socials from '../items/Socials';
 import { DotLoader } from 'react-spinners';
 
 
@@ -39,47 +40,47 @@ export default class Blog extends Component{
                     <div>
                     <Header redirect={this.props.location} />
 		                       	<div className="header header-filter">
-							        <div className="container">
-							            <div className="row">
-							                <div className="col-md-8 col-md-offset-2">
-							                    <div className="brand">
-							                        <h1 className="title white">وبی تک</h1>
-							                        <div className="separator separator-danger">✻</div>
-							                        <h3 className="text-center">مقالات</h3>
+							        <div className="container flex-center">
+							                <div className="col-md-12 flex-center" style={{ background:'url("/images/theme/typing.jpg")',minHeight:'325px' }}>  
+							                    <div className="shape"></div>
+							                    <div className="caption text-center">
+							                        <h3 className="text-center">اخبار و رویدادهای دنیای فناوی اطلاعات</h3>
+							                        <small>جدیدترین خبرها</small>
 							                    </div>
 							                </div>
-							            </div>
 							        </div>
 		     					</div>
-							   	<div className="main main-raised">
-									<nav className="navbar navbar-default">
-									        <div className="container-fluid">
-									             <div className="collapse navbar-collapse menu" id="example-navbar">
-									                                         
-									             </div>
-									        </div>
-									</nav>
-			                     	<div className="section-fluid">
-				                       <div className="container"> 
-												<div className='col-md-12' >
-													<InfiniteScroll
-													     pageStart={1}
-													     loadMore={this.loadMore.bind(this)}
-													     hasMore={this.state.hasMore}
-													     threshold={0.005}
-													     className="row"	
-													     loader={<div className="col-md-12"><div className='sweet-loading'>
-												                    <DotLoader
-												                      color={'#123abc'} 
-												                      loading={true} 
-												                    />
-												                  </div></div>}											>
-														{ articles.map((card , index)=><CardBlog card={card}  key={index} /> ) }
-													</InfiniteScroll>
+							   	<div className="row">
+							   	   <div className="container">
+                                           <div className="main main-raised">
+											<Socials />
+					                     	<div className="section-fluid">
+						                       <div className="container"> 
+														<div className='col-md-12' >
+															<InfiniteScroll
+															     pageStart={1}
+															     loadMore={this.loadMore.bind(this)}
+															     hasMore={this.state.hasMore}
+															     threshold={0.005}
+															     className="row"	
+															     loader={
+															       <div className="col-md-12">
+																     <div className='sweet-loading'>
+															                    <DotLoader
+															                      color={'#123abc'} 
+															                      loading={true} 
+															                    />
+															         </div>
+												                   </div>
+												                 }											>
+																{ articles.map((card , index)=><CardBlog card={card}  key={index} /> ) }
+															</InfiniteScroll>
+														</div>
 												</div>
+											</div>
 										</div>
-									</div>
-								</div>
+									   	   </div>
+							   	</div>
 						<Footer />
                     </div>
 			);

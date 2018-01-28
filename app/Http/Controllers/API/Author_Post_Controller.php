@@ -65,7 +65,7 @@ class Author_Post_Controller extends Controller
                  $file = $request->file('file');
                  $imageName = time().'.'.$file->getClientOriginalExtension();
                  $location = public_path('images/posts/'.$imageName);
-                 Image::make($file)->resize(736,256)->save($location);
+                 Image::make($file)->resize(980,580)->save($location);
 
 
                  $post = new Post;

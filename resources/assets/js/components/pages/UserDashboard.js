@@ -67,7 +67,7 @@ export default class UserDashboard extends Component{
 		const {useremail , username } = this.state;
 		return(
 			     <div>
-			     <Header />
+			      <Header redirect={this.props.location} />
 					     <div className="header header-filter">
 		                        <div className="container">
 		                            <div className="row">

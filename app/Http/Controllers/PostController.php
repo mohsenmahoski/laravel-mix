@@ -70,7 +70,7 @@ class PostController extends Controller
          $filename = time().'.'.$image->getClientOriginalExtension();
          $location = public_path('images/posts/'.$filename);
 
-         Image::make($image)->resize(736,256)->save($location); 
+         Image::make($image)->resize(980,580)->save($location); 
 
          $post->image = $filename;
        }
@@ -145,7 +145,7 @@ class PostController extends Controller
            $filename = time().'.'.$image->getClientOriginalExtension();
            $location = public_path('images/posts/'.$filename);
 
-           Image::make($image)->resize(736,256)->save($location);
+           Image::make($image)->resize(980,580)->save($location);
 
            $oldname = $post->image;
            if (($oldname != '') && (File::exists(public_path('images/posts/'.$oldname))) ) {

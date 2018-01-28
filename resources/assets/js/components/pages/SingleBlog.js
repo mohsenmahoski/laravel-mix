@@ -437,7 +437,7 @@ export default class SingleBlog extends Component{
 		
 		return(
             <div>
-            <Header />
+             <Header redirect={this.props.location} />
                     {this.state.redirect === true ? <Redirect to="/blog"/> : null}
 	                { this.state.hasError == true ? this._renderMessage('failed') : null }
                     { this.state.hasSuccess == true ? this._renderMessage('success') : null }

@@ -2163,7 +2163,7 @@ legend {
   padding-top: 15px;
   padding-bottom: 15px;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   text-transform: uppercase;
   border-radius: 0px;
 }
@@ -2220,7 +2220,7 @@ legend {
   border-top: none;
   box-shadow: none;
   justify-content: flex-end;
-  padding-right:60px;
+  padding-right:10px;
 }
 .navbar .navbar-nav > .open > a, .navbar .navbar-nav > .open > a:hover, .navbar .navbar-nav > .open > a:focus {
   background-color: transparent;

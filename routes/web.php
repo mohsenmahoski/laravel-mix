@@ -99,16 +99,10 @@ Route::get('/', 'PagesController@getIndex')->name('home');
 
 Route::post('/send_message' , 'PagesController@send_message')->name('send_message');
 
-
-
-
-Route::get('/mail' , 'HomeController@send_mail')->name('UserSendMail');
-
 Route::get('/emailRegister',function(){
      $user = User::first();
      return new App\Mail\NewUserRegister($user);
 });
-
 
 
 Route::get('/{path?}', function($path = null){

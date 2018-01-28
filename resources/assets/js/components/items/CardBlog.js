@@ -42,7 +42,7 @@ export default class CardBlog extends Component{
                                       <div className="footer mt-10">
                                                     <div className="author">
                                                         <a className="card-link" href="#">
-                                                           <img src="http://localhost:8080/images/theme/avatar/face-4.jpg" alt="..." className="avatar"/>
+                                                           <img src="/images/theme/avatar/face-4.jpg" alt="..." className="avatar"/>
                                                            <span> Jayz </span>
                                                         </a>
                                                     </div>

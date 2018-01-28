@@ -4,6 +4,9 @@ import Tabs from '../items/Tabs';
 import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
 import LatestBlogs from '../items/LatestBlogs';
+import axios from 'axios';
+import Socials from '../items/Socials';
+
 
 class Home extends Component {
     constructor(props){
@@ -20,8 +23,21 @@ class Home extends Component {
             back3:null,
             left4:150,
             front4:null,
-            back4:null
+            back4:null,
+
+            posts:[],
         }
+    }
+    componentWillMount(){
+        axios.get('api/home')
+        .then(response=>{
+            this.setState({
+                posts:response.data
+            });
+        })
+        .catch(err=>{
+            console.log(response.error);
+        });
     }
     componentDidMount(){
        this.setState({
@@ -133,24 +149,7 @@ class Home extends Component {
                       <div className="row">
                        <div className="container">
                         <div className="main main-raised">
-                                <nav className="navbar navbar-default">
-                                        <div className="container-fluid">
-                                             <div className="collapse navbar-collapse menu" id="example-navbar">
-                                                    <div className="social pull-left">
-                                                         <a className="cyrcle-icon" href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a>
-                                                         <a className="cyrcle-icon" href="#"><i className="fa fa-instagram" aria-hidden="true"></i></a>
-                                                         <a className="cyrcle-icon" href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a>
-                                                         <a className="cyrcle-icon" href="#"><i className="fa fa-google-plus" aria-hidden="true"></i></a>
-                                                         <a className="cyrcle-icon" href="#"><i className="fa fa-linkedin" aria-hidden="true"></i></a>
-                                                    </div>  
-                                                    <div className="path pull-right">
-                                                         <a href="/" className="pull-right">صفحه اصلی<div className="ripple-container"></div></a>
-                                                          <a href="/" className="pull-right">صفحه اصلی<div className="ripple-container"></div></a>
-                                                    </div>           
-                                             </div>
-                                        </div>
-                                </nav>
-                                 
+                                  <Socials />
 						          <div className="row"> 
                                        <div className="col-12 text-center">
                                             <h3 className="text-center black-title"><b>قالب کار خود را انتخاب کنید</b></h3>
@@ -252,7 +251,7 @@ class Home extends Component {
                                       </div>
                                    </div>
                               </div>
-                              <LatestBlogs />
+                              <LatestBlogs posts={this.state.posts} />
                               <div className="parallex navigation-example custom-filter" style={{backgroundImage: "url('../images/theme/developer.jpg')"}}>
                                       <div className="section">
                                            <div className="row">
