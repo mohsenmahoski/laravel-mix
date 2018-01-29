@@ -63,7 +63,7 @@ export default class AuthorLogin extends Component{
                                   ایجاد حساب کاربری جدید
                                  </h5>
                               </div>
-                              <div className="col-md-6 mb-10">
+                              <div className="col-md-12 mb-10">
                                     <div className="input-group">
                                          <div className="form-group is-empty">
                                            <input name="newEmail"  type="email" className="form-control rtl" placeholder="آدرس پست الکترونیکی..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newEmail}  />
@@ -77,7 +77,7 @@ export default class AuthorLogin extends Component{
                                         </span>
                                    </div>
                              </div>
-                              <div className="col-md-6 mb-10">
+                              <div className="col-md-12 mb-10">
                                     <div className="input-group">
                                         <div className="form-group is-empty">
                                            <input name="newusername" type="text" className="form-control rtl" placeholder="نام کاربری" onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newusername} />
@@ -90,7 +90,7 @@ export default class AuthorLogin extends Component{
                                    </div>
                              </div>
                            
-                             <div className="col-md-6 mb-10">
+                             <div className="col-md-12 mb-10">
                                     <div className="input-group">
                                          <div className="form-group is-empty">
                                            <input name="newc_password"  type="password" className="form-control rtl" placeholder="تکرار پسورد..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newc_password} />
@@ -103,7 +103,7 @@ export default class AuthorLogin extends Component{
                                         </span>
                                    </div>
                              </div>  
-                             <div className="col-md-6 mb-10">
+                             <div className="col-md-12 mb-10">
                                     <div className="input-group">
                                          <div className="form-group is-empty">
                                            <input name="newpassword"  type="password" className="form-control rtl" placeholder="پسورد ..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newpassword}  />
@@ -116,7 +116,7 @@ export default class AuthorLogin extends Component{
                                         </span>
                                    </div>
                              </div>
-                             <div className="col-md-12">
+                             <div className="col-md-12 flex">
                                 {this.state.registerspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.registerspinner} /></div>: (this.state.registersuccess==true ? this._successRegister( 'حساب شما با موفقیت ایجاد شد.لینک تایید حساب به پست الکترونیکی شما ارسال شد ، با کلیک بر روی لینک حساب شما فعال خواهد شد. ' ) : this._registerButtons())}
                              </div>
                   </div>
@@ -352,7 +352,7 @@ export default class AuthorLogin extends Component{
                                    {this.state.emailnotfound == true ? this._notConfirm('چنین آدرس ایمیلی ثبت نشده.') : null }
                                    {this.state.forgotspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.forgotspinner} /></div>:(this.state.emailsended == true ? this._successRegister('ایمیل بازیابی رمز عبور با موفقیت ارسال شد') : null )}
                              </div>
-                             <div className="col-md-12 text-center">
+                             <div className="col-md-12 text-center flex-center">
                                 <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginform:true,forgotpassword:false})}>قبلا ثبت نام کرده ام</button>
                             </div>
                           </div>
@@ -367,7 +367,7 @@ export default class AuthorLogin extends Component{
                                   ورود به عنوان نویسنده
                                  </h5>
                               </div>
-                              <div className="col-md-6 mb-10">
+                              <div className="col-md-12 mb-10">
                                     <div className="input-group">
                                         <div className="form-group is-empty">
                                            <input name="password" type="password" className="form-control rtl" placeholder="پسورد..." onChange={this._handleKeyPress.bind(this)} value={this.state.password} />
@@ -379,7 +379,7 @@ export default class AuthorLogin extends Component{
                                         </span>
                                    </div>
                              </div>
-                             <div className="col-md-6 mb-10">
+                             <div className="col-md-12 mb-10">
                                     <div className="input-group">
                                          <div className="form-group is-empty">
                                            <input name="email"  type="text" className="form-control rtl" placeholder="آدرس پست الکترونیکی..." onChange={this._handleKeyPress.bind(this)} value={this.state.email} />

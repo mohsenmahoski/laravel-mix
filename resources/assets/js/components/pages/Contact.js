@@ -97,6 +97,7 @@ class Contact extends Component {
                 if (email !=='' ){
                         if (message !== '' && message.length > 10) {
                              if (no_robot !== false) {
+                                  console.log(this.state);
                                     axios.post('/api/contact', {
                                   name : name,
                                   family : family,
@@ -183,7 +184,8 @@ class Contact extends Component {
                         </div>
                         <div className="row">
                           <div className="container">
-                           <div className="main main-raised">
+                           <div className="main main-raised" style={{     background:'url("/images/theme/busy_city.jpg")' }}>
+                                    <div className="shape"></div>
                                       <nav className="navbar navbar-default">
                                               <div className="container-fluid">
                                                    <div className="collapse navbar-collapse menu" id="example-navbar">
@@ -231,14 +233,14 @@ class Contact extends Component {
                                                                                       <span className="material-input"></span>
                                                                                  </div>
                                                                                  <div className="row">
-                                                                                   <div className="col-md-6 pt-10 text-center">
-                                                                                      <div className="checkbox">
-                                                                                          <label>
-                                                                                              
+                                                                                   <div className="col-md-6 pt-15 text-center">
+                                                                                      
+                                                                                          <label className="flex-center">
                                                                                               من ربات نیستم
-                                                                                              <input  type="checkbox" checked={this.state.no_robot} onChange={this.handleKeyPress.bind(this)} name="no_robot" /><span className="checkbox-material"><span className="check"></span></span><span className="rtl" style={{ color:'#f44336',display: this.state.NoRoobotRequired=='visibile' ? 'block' : 'none'}}>این گزینه الزامی میباشد!!</span> 
+                                                                                              <input className="checkbox"  type="checkbox" checked={this.state.no_robot} onChange={this.handleKeyPress.bind(this)} name="no_robot" />
+                                                                                                  <span className="rtl" style={{ color:'#f44336',display: this.state.NoRoobotRequired=='visibile' ? 'block' : 'none'}}>این گزینه الزامی میباشد!!</span> 
                                                                                           </label>
-                                                                                      </div>
+                                                                                    
                                                                                    </div>
                                                                                    <div className="col-md-6 text-center">
 
@@ -251,25 +253,25 @@ class Contact extends Component {
                                                                   </div>
                                                                </div>
                                                                <div className="col-md-5">
-                                                                  <h2 className="title">راه های ارتباط با ما</h2>
-                                                                  <h5 className="card-description text-right">برای کسب اطلاعات بیشتر می توانید با استفاده از راه های ارتباطی با ما تماس بگیرید </h5>
+                                                                  <h2 className="title text-right" style={{ color:'#FFF' }}>راه های ارتباط با ما</h2>
+                                                                  <h5 className="card-description text-right" style={{ color:'#FFF' }} >برای کسب اطلاعات بیشتر می توانید با استفاده از راه های ارتباطی با ما تماس بگیرید </h5>
                                                                   <div className="info info-horizontal">
                                                                       <div className="icon icon-primary">
-                                                                          <i className="material-icons">pin_drop</i>
+                                                                          <i className="material-icons" style={{ color:'#FFF' }}>pin_drop</i>
                                                                       </div>
                                                                       <div className="card-description text-right">
-                                                                          <h4 className="info-title">آدرس شرکت وبی تک</h4>
-                                                                          <p> مشهد بلوار وکیل آباد ....
+                                                                          <h4 className="info-title" style={{ color:'#FFF' }}>آدرس شرکت وبی تک</h4>
+                                                                          <p style={{ color:'#FFF' }}> مشهد بلوار وکیل آباد ....
                                                                           </p>
                                                                       </div>
                                                                   </div>
                                                                   <div className="info info-horizontal">
                                                                       <div className="icon icon-primary">
-                                                                          <i className="material-icons">phone</i>
+                                                                          <i className="material-icons" style={{ color:'#FFF' }}>phone</i>
                                                                       </div>
                                                                       <div className="card-description text-right">
-                                                                          <h4 className="info-title">تلفن های تماس</h4>
-                                                                          <p> مدیریت<br/>
+                                                                          <h4 className="info-title" style={{ color:'#FFF' }}>تلفن های تماس</h4>
+                                                                          <p style={{ color:'#FFF' }}> مدیریت<br/>
                                                                               +40 762 321 762<br/>
                                                                               09105514062<br/>
                                                                           </p>
@@ -292,6 +294,7 @@ class Contact extends Component {
                                                      </div>
                                             </div>
                                        </div>
+                                   
                            </div>
                           </div>
                       </div>

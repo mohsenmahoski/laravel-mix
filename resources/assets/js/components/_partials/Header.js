@@ -44,7 +44,9 @@ class Header extends Component{
        if (this.props.redirect != undefined){
             if (path !== this.props.redirect.pathname ){
               this.setState({
-                  width:150
+                  width:150,
+                  displayuser:'none',
+                  displyauthor:'none',
                });
                setTimeout(()=>{ this.setState({path}) },700);
              }
@@ -71,8 +73,8 @@ class Header extends Component{
                      });
          }
     }
+    
     render() { 
-
         return (
                <div className="row">
                {this.state.path !== null ? <Redirect to={this.state.path} /> : null}
@@ -110,7 +112,7 @@ class Header extends Component{
                                       <li className="text-right">
                                            <ul className="nav navbar-nav prl-0">
                                                     <li className="dropdown text-right" id="categories">
-                                                              <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i className="material-icons">view_carousel</i>قالب ها
+                                                              <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">قالب ها<i className="material-icons">view_carousel</i>
                                                                   <div className="ripple-container"></div>
                                                               </a>
                                                               <ul className="dropdown-menu">
@@ -189,7 +191,6 @@ class Header extends Component{
                                                                          </li>
                                                               </ul>
                                                     </li>  
-
                                            </ul>
                                       </li>
                                       <li className="nav-item">

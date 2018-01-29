@@ -63,8 +63,8 @@ export default class UserLogin extends Component{
                                   ایجاد حساب کاربری جدید
                                  </h5>
                               </div>
-                              <div className="col-md-6 mb-10">
-                                    <div className="input-group">
+                              <div className="col-md-12 mb-10 pull-right">
+                                    <div className="input-group flex">
                                          <div className="form-group is-empty">
                                            <input name="newEmail"  type="email" className="form-control rtl" placeholder="آدرس پست الکترونیکی..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newEmail}  />
                                            <span className="material-input"></span>
@@ -77,7 +77,7 @@ export default class UserLogin extends Component{
                                         </span>
                                    </div>
                              </div>
-                              <div className="col-md-6 mb-10">
+                              <div className="col-md-12 mb-10 pull-right">
                                     <div className="input-group">
                                         <div className="form-group is-empty">
                                            <input name="newusername" type="text" className="form-control rtl" placeholder="نام کاربری" onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newusername} />
@@ -90,7 +90,7 @@ export default class UserLogin extends Component{
                                    </div>
                              </div>
                            
-                             <div className="col-md-6 mb-10">
+                             <div className="col-md-12 mb-10 pull-right">
                                     <div className="input-group">
                                          <div className="form-group is-empty">
                                            <input name="newc_password"  type="password" className="form-control rtl" placeholder="تکرار پسورد..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newc_password} />
@@ -103,7 +103,7 @@ export default class UserLogin extends Component{
                                         </span>
                                    </div>
                              </div>  
-                             <div className="col-md-6 mb-10">
+                             <div className="col-md-12 mb-10 pull-right">
                                     <div className="input-group">
                                          <div className="form-group is-empty">
                                            <input name="newpassword"  type="password" className="form-control rtl" placeholder="پسورد ..." onChange={this._handleRegisterKeyPress.bind(this)} value={this.state.newpassword}  />
@@ -116,7 +116,7 @@ export default class UserLogin extends Component{
                                         </span>
                                    </div>
                              </div>
-                             <div className="col-md-12">
+                             <div className="col-md-12 flex">
                                 {this.state.registerspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.registerspinner} /></div>: (this.state.registersuccess==true ? this._successRegister( 'حساب شما با موفقیت ایجاد شد.لینک تایید حساب به پست الکترونیکی شما ارسال شد ، با کلیک بر روی لینک حساب شما فعال خواهد شد. ' ) : this._registerButtons())}
                              </div>
                   </div>
@@ -348,7 +348,7 @@ export default class UserLogin extends Component{
                                          </div>
                                    </div>
                              </div>
-                             <div className="col-md-12">
+                             <div className="col-md-12 flex">
                                    {this.state.emailnotfound == true ? this._notConfirm('چنین آدرس ایمیلی ثبت نشده.') : null }
                                    {this.state.forgotspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.forgotspinner} /></div>:(this.state.emailsended == true ? this._successRegister('ایمیل بازیابی رمز عبور با موفقیت ارسال شد') : null )}
                              </div>
@@ -367,19 +367,7 @@ export default class UserLogin extends Component{
                                   ورود به حساب کاربری
                                  </h5>
                               </div>
-                              <div className="col-md-6 mb-10">
-                                    <div className="input-group">
-                                        <div className="form-group is-empty">
-                                           <input name="password" type="password" className="form-control rtl" placeholder="پسورد..." onChange={this._handleKeyPress.bind(this)} value={this.state.password} />
-                                             <span className="rtl" style={{ color:'#f44336',display: this.state.passwordrequired=='visibile' ? 'block' : 'none'}}><small>لطفا پسورد خود را وارد کنید.</small></span>
-                                           <span className="material-input"></span>
-                                        </div>
-                                        <span className="input-group-addon">
-                                            <i className="material-icons">lock_outline</i>
-                                        </span>
-                                   </div>
-                             </div>
-                             <div className="col-md-6 mb-10">
+                              <div className="col-md-12 mb-10 pull-right">
                                     <div className="input-group">
                                          <div className="form-group is-empty">
                                            <input name="email"  type="text" className="form-control rtl" placeholder="آدرس پست الکترونیکی..." onChange={this._handleKeyPress.bind(this)} value={this.state.email} />
@@ -392,16 +380,28 @@ export default class UserLogin extends Component{
                                         </span>
                                    </div>
                              </div>
-                           <div className="col-md-12">
-                              <p className="col-md-12 col-sm-12 pull-right text-center rtl error" style={{ display:this.state.login === 'failed' ? 'block' : 'none' , }} >ایمیل یا پسورد شما صحیح نیست ، مجددا تلاش کنید.</p>
-                              <button className="btn btn-primary" onClick={()=>this._handleSubmit(this)}>ورود</button>
-                              <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginform:false})}>ثبت نام</button>
-                              <button className="btn btn-simple btn-warning pull-right" onClick={()=>this.setState({forgotpassword:true})}>رمز عبور را فراموش کرده ام</button>
-                             {this.state.notconfirm == true ? this._notConfirm('این حساب غیر فعال می باشد.') : null }
-                             {this.state.unauthorized == true ? this._notConfirm('این حساب کاربری وجود ندارد') : null }
-                             {this.state.loginspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.loginspinner} /></div>:null}
-                            }
-                           </div>
+                              <div className="col-md-12 mb-10 pull-right">
+                                    <div className="input-group">
+                                        <div className="form-group is-empty">
+                                           <input name="password" type="password" className="form-control rtl" placeholder="پسورد..." onChange={this._handleKeyPress.bind(this)} value={this.state.password} />
+                                             <span className="rtl" style={{ color:'#f44336',display: this.state.passwordrequired=='visibile' ? 'block' : 'none'}}><small>لطفا پسورد خود را وارد کنید.</small></span>
+                                           <span className="material-input"></span>
+                                        </div>
+                                        <span className="input-group-addon">
+                                            <i className="material-icons">lock_outline</i>
+                                        </span>
+                                   </div>
+                             </div>
+                             
+                             <div className="col-md-12 flex">
+                                <p className="col-md-12 col-sm-12 pull-right text-center rtl error" style={{ display:this.state.login === 'failed' ? 'block' : 'none' , }} >ایمیل یا پسورد شما صحیح نیست ، مجددا تلاش کنید.</p>
+                                <button className="btn btn-primary" onClick={()=>this._handleSubmit(this)}>ورود</button>
+                                <button className="btn btn-simple btn-info" onClick={()=>this.setState({loginform:false})}>ثبت نام</button>
+                                <button className="btn btn-simple btn-warning pull-right" onClick={()=>this.setState({forgotpassword:true})}>رمز عبور را فراموش کرده ام</button>
+                                {this.state.notconfirm == true ? this._notConfirm('این حساب غیر فعال می باشد.') : null }
+                                {this.state.unauthorized == true ? this._notConfirm('این حساب کاربری وجود ندارد') : null }
+                                {this.state.loginspinner==true ? <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}><DotLoader color={'#9c27b0'} loading={this.state.loginspinner} /></div>:null}}
+                             </div>
                   </div>
               );
         }

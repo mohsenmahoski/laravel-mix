@@ -40,12 +40,12 @@ class Home extends Component {
         });
     }
     componentDidMount(){
-       this.setState({
-            front : setInterval(this._front.bind(this),65),
-            front2 : setInterval(this._front2.bind(this),55),
-            front3 : setInterval(this._front3.bind(this),60),
-            front4 : setInterval(this._front4.bind(this),60)
-       }); 
+       // this.setState({
+       //      front : setInterval(this._front.bind(this),65),
+       //      front2 : setInterval(this._front2.bind(this),55),
+       //      front3 : setInterval(this._front3.bind(this),60),
+       //      front4 : setInterval(this._front4.bind(this),60)
+       // }); 
     }
     
     _front(){
