@@ -49,7 +49,7 @@ export default class AboutUs extends Component{
 												    					<div className="card card-profile card-plain">
 												    						<div className="card-avatar">
 												    							<a href="#pablo">
-												    								<img className="img" src="http://localhost:8080/images/theme/avatar/marc.jpg"/>
+												    								<img className="img" src="/images/theme/avatar/marc.jpg"/>
 												    							</a>
 												    						</div>
 
@@ -73,7 +73,7 @@ export default class AboutUs extends Component{
 												    					<div className="card card-profile card-plain">
 												    						<div className="card-avatar">
 												    							<a href="#pablo">
-												    								<img className="img" src="http://localhost:8080/images/theme/avatar/kendall.jpg"/>
+												    								<img className="img" src="/images/theme/avatar/kendall.jpg"/>
 												    							</a>
 												    						</div>
 
@@ -97,7 +97,7 @@ export default class AboutUs extends Component{
 												    					<div className="card card-profile card-plain">
 												    						<div className="card-avatar">
 												    							<a href="#pablo">
-												    								<img className="img" src="http://localhost:8080/images/theme/avatar/christian.jpg"/>
+												    								<img className="img" src="/images/theme/avatar/christian.jpg"/>
 												    							</a>
 												    						</div>
 
@@ -119,7 +119,7 @@ export default class AboutUs extends Component{
 												    					<div className="card card-profile card-plain">
 												    						<div className="card-avatar">
 												    							<a href="#pablo">
-												    								<img className="img" src="http://localhost:8080/images/theme/avatar/avatar.jpg"/>
+												    								<img className="img" src="/images/theme/avatar/avatar.jpg"/>
 												    							</a>
 												    						</div>
 

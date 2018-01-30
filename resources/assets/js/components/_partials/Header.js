@@ -198,7 +198,7 @@ class Header extends Component{
                                                         تماس با ما<i className="material-icons">perm_phone_msg</i>
                                                 </a>
                                       </li>
-                                      {this.state.username == '' ? <Menu title="ورود" data={[{title:'کاربر' , to:'#' , onClicking:()=>{this._userlogin()}},{title:'نویسنده' , to:'#' , onClicking:()=>{this._authorlogin()}}]} /> : <NavItem className="nav-link" dataOriginalTitle="با ما در تماس باشید" to="/dashboard">{this.state.username}<i className="material-icons">perm_phone_msg</i></NavItem>}
+                                      {this.state.username == '' ? <Menu title="ورود" data={[{title:'کاربر' , to:'#' , onClicking:()=>{this._userlogin()}},{title:'نویسنده' , to:'#' , onClicking:()=>{this._authorlogin()}}]} /> : <NavItem className="nav-link" to="/dashboard">{this.state.username}<i className="material-icons">perm_phone_msg</i></NavItem>}
                         </ul>
                       </div>
                     </nav>

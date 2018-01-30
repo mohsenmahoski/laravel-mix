@@ -2172,6 +2172,7 @@ legend {
   font-size: 14px;
   text-transform: uppercase;
   border-radius: 0px;
+  color: #FFF;
 }
 .navbar .navbar-nav > li  .last-a{direction:ltr;}
 .navbar .navbar-nav > li > a{-webkit-transition: all 350ms ease-out;transition: all 350ms ease-out;}
@@ -2525,6 +2526,8 @@ legend {
   box-shadow: none;
   color: #fff;
   padding-top: 25px;
+  padding-right:25px;
+  padding-left:25px;
 }
 .navbar.navbar-transparent .logo-container .brand {
   color: #FFFFFF;
@@ -3007,7 +3010,7 @@ h2.title {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 35px;
+    width: 85px;
     margin: 0 25px;
     top: 0;
 }

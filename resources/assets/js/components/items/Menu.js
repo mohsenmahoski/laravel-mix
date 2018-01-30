@@ -24,7 +24,7 @@ export default class Menu extends Component{
 				<li className="dropdown-link">
 					<a className="nav-link" rel="tooltip" href="#">{title}  <i className="material-icons">contacts</i></a>
 				</li>
-                <div className="submenu" style={{ display:this.state.display }}>
+                <div className="login-menu" style={{ display:this.state.display }}>
                      {data.map(this._handleItems.bind(this))}
 				</div>
 			</div>

@@ -2917,7 +2917,7 @@ var Header = function (_Component) {
                       _this5._authorlogin();
                     } }] }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_1__items_NavItem__["a" /* default */],
-                  { className: 'nav-link', dataOriginalTitle: '\u0628\u0627 \u0645\u0627 \u062F\u0631 \u062A\u0645\u0627\u0633 \u0628\u0627\u0634\u06CC\u062F', to: '/dashboard' },
+                  { className: 'nav-link', to: '/dashboard' },
                   this.state.username,
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'i',
@@ -5289,41 +5289,6 @@ var Socials = function (_Component) {
 								"a",
 								{ href: "#", className: "cyrcle-icon" },
 								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-twitter", "aria-hidden": "true" })
-							)
-						),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							"div",
-							{ className: "pull-right flex-center" },
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								"ul",
-								{ className: "nav navbar-nav pull-right", style: { flexDirection: 'row' } },
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									"li",
-									{ className: "path" },
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										"a",
-										{ href: "http://localhost:8080" },
-										"\u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC"
-									)
-								),
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									"li",
-									{ className: "path" },
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										"a",
-										{ href: "http://localhost:8080" },
-										"\u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC"
-									)
-								),
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									"li",
-									{ className: "path" },
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										"a",
-										{ href: "http://localhost:8080" },
-										"\u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC"
-									)
-								)
 							)
 						)
 					)
@@ -33271,7 +33236,7 @@ var Menu = function (_Component) {
 				),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'div',
-					{ className: 'submenu', style: { display: this.state.display } },
+					{ className: 'login-menu', style: { display: this.state.display } },
 					data.map(this._handleItems.bind(this))
 				)
 			);
@@ -41169,7 +41134,7 @@ var AboutUs = function (_Component) {
 																__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 																	'a',
 																	{ href: '#pablo' },
-																	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img', src: 'http://localhost:8080/images/theme/avatar/marc.jpg' })
+																	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img', src: '/images/theme/avatar/marc.jpg' })
 																)
 															),
 															__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -41224,7 +41189,7 @@ var AboutUs = function (_Component) {
 																__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 																	'a',
 																	{ href: '#pablo' },
-																	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img', src: 'http://localhost:8080/images/theme/avatar/kendall.jpg' })
+																	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img', src: '/images/theme/avatar/kendall.jpg' })
 																)
 															),
 															__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -41279,7 +41244,7 @@ var AboutUs = function (_Component) {
 																__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 																	'a',
 																	{ href: '#pablo' },
-																	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img', src: 'http://localhost:8080/images/theme/avatar/christian.jpg' })
+																	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img', src: '/images/theme/avatar/christian.jpg' })
 																)
 															),
 															__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -41329,7 +41294,7 @@ var AboutUs = function (_Component) {
 																__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 																	'a',
 																	{ href: '#pablo' },
-																	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img', src: 'http://localhost:8080/images/theme/avatar/avatar.jpg' })
+																	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img', src: '/images/theme/avatar/avatar.jpg' })
 																)
 															),
 															__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
