@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
+import Socials from '../items/Socials';
 
 
 export default class UserDashboard extends Component{
@@ -37,7 +38,6 @@ export default class UserDashboard extends Component{
                });
 	}
    _logOut(){
-   	  console.log('called');
       let cookie = new Cookie; 
       cookie.remove('user_token');
       let token = cookie.get('user_token',{ path: '/' });
@@ -67,48 +67,41 @@ export default class UserDashboard extends Component{
 		const {useremail , username } = this.state;
 		return(
 			     <div>
-			      <Header redirect={this.props.location} />
-					     <div className="header header-filter">
-		                        <div className="container">
-		                            <div className="row">
-		                                <div className="col-md-8 col-md-offset-2">
-		                                    <div className="brand">
-		                                        <h1 className="title white">وبی تک</h1>
-		                                        <div className="separator separator-danger">✻</div>
-		                                        <h3 className="text-center">ما فقط یک وب سایت طراحی نمیکنیم،ما آنچه در ذهن ورویای شماست به واقعیت تبدیل میکنیم</h3>
-		                                    </div>
-		                                </div>
-		                            </div>
-		                        </div>
-		                      </div>
-		                     <div className="main main-raised">
-		                            <nav className="navbar navbar-default">
-		                                        <div className="container-fluid">
-		                                             <div className="collapse navbar-collapse menu" id="example-navbar">
-		                                                                         
-		                                             </div>
-		                                        </div>
-		                            </nav>
+			       <Header redirect={this.props.location} />
+					     	<div className="header header-filter">
+							        <div className="container flex-center">
+							                <div className="col-md-12 flex-center" style={{ background:'url("/images/theme/typing.jpg")',minHeight:'325px' }}>  
+							                    <div className="shape"></div>
+							                    <div className="caption text-center">
+							                        <h3 className="text-center">اخبار و رویدادهای دنیای فناوی اطلاعات</h3>
+							                        <small>جدیدترین خبرها</small>
+							                    </div>
+							                </div>
+							        </div>
+		     				</div>
+		                    <div className="row">
+							   	<div className="container">
+                                  <div className="main main-raised">
+									<Socials />
 				                    {this.state.redirect === true ? <Redirect to="/"/> : null}
-				                    <div className="container">
-													    <div className="row">
+				                    <div className="flex-center">
 													        <div className="col-md-8 col-md-offset-2">
 													            <div className="panel panel-default">
-													                <div className="panel-heading rtl title">
+													                <div className="panel-heading rtl title pd-20">
                                                                         <div className="row">
                                                                           	<button className="btn btn-info btn-fab btn-fab-mini btn-round mr-10"><i className="material-icons">settings</i></button>
 	                                                                        <button className="btn btn-success btn-fab btn-fab-mini btn-round mrl-10"><i className="material-icons">forum</i></button>
 	                                                                        <button className="btn btn-warning btn-fab btn-fab-mini btn-round"><i className="material-icons">favorite_border</i></button>
-                                                                            <button className="btn btn-primary pull-left mrl-10" onClick={()=>this._logOut()}>خروج</button>
+                                                                            <button className="btn btn-primary btn-sm pull-left mrl-10" onClick={()=>this._logOut()}>خروج</button>
                                                                         </div>
 													                </div>
 													                
 													               
 
-													                <div className="panel-body">
+													                <div className="panel-body pd-20">
 													                    <div className="col-md-12 rtl text-right">
 													                       
-                                                                             <img src="../images/theme/avatar.jpg" alt="Circle Image" className="pull-left img-rounded img-responsive img-raised" style={{ height:'85px',width:'85px' }} />
+                                                                             <img src="../images/theme/avatar.jpg" alt="Circle Image" className="pull-left img-rounded img-responsive img-raised" style={{ height:'85px',width:'85px',borderRadius:'50px',margin:'10px' }} />
 													                         
 													                   	     <label> نام کاربری: </label>
 													                   	      <h5>{username}</h5>
@@ -122,7 +115,7 @@ export default class UserDashboard extends Component{
 													                         
 													                        
 													                  </div>
-													                  <div className="row">
+													                  <div className="row pd-20">
 													                      <div className="col-md-12">
                                                                                  <label className="pull-right"><h5 className="col-md-12 rtl">نظرات کاربر</h5></label>
 													                      </div>
@@ -131,11 +124,11 @@ export default class UserDashboard extends Component{
 													                </div>
 													             </div>
 													        </div>
-													    </div>
 								    </div>       
+		                          </div>
+		                        </div>
 		                    </div>
-                   
-			     <Footer />
+			       <Footer />
 			     </div>
 			);
 	}

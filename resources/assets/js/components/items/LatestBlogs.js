@@ -25,7 +25,8 @@ class LatestBlogs extends Component{
                      <div className="card" key={index}>
 								<img className="card-img-top" src={`/images/posts/${item.image}`} alt={item.title} />
 								<div className="card-body">
-											<p className="rtl">{item.body}</p>
+											
+											 <p className="rtl" dangerouslySetInnerHTML={{__html: `${item.body.substr(3, 200)}...`}}></p>
 											 <a href={`/blog/${item.id}`} className="btn btn-outline-secondary">ادامه خبر</a>
 								</div>
 					 </div>
@@ -34,7 +35,7 @@ class LatestBlogs extends Component{
 	render(){
 		const{posts} = this.props;
 		return(
-               <div className="section section-bg news">
+               <div className="section news">
                                                 <div className="col-12 text-center">
                                                         <blockquote className="blockquote text-center">
                                                           <h1 className="title mb-0">آخرین مطالب و خبر ها</h1>

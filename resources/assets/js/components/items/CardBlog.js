@@ -1,15 +1,12 @@
 import React ,{Component} from 'react';
 import {Link} from 'react-router-dom';
 
-
 export default class CardBlog extends Component{
-
+  
 	render(){
-		
-            const {title,body,slug,image , id} = this.props.card;
-            const subBody = body.substr(1, 20);
+            const {title,body,slug,image , id ,author,comments_count,time} = this.props.card;
+          
 		return(
-             <div className="col-md-4 mb-10">
                <div className="card">
                            <Link to={'/blog/'+id} >
                                 <div className="image" style={{ backgroundImage: `url( images/posts/${image} )` ,  backgroundPosition:'center center' , backgroundSize:'cover' }}>
@@ -21,45 +18,40 @@ export default class CardBlog extends Component{
                                                 </div>
                                  </div>
                            </Link>
-                           <div className="content min-height-235">
+                           <div className="content min-height-235 text-right">
                                        <a href="http://localhost:8080/blog/ergergerg">
-                                            <div className="row pad-r-10">
-                                              <small className="pull-right text-muted">تاریخ انتشار: Dec J,2017
+                                            <div className="col-12">
+                                              <small className="text-muted">تاریخ انتشار:{time}
                                               </small>
                                             </div>
-                                            <h3 className="blog-title text-right">
+                                            <h3 style={{ fontSize:'14px',fontWeight:'bold' }} className="blog-title text-right">
                                                         { title }
                                             </h3>
                                                                                                    
                                                  
-                                            <p className="blog-desc text-right">
-                                                       {subBody}
-                                            </p>      
+                                           
+                                                       
+                                                       <p className="col-md-12 blog-content rtl" style={{ fontSize:'12px' }} dangerouslySetInnerHTML={{__html: `${body.substr(3, 200)}...`}}></p>
+                                             
                                       </a>
                                       <a className="text-info" href="#">
                                                    <small>دمو</small>
                                       </a>
-                                      <div className="footer mt-10">
+                                      <div className="footer mt-10 text-left">
                                                     <div className="author">
                                                         <a className="card-link" href="#">
                                                            <img src="/images/theme/avatar/face-4.jpg" alt="..." className="avatar"/>
-                                                           <span> Jayz </span>
+                                                           <span> {author!= null ? author.name : 'admin'} </span>
                                                         </a>
-                                                    </div>
-                                                     <div className="stats pull-right">
-                                                         <a className="card-link" href="#">
-                                                            <i className="fa fa-heart"></i> 92
-                                                         </a>
                                                     </div>
                                                     <div className="stats pull-right">
                                                         <a className="card-link" href="#">
-                                                            <i className="fa fa-comment"></i> 41
+                                                            <i className="fa fa-comment"></i> {comments_count}
                                                         </a>
                                                     </div>
                                      </div>
                            </div>                    
                </div> 
-            </div>
 			);
 	}
 }

@@ -17,7 +17,7 @@ class Header extends Component{
         useremail:'',
         redirect:null,
         path:null,
-        width:150,
+        width:100,
       }
     }
     _userlogin(){
@@ -44,7 +44,7 @@ class Header extends Component{
        if (this.props.redirect != undefined){
             if (path !== this.props.redirect.pathname ){
               this.setState({
-                  width:150,
+                  width:100,
                   displayuser:'none',
                   displyauthor:'none',
                });
@@ -73,8 +73,16 @@ class Header extends Component{
                      });
          }
     }
-    
+    componentWillReceiveProps(nextProps){ 
+      if (this.state.displyauthor=='block'){
+         this.setState({displyauthor:'none'});
+      }
+      if (this.state.displayuser=='block'){
+         this.setState({displayuser:'none'});
+      }
+    }
     render() { 
+
         return (
                <div className="row">
                {this.state.path !== null ? <Redirect to={this.state.path} /> : null}

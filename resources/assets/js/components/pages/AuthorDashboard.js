@@ -10,6 +10,7 @@ import Select from 'react-select';
 import TinyMCE from 'react-tinymce';
 import 'react-select/dist/react-select.css';
 import { DotLoader } from 'react-spinners';
+import Socials from '../items/Socials';
 
 
 export default class AuthorDashboard extends Component{
@@ -267,45 +268,44 @@ export default class AuthorDashboard extends Component{
 	_showposts(item , index){
    	       
            return(
-                    <div className="row"  key={index}>
-                     <div className="container-fluid">
-                             <div className="col-md-12">
-                               <hr/>
-                             </div>
-                      </div>
-                      <div className="col-md-12">
-                            <Link to={'/blog/'+item[0].id} >
-				                    <div className="col-md-4 mb-10">
-									        <div className="card" style={{borderRadius:'5px'}}>
-									          
-									                <div className="image" style={{borderRadius:'5px', backgroundImage: `url(/images/posts/${item[0].image})`, backgroundPosition: 'center center' , backgroundSize: 'cover'}}>
-										                 <div className="filter filter-white">
-										                    <button type="button" className="blogs btn btn-sm btn-primary btn-round btn-fill">
-										                         <i className="material-icons">keyboard_backspace</i> ادامه مطلب
-										                    </button>
-										                 </div>
-									                 </div>
-									         
-									        </div>
-									</div>
-							</Link>
-							<div className="col-md-8 text-right rtl">
-                               {item[1].map((item , index)=>this._comments(item , index))}
-							</div>
-                      </div>
+                    <div className="col-md-12"  key={index}>
+                           <div className="container-fluid">
+                                   <div className="col-md-12">
+                                     <hr/>
+                                   </div>
+                            </div>
+                            <div className="col-md-12">
+                                  <Link to={'/blog/'+item[0].id} >
+      				                    <div className="col-md-4 mb-10 pull-left">
+            									        <div className="card" style={{borderRadius:'5px'}}>
+            									          
+            									                <div className="image" style={{borderRadius:'5px', backgroundImage: `url(/images/posts/${item[0].image})`, backgroundPosition: 'center center' , backgroundSize: 'cover'}}>
+            										                 <div className="filter filter-white">
+            										                    <button type="button" className="blogs btn btn-sm btn-primary btn-round btn-fill">
+            										                         <i className="material-icons">keyboard_backspace</i> ادامه مطلب
+            										                    </button>
+            										                 </div>
+            									                 </div>
+            									         
+            									        </div>
+      									          </div>
+      							           </Link>
+                							<div className="col-md-8 text-right rtl pull-right">
+                                               {item[1].map((item , index)=>this._comments(item , index))}
+                							</div>
+                            </div>
                       
-                    </div>
-           	       
-           	     );
+                     </div>
+           	       );
    }
 	_profile(){
    	   const {useremail , username , description } = this.state;
    	   return (
              <div>
              	  
-      				  <div className="panel-body">
+      				  <div className="panel-body pd-20">
       					  <div className="col-md-12 rtl text-right">
-      								<img src="../images/theme/avatar.jpg" alt="Circle Image" className="pull-left img-rounded img-responsive img-raised" style={{ height:'85px',width:'85px' }} />
+      								<img src="../images/theme/avatar.jpg" alt="Circle Image" className="pull-left img-rounded img-responsive img-raised" style={{ height:'85px',width:'85px',borderRadius:'50px',margin:'10px' }} />
       								<label> نام کاربری: </label>
       										<h5>{username}</h5>
       					  </div>
@@ -338,7 +338,7 @@ export default class AuthorDashboard extends Component{
     }
 	_createpost(){
    	  return(
-		        <div className="panel-body">
+		        <div className="panel-body pd-20">
               {this.state.redirect === true ? <Redirect to="/"/> : null}
 		             <div className="col-md-12">
 				           <div className="col-md-12">
@@ -424,46 +424,40 @@ export default class AuthorDashboard extends Component{
 	render(){
 		return(
 			     <div>
-			     <Header />
+			      <Header redirect={this.props.location} />
 					        <div className="header header-filter">
-		                        <div className="container">
-		                            <div className="row">
-		                                <div className="col-md-8 col-md-offset-2">
-		                                    <div className="brand">
-		                                        <h1 className="title white">وبی تک</h1>
-		                                        <div className="separator separator-danger">✻</div>
-		                                        <h3 className="text-center">ما فقط یک وب سایت طراحی نمیکنیم،ما آنچه در ذهن ورویای شماست به واقعیت تبدیل میکنیم</h3>
-		                                    </div>
-		                                </div>
-		                            </div>
-		                        </div>
-		                     </div>
-		                     <div className="main main-raised">
-		                            <nav className="navbar navbar-default">
-		                                        <div className="container-fluid">
-		                                             <div className="collapse navbar-collapse menu" id="example-navbar">
-		                                                                         
-		                                             </div>
-		                                        </div>
-		                            </nav>
-		                             <div className="container">
-																    <div className="row">
-																        <div className="col-md-8 col-md-offset-2">
-																            <div className="panel panel-default">
-																                <div className="panel-heading rtl title">
+                      <div className="container flex-center">
+                              <div className="col-md-12 flex-center" style={{ background:'url("/images/theme/typing.jpg")',minHeight:'325px' }}>  
+                                  <div className="shape"></div>
+                                  <div className="caption text-center">
+                                      <h3 className="text-center">اخبار و رویدادهای دنیای فناوی اطلاعات</h3>
+                                      <small>جدیدترین خبرها</small>
+                                  </div>
+                              </div>
+                      </div>
+                  </div>
+                  <div className="row">
+                            <div className="container">
+                               <div className="main main-raised">
+		                            <Socials />
+		                             <div className="flex-center">
+																        <div className="col-md-8 col-md-offset-2 mb-20">
+																            <div className="panel panel-default pd-20">
+																                <div className="panel-heading rtl title pd-20">
 			                                                                        <div className="row">
 			                                                                          	<button className="btn btn-info btn-fab btn-fab-mini btn-round mr-10" onClick={()=>{this.setState({setting:true,comments:false})}}><i className="material-icons">settings</i></button>
-				                                                                        <button className="btn btn-success btn-fab btn-fab-mini btn-round mrl-10" onClick={()=>{this.setState({setting:false,comments:true})}} ><i className="material-icons">forum</i></button>
-				                                                                        <button className="btn btn-warning btn-fab btn-fab-mini btn-round" onClick={()=>{this.setState({setting:false,comments:false})}}><i className="material-icons">note_add</i></button>
+				                                                                          <button className="btn btn-success btn-fab btn-fab-mini btn-round mrl-10" onClick={()=>{this.setState({setting:false,comments:true})}} ><i className="material-icons">forum</i></button>
+				                                                                          <button className="btn btn-warning btn-fab btn-fab-mini btn-round" onClick={()=>{this.setState({setting:false,comments:false})}}><i className="material-icons">note_add</i></button>
 			                                                                            <button className="btn btn-primary pull-left mrl-10" onClick={()=>this._logOut()}>خروج</button>
 			                                                                        </div>
 																                </div>
-				                                                               {this.state.setting==true?this._profile():(this.state.comments== true? this._posts() : this._createpost())}   
-				                                                           </div>
+				                                        {this.state.setting==true?this._profile():(this.state.comments== true? this._posts() : this._createpost())}   
+				                                    </div>
 																        </div>
-																    </div>
-				                    </div> 
-		                    </div>
+				                         </div> 
+		                           </div>
+                            </div>
+                  </div>
 			     <Footer />
 			     </div>
 			);

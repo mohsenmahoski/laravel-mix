@@ -8,6 +8,7 @@ import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
 import Cookie from 'universal-cookie';
 import { Redirect } from 'react-router-dom';
+import Socials from '../items/Socials';
 
 export default class SingleBlog extends Component{
    constructor(props){
@@ -346,7 +347,7 @@ export default class SingleBlog extends Component{
   	    const id = item.id;
   	    console.log(item);
 		return (
-              <div className="blogcard mt-20 container-fluid" key={index} >
+              <div className="blogcard mt-20 container" key={index} >
                  <div className="content">
                     <div className="tab-content text-center">
                         <div className="col-md-2 pull-right">
@@ -354,7 +355,7 @@ export default class SingleBlog extends Component{
                                 <small className="col-md-12 text-center" >{item.user.name}</small>
                         </div>
                         <div className="tab-pane active col-md-10" style={{border:'1px solid #e8e8e8',borderRadius:'5px' }} >
-	                             <p className="text-justify" style={{ display:'flex',minHeight:'65px',justifyContent:'end',alignItems:'center' }}> {item.comment} </p>
+	                             <p className="text-justify rtl" style={{ display:'flex',minHeight:'65px',justifyContent:'end',alignItems:'center' }}> {item.comment} </p>
 	                             <div className="col-md-12">
                                                  <div  className="pull-left text-center" style={{ display : 'flex',flexDirection:'column' }}>
 							                            <button onClick={()=>this._handleDisLike(item.id , item.likes)} style={{ padding:'10px 5px' }} className="btn btn-simple btn-primary btn-xs  hvr-icon-bounce">
@@ -380,7 +381,6 @@ export default class SingleBlog extends Component{
 			);
    }
    _clearSearch(){
-   		console.log('called');
 	   	  this.setState({
 	   	  	  searchResult:[],
 	  	      searchIcon:'search',
@@ -432,40 +432,33 @@ export default class SingleBlog extends Component{
           	);
    }
    render(){
-		const { title , body , image , category_name  } = this.state.data;
+		const { title , body , image , category_name,author , created_at } = this.state.data;
         const comments = this.state.comments;
-		
 		return(
             <div>
              <Header redirect={this.props.location} />
+                    <div className="header header-filter">
+						<div className="container flex-center">
+							                <div className="col-md-12 flex-center" style={{ background:'url("/images/theme/typing.jpg")',minHeight:'325px' }}>  
+							                    <div className="shape"></div>
+							                    <div className="caption text-center">
+							                        <h3 className="text-center">اخبار و رویدادهای دنیای فناوی اطلاعات</h3>
+							                        <small>جدیدترین خبرها</small>
+							                    </div>
+							                </div>
+						</div>
+		     		</div>
                     {this.state.redirect === true ? <Redirect to="/blog"/> : null}
 	                { this.state.hasError == true ? this._renderMessage('failed') : null }
                     { this.state.hasSuccess == true ? this._renderMessage('success') : null }
-		                     	<div className="header header-filter">
-							        <div className="container">
-							            <div className="row">
-							                <div className="col-md-8 col-md-offset-2">
-							                    <div className="brand">
-							                        <h1 className="title white">وبی تک</h1>
-							                        <div className="separator separator-danger">✻</div>
-							                        <h3 className="text-center">مقالات</h3>
-							                    </div>
-							                </div>
-							            </div>
-							        </div>
-		     					</div>
-							   	<div className="main main-raised">
-									<nav className="navbar navbar-default">
-									        <div className="container-fluid">
-									             <div className="collapse navbar-collapse menu" id="example-navbar">
-									                                         
-									             </div>
-									        </div>
-									</nav>
-			                     	<div className="section-fluid">
-				                       <div className="container-fluid"> 
+		            <div className="row">
+                             <div className="container">
+                               <div className="main main-raised">
+                                  <Socials />
+		     				         <div className="section-fluid">
+				                         <div className="container-fluid"> 
 									            <div className="row">
-													 <div className="col-md-12 blog-post text-right mt-20">
+													 <div className="col-md-12 blog-post text-right mt-20 flex">
 													 		 <div className="col-md-4  text-center">
 													 		    <div className="col-md-12 input-group">
 										                                <div className="form-group is-empty pull-right col-md-12"> 
@@ -478,11 +471,11 @@ export default class SingleBlog extends Component{
 									                                    </button>
 									                              </div>
 								                                  <div className="card text-center">                                  	   
-								                                       <h5 className="col-md-12" >
+								                                       <h5 className="col-md-12 rtl" >
 								                                  	   	 با عضویت در اشتراک خبر نامه از آخرین اطلاعات و اخبار وب سایت ما آگاه شوید...
 								                                  	   </h5> 
 								                                  	   <div className="form-group is-empty pull-right col-md-12">
-								                                  	      <input type="text" value={this.state.subscribe} onChange={this._handleKeyPress.bind(this)} name="subscribe" className="text-right form-control" placeholder="آدرس پست الکترونیکی شما..." />
+								                                  	      <input type="text" value={this.state.subscribe} onChange={this._handleKeyPress.bind(this)} name="subscribe" className="text-right form-control rtl" placeholder="آدرس پست الکترونیکی شما..." />
 								                                  	   	  <span className="error col-md-12">{ this.state.validEmail == 'visibile' ? 'لطفا ایمیل صحیح وارد کنید' : null }</span>
 								                                  	   	  <span className="error col-md-12">{ this.state.EmailRequired == 'visibile' ? 'لطفا ایمیل خود را وارد کنید' : null }</span>
 								                                  	   </div>
@@ -496,8 +489,8 @@ export default class SingleBlog extends Component{
 													                        </div>
 
 													                        <div className="card-description text-center">
-													                            <h3 className="big-text">تینا</h3>
-													                            <p className="small-text">طراح و نویسنده وب</p>
+													                            <h3 className="big-text">{author!= undefined ? author.name : 'admin'}</h3>
+													                            <p className="small-text">{author!= undefined ? author.description : 'admin'}</p>
 													                           <div className="separator separator-primary">✻</div>
 													                        </div>
 													                        <div className="social-buttons">
@@ -521,14 +514,14 @@ export default class SingleBlog extends Component{
 													     </div>
 														 <div className="col-md-8 ">
 															     <img src={'/images/posts/'+image} className="responsive-image blog-banner" />
-															 	 <h3 className="well">{ title }</h3>
+															 	 <h3 className="well">{ title }<small className="pull-left" style={{ direction:'rtl',fontSize:'12px',background:'gainsboro',borderRadius: '5px',padding:' 5px 20px',lineHeight:1,marginTop:'10px' }}>{created_at != undefined ?  created_at : null}</small></h3>
 															 	
-															 	 <div className="col-md-12" dangerouslySetInnerHTML={{__html: body}} />
+															 	 <div className="col-md-12 blog-content" dangerouslySetInnerHTML={{__html: body}}></div>
 															 	 <div className="card container-fluid"> 
 															 	       <i className="material-icons" style={{ color:'#ababab' , marginTop:10 , marginBottom:10, borderRadius:5 , border: '2px solid #ababab' }} >comment</i> ...
 																	   <div className="input-group">
 												                                <div className="form-group is-empty">
-												                                    <textarea className="form-control" value={this.state.message} onChange={this._handleKeyPress.bind(this)}  name="message" cols="100" rows="5" placeholder="نظر شما در مورد این مطلب " ></textarea>
+												                                    <textarea className="form-control text-right" value={this.state.message} onChange={this._handleKeyPress.bind(this)}  name="message" cols="100" rows="5" placeholder="نظر شما در مورد این مطلب " ></textarea>
 												                                     <span className="rtl" style={{ color:'#f44336',display: this.state.MessageRequired=='visibile' ? 'block' : 'none'}}>لطفا پیام خود را وارد کنید!!</span>
 	                                                                                 <span className="rtl" style={{ color:'#f44336',display: this.state.MessageLength=='visibile' ? 'block' : 'none'}}>لطفا پیام طولانی تری وارد کنید!!</span> 
 												                                    <span className="material-input"></span>
@@ -536,15 +529,15 @@ export default class SingleBlog extends Component{
 	                            										</div>
                                                                         <input className="pull-left btn btn-primary" type="submit" value="ارسال پیام" onClick={this._handleSubmit.bind(this)} /> 
                                                                  </div>
-														 </div>
-														 <div className="col-xs-12 col-sm-12 col-md-8 pull-right">
-															   { comments == null ? null : comments.map(this._comments.bind(this)) }
+                                                                 { comments == null ? null : comments.map(this._comments.bind(this)) }
 														 </div>
 													 </div>
 												</div>
 								      </div>
 								    </div>
 								</div>
+							 </div>
+					</div>
 				<Footer />
            </div>
 			);

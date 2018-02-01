@@ -6,6 +6,7 @@ import Footer from '../_partials/Footer';
 import LatestBlogs from '../items/LatestBlogs';
 import axios from 'axios';
 import Socials from '../items/Socials';
+import Message from '../items/Message';
 
 
 class Home extends Component {
@@ -24,6 +25,10 @@ class Home extends Component {
             left4:150,
             front4:null,
             back4:null,
+            
+            height:0,
+            language:null,
+            messagedisplay:'none',
 
             posts:[],
         }
@@ -39,104 +44,139 @@ class Home extends Component {
             console.log(response.error);
         });
     }
-    componentDidMount(){
-       // this.setState({
-       //      front : setInterval(this._front.bind(this),65),
-       //      front2 : setInterval(this._front2.bind(this),55),
-       //      front3 : setInterval(this._front3.bind(this),60),
-       //      front4 : setInterval(this._front4.bind(this),60)
-       // }); 
-    }
-    
-    _front(){
-        const {left,front} = this.state;
-        if (left<10){
-            this.setState({left:left+1});
-        }else{
-            clearInterval(front);
-            this.setState({back : setInterval(this._back.bind(this),65)}); 
+    _message(char){
+        if (char=='R'){
+            this.setState({
+                height:window.innerHeight,
+                messagedisplay:'block',
+                language:'R',
+            })
+        }
+        if (char=='RN'){
+            this.setState({
+                height:window.innerHeight,
+                messagedisplay:'block',
+                language:'RN',
+               
+            })
+        }
+        if (char=='L'){
+            this.setState({
+                height:window.innerHeight,
+                messagedisplay:'block',
+                language:'L',
+            })
+        }
+        if (char=='W'){
+            this.setState({
+                 height:window.innerHeight,
+                language:'W',
+                messagedisplay:'block',
+            })
+        }
+        if (char=='M'){
+            this.setState({
+                height:window.innerHeight,
+                messagedisplay:'block',
+                language:'M',
+            })
         }
     }
-     _back(){
-        const {left,back} = this.state;
-        if (left>0){
-            this.setState({left:left-1});
-        }else{
-            clearInterval(back);
-            this.setState({front : setInterval(this._front.bind(this),65)}); 
-        }
-    }
-    _front2(){
-        const {left2,front2} = this.state;
-        if (left2<200){
-            this.setState({left2:left2+1});
-        }else{
-            clearInterval(front2);
-            this.setState({back2 : setInterval(this._back2.bind(this),55)}); 
-        }
-    }
-    _back2(){
-        const {left2,back2} = this.state;
-        if (left2>80){
-            this.setState({left2:left2-1});
-        }else{
-            clearInterval(back2);
-            this.setState({front2 : setInterval(this._front2.bind(this),55)}); 
-        }
-    }
-    _front3(){
-        const {left3,front3} = this.state;
-        if (left3<300){
-            this.setState({left3:left3+1});
-        }else{
-            clearInterval(front3);
-            this.setState({back3 : setInterval(this._back3.bind(this),60)}); 
-        }
-    }
-    _back3(){
-        const {left3,back3} = this.state;
-        if (left3>200){
-            this.setState({left3:left3-1});
-        }else{
-            clearInterval(back3);
-            this.setState({front3 : setInterval(this._front3.bind(this),60)}); 
-        }
-    }
-    _front4(){
-        const {left4,front4} = this.state;
-        if (left4<350){
-            this.setState({left4:left4+1});
-        }else{
-            clearInterval(front4);
-            this.setState({back4 : setInterval(this._back4.bind(this),60)}); 
-        }
-    }
-    _back4(){
-        const {left4,back4} = this.state;
-        if (left4>150){
-            this.setState({left4:left4-1});
-        }else{
-            clearInterval(back4);
-            this.setState({front4 : setInterval(this._front4.bind(this),60)}); 
-        }
-    }
-    componentWillUnmount(){
-        const{front,front2,front3,front4,back,back2,back3,back4} = this.state;
-        clearInterval(front);
-         clearInterval(front2);
-          clearInterval(front3);
-           clearInterval(front4);
-               clearInterval(back);
-                 clearInterval(back2);
-                  clearInterval(back3);
-                   clearInterval(back4);
+    _messagehtml(char){
+          if (char=='R'){
+             return(
+                     <div>
+                          <img src="/images/theme/reactjs.jpg" />
+                          <p className="rtl">
+                                     React یک Libarary متن باز و البته رایگان جاوا اسکریپت برای طراحی رابط کاربری است. این کتابخانه جاوا اسکریپت در ماه مه سال ۲۰۱۳ به صورت عمومی منتشر شد. جالب است بدانید که این فریم ورک در ابتدا توسط یکی از مهندسین فعال در فیسبوک به وجود آمد. آقای «جردن واک» در سال ۲۰۱۱ این فریم ورک را تحت تاثیر XHP که یک کامپوننت HTML برای زبان برنامه نویسی PHP‌ است، ایجاد کرد. در همین سال React روی قسمت News Feed شبکه اجتماعی فیسبوک به کار گرفته شد و ۲ سال بعد، یعنی در سال ۲۰۱۳ هم استفاده از آن توسط فیسبوک به اینستاگرام تعمیم پیدا کرد.
+                                     نکته مهم در کاربرد React JS این است که این کتابخانه صرفا در الگوی طراحی MVC، عهده‌دار بخش View است. View یا اینترفیس در واقع مرتبط با نمایش اجزا هستند و طبعا React JS به جای پرداختن به الگوی MVC به وظایفی می‌پردازد که مربوط به نمایش اجزا می‌پردازد. از دیگر کاربردهای React JS استفاده در طراحی و ایجاد سایت تک صفحه‌ای است.
+                                     زمانی که یک موسسه یا شرکت عظیم با طرفداران فوق‌العاده زیاد، عهده‌دار نگهداری و توسعه یک کتابخانه جاوا اسکریپتی می‌شود، دیگر نباید شکی به این کتابخانه داشت. امروزه همه ما از Facebook و Instagram استفاده می‌کنیم و می‌دانیم که چقدر این دو شبکه اجتماعی از نگاه فنی کم اشکال و قابل اطمینان هستند و در سطح بالایی قرار دارند. حال در نظر بگیرید که این شرکت بزرگ عهده‌دار توسعه چنین کتابخانه مهمی بوده که از آن در ایجاد یک رابط کاربری زیبا و عام پسند استفاده کرده است. بنابراین، طراحان سایت و توسعه دهندگان وب، خیلی زود سراغ React رفتند. 
+                                     React کتابخانه‌ای است که با استفاده از آن تمام جنبه‌های ظاهری یا همان بخش View در طراحی سایت یا توسعه اپلیکیشن موبایل را به عهده می‌گیرد. با استفاده از React، بسیاری از پیچیدگی‌ها و درگیری‌های مختلف برنامه نویسی از روی دوش شما برداشته می‌شود.
+                          </p>
+                           <button className="btn btn-primary" onClick={()=>this.setState({height:0,messagedisplay:'none'})}>بازگشت</button>
+                     </div>
+                    
+                );
+          }
+          if (char=='RN'){
+             return(
+                     <div>
+                     <img src="/images/theme/reactnative.jpg" />
+                     <p className="rtl">
+                                    بذارید یکم برم به عقب. فیس بوک ابتدای سال ۲۰۱۵ اولین نسخه stable یک کتابخانه جاوااسکریپت open-source رو منتشر کرد برای توسعه رابط کاربری (user interface) وب اپلیکیشن ها. اسم این کتابخانه React (یا ReactJS) بود. این کتابخانه با ساختار بسیار ساده و سرعت بسیار بالایی که داشت خیلی سریع مورد توجه قرار گرفت. طوری که با وجود اینکه مدت کوتاهی از اومدنش گذشته، بجز فیس بوک کمپانی هایی از قبیل یاهو، Airbnb و Netflix هم دارن ازش استفاده می کنن.
+                                    React native یک فریم ورک جاوا اسکریپت برای ساختن برنامه های موبایلِ native است. این فریم ورک از فریم ورکِ React استفاده می کنه و APIها و کامپوننت های تعبیه شده ی داخلیِ زیادی داره.
+                    </p>
+                     <button className="btn btn-primary" onClick={()=>this.setState({height:0,messagedisplay:'none'})}>بازگشت</button>
+                    </div>
+                );
+          }
+          if (char=='L'){
+             return(
+                     <div>
+                     <img src="/images/theme/laravelcard.jpg" />
+                     <p className="rtl">
+                                    Laravel یکی از فریم‎ ورک‎ های زبان  PHP است که برای توسعه اپلیکیشن ‎های وب در نظر گرفته شده است و بر پایه MVC کار می‎ کند. فریم‎ ورک لاراول، برنامه‎ نویسی برنامه‎ های کاربردی تحت وب با زبان PHP را ساده‎تر می‎ نماید و کمک بسزایی برای انجام پروژه ‎های  PHP و توسعه آسان آن‎ها می‎ کند. فریم ‎ورک Laravel بر روی اجزای مختلف فریم ورک symfony ساخته شده است و به برنامه شما پایه‎ای بزرگ از کد ‎های قابل اعتماد و تست شده می ‎دهد. لاراول مجموعه ای از بهترین راه حل ها با سینتکس پر معنا و خلاقانه را ارائه می‌کند که به درستی انجام می‌ پذیرند. لاراول توسط آسان سازی کارهای معمول مانند احراز هویت، روتینگ، sessionها ، کار با بانکهای اطلاعاتی و … که تقریبا در تمامی پروژه های تحت وب استفاده می‌شوند، مسائل و مشکلات ناشی از توسعه را هم برای توسعه دهنده و هم برای کارفرما کاهش می دهد. لاراول، سیمفونی، کیک پی اچ پی و کد ایگنایتر از محبوب ترین فریم ورک های زبان PHP هستند که بررسی میزان محبوبیت آنها در گوگل ترند حاکی از رشد روز افزون فریم ورک Laravel است.
+                     </p>
+                      <button className="btn btn-primary" onClick={()=>this.setState({height:0,messagedisplay:'none'})}>بازگشت</button>
+                     </div>
+                );
+          }
+          if (char=='W'){
+             return(
+                     <div>
+                     <img src="/images/theme/wordpresscard.jpg" />
+                     <p className="rtl">
+                                    وردپرس یک سیستم مدیریت محتوا برای سایت‌ها و وبلاگ‌ها می‌باشد. وردپرس در ابتدا تنها یک سیستم رایگان وبلاگ نویسی بود که امکانات خوبی را در اختیار وبلاگ نویسان قرار می‌داد و سپس به صورت یک CMS یا نرم‌افزار کدباز برای مدیریت محتوای سایت‌ها معرفی شد.
 
+                                    سایت‌های وردپرسی با استفاده از افزونه‌های نوشته شده برای وردپرس می‌توانند انواع امکانات را دربرگیرند. به عنوان مثال برای راه اندازی یک فروشگاه اینترنتی در کنار سایت وردپرسی کافیست یکی از افزونه‌هایی که برای این منظور طراحی شده‌اند را به هسته وردپرس خود اضافه کنید. به عنوان مثال افزونه‌های WooCommerce و EDD دو افزونه وردپرس هستند که برای راه اندازی فروشگاه اینترنتی جهت فروش کالای فیزیکی یا فایل‌های دانلودی استفاده می‌شوند. همچنین قابلیت تبدیل شدن سایت به یک شبکه اجتماعی با افزونه قدرتمند Buddypress یا ایجاد یک تالار گفتگو یا انجمن با افزونه BBpress، در وردپرس وجود دارد. با توجه به فراوانی و تنوع افزونه‌های وردپرس تقریباً هر امکانی را می‌توان به سایت وردپرسی اضافه کرد.
+
+                                    وردپرس با زبان برنامه‌نویسی پی اچ پی نوشته شده و توسط مای‌اس‌کیوال پشتیبانی می‌شود. همچنین نسخه‌ای برای پست‌گرس‌کیوال نیز موجود می‌باشد این سیستم کاملاً رایگان و متن باز است.
+
+                                    وردپرس در ادامه راه پروژهٔ موفق b۲ است که در سال ۲۰۰۳ شکل گرفت. نام وردپرس را کریستیان اِسلِک، دوست مت مولنوگ (توسعه‌دهندهٔ اصلی وردپرس) پیش نهاد و از آن روز وردپرس با سرعت و پیشرفتی قابل ملاحظه تبدیل به معروف‌ترین و پرکاربردترین ابزار ساخت وبلاگ و سایت بر روی هاست شده‌است.
+                    
+                    </p>
+                     <button className="btn btn-primary" onClick={()=>this.setState({height:0,messagedisplay:'none'})}>بازگشت</button>
+                    </div>
+                );
+          }
+          if (char=='M'){
+             return(
+                     <div>
+                     <img src="/images/theme/magentocard.jpg" />
+                     <p className="rtl">
+                                      Magento  یک پلت فرم  تجارت الکترونیک است که بر روی  تکنولوژی open source ساخته می شود. Magento  علاوه بر ایجاد یک تجارت آنلاین به همراه سبد خرید، به کنترل مقدار و عملکرد فروشگاه های آنلاین خود نیز می پردازد.Magento ، مارکتینگ قدرتمند، بهینه سازی موتور جستجو (SEO) و اسباب مدیریت کاتالوگ را ارائه می دهد. ما بر این باوریم که Magento یکی از بهترین پلت فرم های تجارت الکترونیک موجود در حال حاضر است.
+                                      توانایی Magento  در انعطاف پذیری این اجازه را می دهد که بدون ایجاد تغییر در پلت فرم ها، فروشگاهی با تعداد کمی محصول و سطح نیاز 
+                                      ساده، به فروشگاهی با تعداد محصولات بالا و سفارشات زیاد تغییر کند. Magento گونه های گوناگونی از نحوه ی ورود و تم ها را ارائه می دهد، که می تواند تجربه مشتریان رابالا ببرد. جنبه های مختلفی در فروشگاه های آنلاین وجود دارد که نیاز به پیکره بندی دارند، حال اینکه این پیکره بندی ها به چه صورت انجام شوند، به هوش تجاری بستگی دارد. هنگامی که نوبت به custom functionality  رسید، اینجا نیاز به برنامه نویسی پیچیده است.
+                                      Magento  به گونه ای طراحی شده است که افراد عادی ( نه الزاما توسعه دهندگان) نیز بتوانند از آن استفاده کنند. Magento  بسیار بزرگ و مفید است. اما در بعضی موارد میانگین افراد در استفاده از آن، به بن بست می رسند.
+                                      دلایل زیادی برای درخواست از توسعه دهندگان برای تطبیق وب سایت های Magento، وجود دارد.
+                                      Magento  حتی در سطح ابتدایی خود  نیز از سایت Drupal، بهتر بوده و یک سیستم قوی و بازدارنده از خطا ست. هنگامی که شما شروع به ادغام با دیگر سیستم ها می کنید، یا می خواهید که محصولات خود را به صورت انبوه معرفی کنید، نیاز به همکاری یک توسعه دهنده ی مجرب دارید. برای مثال، ما مشتریانی داشتیم که نیاز به امکانات اضافی برای نمایش صفحات اصلی، داشتند. معمولا شما می توانید محصولات را در گروه های 5، 25 و 50 تای نمایش دهید. ما یک متقاضی داشتیم که خواهان 2000 نمایش بود. عملکرد ممکن است تا حدی تغییر کند، فراتر از آن، برای بالا بردن سطح کارایی سیستم، نیاز به یک متخصص واقعی در Magento  است.
+                                      یک توسعه دهنده ی مجرب اغلب به شما گوشزد می کند که اساس تجارت الکترونیک، سرعت است. هیچ کسی نمی خواهد وقتی که در حال خرید آنلاین است، منتظر بالا آمدن سایت شود. با همچین لیستی قوی از ویژگی ها در یک برنامه ی کاربردی، شما می توانید آنها را بر روی سرور قراردهید. از آنجایی که ما هنوز متقاضی ای که خواهان سرورهای بیشتر برای فروشگاه آنلاین خود است، نداشته ایم،اما من توانایی پیش بینی وقوع این وضعیت را در آینده دارم. 
+                                      مزایای استفاده از Magento:
+                                      نصب راحت و اضافه کردن گزینه ی ورود و خروج
+                                      وجود تکنولوژی open source  که تجارت الکترونیک را انعطاف پذیر و مقیاس پذیر می کند
+                                      برنامه ای موثر و به صرفه 
+                                      امکان اعمال تخفیفات و تبلیغات
+                                      ایجاد و پیشتیبانی بیش از 50 درگاه پرداختی
+                     </p>
+                     <button className="btn btn-primary" onClick={()=>this.setState({height:0,messagedisplay:'none'})}>بازگشت</button>
+                     </div>
+                );
+          }
+    }
+    _messageComponent(){
+      const {height,messagedisplay} = this.state;
+     
+      return(
+           <div className="container">
+            <Message height={height} display={messagedisplay}>{this._messagehtml(this.state.language)}</Message>
+           </div>
+        );
     }
     render() {
-    	
         return (
-        	<div>
+        	<div style={{ position:'relative' }}>
              <Header redirect={this.props.location} />
+              {this._messageComponent()}
                       <div className="header header-filter">
                             <div className="row">
                                 <div className="container">
@@ -149,46 +189,48 @@ class Home extends Component {
                       <div className="row">
                        <div className="container">
                         <div className="main main-raised">
-                                  <Socials />
-						          <div className="row"> 
+                                  <Socials />  
+                                <div className="section">
+						                       <div className="row"> 
                                        <div className="col-12 text-center">
-                                            <h3 className="text-center black-title"><b>قالب کار خود را انتخاب کنید</b></h3>
-                                            <p className="rtl text-center"><b>شما می توانید از بین قالب های متنوع قالب مناسب برای کسب و کار خود را انتخاب کنید.</b></p>
+                                            <h3 className="text-center black-title"><b>کمی بیشتر با توانمندی های وبی تک آشنا شوید</b></h3>
+                                            <p className="rtl text-center"><b>تکنولوژی های مورد استفاده در طراحی وب</b></p>
                                        </div>
-                                       <div className="container-fluid flex-center">
-                                                <a href=""  className="mask item-banner">
-                                                    <img  src="images/theme/banner1.jpg" alt="Rounded Image" className="banner  img-responsive" />
-                                                    <div className="fade-caption">  
-                                                        <h5 className="caption-title text-right">یک فروشگاه اینترنتی موفق چه امکاناتی دارد؟</h5>  
-                                                        
-                                                        <p className="text-right">یک فروشگاه اینترنتی برا ی موفقیت نیاز به فاکتور هایی خاص  نظیر سرعت اجرایی بالا ، ظاهری زیبا و کاربر پسند و..</p>  
+                                       <div className="container flex-center">
+                                                <a href="#" onClick={()=>{this._message('R')}}  className="mask item-banner">
+                                                    <img  src="images/theme/reactjs.jpg" alt="Rounded Image" className="banner  img-responsive" />
+                                                    <div className="fade-caption flex-center">  
+                                                        <h3 className="caption-title text-right">React Js</h3> 
                                                     </div>  
                                                 </a>
-                                                <a href=""  className="mask item-banner">
-                                                    <img  src="images/theme/banner2.jpg" alt="Rounded Image" className="banner  img-responsive" />
-                                                    <div className="fade-caption">  
-                                                        <h5 className="caption-title mb-20 text-right" >چطور کار وتخصص خود را به دیگران معرفی کنیم؟</h5>  
-                                                        <p className="text-right">با داشتن وب سایتی حرفه ای موفقیت کار خود را تضمین کنید...</p>  
+                                                 <a href="#" onClick={()=>{this._message('RN')}}  className="mask item-banner">
+                                                    <img  src="images/theme/reactnative.jpg" alt="Rounded Image" className="banner  img-responsive" />
+                                                    <div className="fade-caption flex-center">  
+                                                        <h3 className="caption-title mb-20 text-right" >React Native</h3>  
                                                     </div>  
                                                 </a>
-                                                 <a href=""  className="mask item-banner">
-                                                    <img  src="images/theme/banner2.jpg" alt="Rounded Image" className="banner  img-responsive" />
-                                                    <div className="fade-caption">  
-                                                        <h5 className="caption-title mb-20 text-right" >چطور کار وتخصص خود را به دیگران معرفی کنیم؟</h5>  
-                                                        <p className="text-right">با داشتن وب سایتی حرفه ای موفقیت کار خود را تضمین کنید...</p>  
+                                                 <a href="#" onClick={()=>{this._message('L')}}  className="mask item-banner">
+                                                    <img  src="images/theme/laravelcard.jpg" alt="Rounded Image" className="banner  img-responsive" />
+                                                    <div className="fade-caption flex-center">  
+                                                        <h3 className="caption-title mb-20 text-right" >Laravel</h3>
                                                     </div>  
                                                 </a>
-                                                 <a href=""  className="mask item-banner">
-                                                    <img  src="images/theme/banner2.jpg" alt="Rounded Image" className="banner  img-responsive" />
-                                                    <div className="fade-caption">  
-                                                        <h5 className="caption-title mb-20 text-right" >چطور کار وتخصص خود را به دیگران معرفی کنیم؟</h5>  
-                                                        <p className="text-right">با داشتن وب سایتی حرفه ای موفقیت کار خود را تضمین کنید...</p>  
+                                                <a href="#" onClick={()=>{this._message('W')}}  className="mask item-banner">
+                                                    <img  src="images/theme/wordpresscard.jpg" alt="Rounded Image" className="banner  img-responsive" />
+                                                    <div className="fade-caption flex-center">  
+                                                        <h3 className="caption-title mb-20 text-right" >WordPress</h3> 
+                                                    </div>  
+                                                </a>
+                                                 <a href="#" onClick={()=>{this._message('M')}}  className="mask item-banner">
+                                                    <img  src="images/theme/magentocard.jpg" alt="Rounded Image" className="banner  img-responsive" />
+                                                    <div className="fade-caption flex-center">  
+                                                        <h3 className="caption-title mb-20 text-right" >Magento</h3> 
                                                     </div>  
                                                 </a>
                                        </div>
+                                   </div>
                                 </div>
-						      <Tabs />
-                              <div className="section">
+                              <div className="section section-bg">
                                    <div className="row">
                                       <div className="container-fluid">
                                          <div className="col-12 text-center">

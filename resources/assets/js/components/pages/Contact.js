@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Header from '../_partials/Header';
 import Footer from '../_partials/Footer';
-import GoogleMapReact,{ Marker } from 'google-map-react';
+import {withGoogleMap,GoogleMap,Marker,} from "react-google-maps";
+import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class Contact extends Component {
   constructor(){
@@ -156,6 +156,36 @@ class Contact extends Component {
           });
         } 
   }
+  _map(){
+      const props = this.props;
+      const center = { lat:   36.3253774377407, lng: 59.514559507369995 };
+      const MapWithAMarker = withGoogleMap(props =>
+                                        <GoogleMap
+                                          defaultZoom={16}
+                                          defaultCenter={{ lat: 36.325308286843516, lng:59.51423764228821 }}
+                                        >
+                                          <Marker
+                                            position={{ lat:36.325308286843516, lng:59.51423764228821 }}
+                                          />
+                                          <InfoBox
+                                                defaultPosition={new google.maps.LatLng(center.lat, center.lng)}
+                                                options={{ closeBoxURL: ``, enableEventPropagation: true }}
+                                              >
+                                                <div style={{ background:'#f9f9f978',opacity: 1, padding: `12px`,color:`#000`,borderRadius:'5px',border:'1px solid red' }}>
+                                                  <div style={{ fontSize: `22px`, fontColor: `#08233B`}}>
+                                                    <img src="/images/theme/logo.png" width="80px" height="51px" />
+                                                  </div>
+                                                </div>
+                                              </InfoBox>
+                                        </GoogleMap>
+                                      );
+      return(
+             <MapWithAMarker
+                        containerElement={<div style={{ height: `320px` }} />}
+                        mapElement={<div style={{ height: `100%` }} />}
+                      />
+        );
+  }
     render() {
       const center = {lat: 36.325, lng: 59.504};
       const zoom = 12;
@@ -167,17 +197,7 @@ class Contact extends Component {
                               <div className="col-md-12 flex-center" style={{ minHeight:'325px',padding:0 }}>  
                                   <div className="shape"></div>
                                   <div style={{ width:'1200px', height:'325px' ,zIndex:-1}}>
-                                    <GoogleMapReact
-                                      defaultCenter={center}
-                                      defaultZoom={zoom}
-                                    >
-                                      <AnyReactComponent
-                                        lat={36.32508354600387}
-                                        lng={59.50469970703125}
-                                        text={'Kreyser Avrora'}
-                                      />
-                                     
-                                    </GoogleMapReact>
+                                      { this._map() }
                                   </div>
                               </div>
                          </div>
@@ -305,3 +325,4 @@ class Contact extends Component {
 }
  
 export default Contact;
+

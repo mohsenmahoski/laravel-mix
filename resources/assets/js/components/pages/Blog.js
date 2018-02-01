@@ -22,7 +22,8 @@ export default class Blog extends Component{
 		
 			 axios.get('/api/blog?page='+this.state.nextPage)
 		      .then(response=>{
-		      	const {current_page , last_page ,data} = response.data;
+		      	console.log(response.data);
+		      	const {current_page , last_page ,data} = response.data.posts;
 		      		this.setState(prevState=>({
 				      		article:[ ...prevState.article , ...data],
 				      		hasMore: ( current_page != last_page ) ? true : false,
@@ -54,7 +55,7 @@ export default class Blog extends Component{
 							   	   <div className="container">
                                            <div className="main main-raised">
 											<Socials />
-					                     	<div className="section-fluid">
+					                     	<div className="section-fluid blogs">
 						                       <div className="container"> 
 														<div className='col-md-12' >
 															<InfiniteScroll
@@ -62,7 +63,7 @@ export default class Blog extends Component{
 															     loadMore={this.loadMore.bind(this)}
 															     hasMore={this.state.hasMore}
 															     threshold={0.005}
-															     className="row"	
+															     className="row flex-center"	
 															     loader={
 															       <div className="col-md-12">
 																     <div className='sweet-loading'>

@@ -93,6 +93,10 @@ class PagesController extends Controller
             }
         
     }
+
+    public function test(){
+        return $this->jalali('2018-08-14');
+    }
     
 
  

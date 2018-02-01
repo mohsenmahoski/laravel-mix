@@ -102,6 +102,10 @@ body{
 .flex{
   display:flex;
 }
+.sweet-loading{
+   width: 0px;
+   margin: auto;
+}
 .carousel-inner>.item>img, .carousel-inner>.item>a>img,.carousel-inner>.item{
   height:auto;
   min-height:325px;
@@ -121,6 +125,7 @@ a:hover{
     width: 30px;
     height: 15px;
     display: flex;
+    padding: 8px;
     align-items: center;
     justify-content: center;
     background: #fff;
@@ -186,7 +191,7 @@ img.gra{
   color:#fff;
   direction:rtl;
 }
-.news{
+.section-bg{
       background: #f1f1f1;
 }
 .news .card {
@@ -215,25 +220,28 @@ img.gra{
     padding:0 5px;
 }
 .news .card-body {
-    min-height: 180px;
+    min-height: 200px;
+}
+.news .card-body p span{
+  font-size:12px !important;
 }
 .news blockquote{
   border:none;
 }
 .holder{
     transition: 0.7s;
-    position: absolute;
+    position:fixed;
     z-index: 1000;
-    height: 215%;
+    height:100%;
     background: #9c27b0;
     bottom: 0;
-    left: -50%;
+    left:0;
     transform-origin: left bottom;
-    transform: rotate(20deg);
     background: url(/images/theme/loader.gif);
     background-position: center center;
     background-repeat: no-repeat;
     background-color: #8d608c;
+    background-size: contain;
     
 }
 /* CUSTOMIZE THE CAROUSEL
@@ -644,6 +652,23 @@ i.close{
    background-color: #fff; 
    display:none;   
 }
+.message{
+    transition: 0.7s;
+    position: fixed;
+    width: 60%;
+    right: 20%;
+    top: 0;
+    background: #ffffff;
+    box-shadow: 0px 17px 18px 0 black;
+    z-index: 1000;
+}
+.message p{
+    direction: rtl;
+    padding: 20px;
+    text-align: justify;
+    border: 1px solid;
+    margin: 15px;
+}
 .login-menu{
    z-index: 1000;
    min-width: 175px;
@@ -703,9 +728,18 @@ i.close{
     border: 1px solid #9c27b0;
     cursor: pointer;
     border-radius: 5px;
+    height: 65px;
 }
 .drop-zone:hover{
   background: #deb0e6;
+}
+.blog-content{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid #d8d8d8;
+}
+.blog-content span{
+  font-size:12px !important
 }
 .drop-zone:after{
     content: '';
@@ -890,6 +924,8 @@ path[fill='#123456'] {
   color: #333;
 }
 .blogs i{font-size:30px}
+.blogs .card{width:250px;margin:15px;
+    border-radius: 6px 6px 0 0;}
 .product{
   color:#333;
 }
@@ -1228,4 +1264,15 @@ path[fill='#123456'] {
             left:0;
             max-width:100%;
           }
+          .show{
+            display:inline-block;
+          }
+          .show .submenu{
+            position:relative;
+            display:block;
+            right:0;
+            visibility: visible;
+            opacity: 1;
+          }
+
         }

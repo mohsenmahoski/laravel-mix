@@ -105,6 +105,8 @@ Route::get('/emailRegister',function(){
 });
 
 
+Route::get('/tester', 'PagesController@test');
+
 Route::get('/{path?}', function($path = null){
         return View::make('welcome');
 })->where('path', '.*'); 

@@ -13,9 +13,13 @@ class BlogController extends Controller
 	
 	
 	public function index (){
-		$posts = Post::where('approved', true)->paginate(6);
+		$posts = Post::where('approved', true)->with('author')->withCount('comments')->paginate(6);
+    foreach ($posts as $post) {
+        $post->time = $this->jalali($post->created_at);
+    }
+    
 		$category = Category::all()->keyBy('id');
-		return response()->json($posts);
+		return response()->json(['posts'=>$posts]);
 	
 	}
    public function getsingleblog($id){
@@ -29,10 +33,11 @@ class BlogController extends Controller
                   $image = $post->image;
                   $category_id = $post->category_id;
                   $category_name = $post->category->name;
-                  $created_at = $post->created_at;
+                  $created_at = $this->jalali($post->created_at);
                   $updated_at = $post->updated_at;
                   $approved = $post->approved;
                   $comments = $post->comments;
+                  $author = $post->author;
                   foreach ($comments as $comment) {
                         $comment->user;
                   }
@@ -47,7 +52,9 @@ class BlogController extends Controller
                         'created_at' => $created_at,
                         'updated_at' => $updated_at,
                         'approved' => $approved,
-                        'comments' => $comments]
+                        'comments' => $comments,
+                         'author'=>$author
+                      ]
                   ]);
            }else{
              return response()->json(['message'=>'Post Not Approved'],203);
